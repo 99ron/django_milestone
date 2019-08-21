@@ -10,7 +10,7 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     
 
-class UserRegeistrationForm(UserCreationForm):
+class UserRegistrationForm(UserCreationForm):
     """Form used to register a new user"""
     
     password1 = forms.CharField(

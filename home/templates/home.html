@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block page_title %} Home Page {% endblock %}
+
+{% block page_heading %} Mainpage {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="header-image">
+    <div class="container header-container"></div>
+</div>
+
+<div class="container main-content">
+    
+    <div class="row">
+        
+        <h1 class="text-center header-text font-weight-bold">WELCOME TO AUTOWRAPS</h1>
+    
+        <hr class="hr-under-heading">
+    
+        <div class="text-center header-sub-text">
+    
+            <p class="text-padding">Specialists in all areas of vehicle graphics; <strong>Sign-Writing, Wraps, Paint Protection Film & Ceramic Coatings.</strong></p> 
+            
+            <p class="text-padding">We keep it <strong>simple</strong>. It has to be <strong>perfect!</strong> All about going the extra miles for our client. </p>
+            
+            <p class="text-padding">We only use and trust the very best materials on the market. <strong>Avery, 3M, Hexis & Ceramic Pro</strong></p>
+            
+            <p class="text-padding"><Strong>We are proud and professional</Strong> when it comes to our business and our clients.</p>
+    
+        </div>
+
+    </div>
+
+    <div class="row imagetiles">
+        
+        <div class="col-sm-12 col-md-3">
+            <img class="img-responsive img-mainpage-size" src="{% static "img/acc.png" %}" alt="Auto Ceramic Coating">
+        </div>
+        
+        <div class="col-sm-12 col-md-3">
+            <img class="img-responsive img-mainpage-size" src="{% static "img/CP.png" %}" alt="Ceramic Pro">
+        </div>
+        
+        <div class="col-sm-12 col-md-3">
+            <img class="img-responsive img-mainpage-size" src="{% static "img/pc.png" %}" alt="Paint Correction">
+        </div>
+        
+        <div class="col-sm-12 col-md-3">
+            <img class="img-responsive img-mainpage-size" src="{% static "img/PPF.png" %}" alt="Paint Protection FIlm">
+        </div>
+    </div>
+
+    <div class="row">
+        <h1 class="text-center header-text font-weight-bold">OUR SERVICES</h1>
+        
+        <hr class="hr-under-heading">
+    
+        <div class="services-subtext">
+            <div class="row servicetiles">
+                
+                <div class="col-sm-12 col-md-4">
+                    <p class="services-text-header text-center"> Ceramic Coating </p>
+                    <p>Ceramic Pro is a series of revolutionary protective coatings that simultaneously protect and
+                    enhances the appearance of automotive paint and interior surfaces.</p>
+                </div>
+                
+                <div class="col-sm-12 col-md-4">
+                    <p class="services-text-header text-center"> Paint Protection Film </p>
+                    <p>PPF Surface Protection Film helps keep your vehicle in that showroom condition by providing a near invisible barrier
+                    minimizing stone chips, protecting from minor abrasions, bug stains and ultimately protecting your pride and joy.</p>
+                </div>
+                
+                <div class="col-sm-12 col-md-4">
+                     <p class="services-text-header text-center"> Vehicle Colour Change </p>
+                    <p>Make your car feel fresh again by simply changing the colour. Get a paint-like, glossy finish for
+                    a piece of the cost, with our 3M & Avery vehicle wrapping films.</p>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}
+

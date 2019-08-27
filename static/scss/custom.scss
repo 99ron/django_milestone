@@ -1,0 +1,156 @@
+/* ---------------------------------------------------------- Variables */
+
+$primary-text-colour: #000;
+$secondary-text-colour: #666;
+$third-text-colour: #4bb7ff;
+$footer-text-colour: #ffffff;
+$hr-colour: #4bb7ff;
+$font-family: "Montserrat";
+
+/* ---------------------------------------------------------- Body */
+
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: $font-family;
+    font-size: 13pt;
+    padding-top: 50px;
+}
+
+a:link, a:visited {
+    color: $footer-text-colour;
+}
+
+/* ---------------------------------------------------------- Headers */
+
+.header-container {
+    margin-top: 50px;
+}
+
+.header-text {
+    color: $primary-text-colour;
+}
+
+.header-text {
+    padding-top: 30px;
+    font-weight: 501;
+    font-size: 40px;
+}
+
+/* ---------------------------------------------------------- Main */
+
+.services-text-header {
+    color: $third-text-colour;
+    padding-top: 25px;
+}
+
+.header-sub-text {
+    color: $primary-text-colour;
+}
+
+.services-subtext {
+    color: $secondary-text-colour;
+}
+
+.imagetiles {
+    margin: 0px;
+    padding-top: 80px;
+    
+    .img-mainpage-size {
+        height: auto;
+        object-fit: fill;
+        width: 550px;
+        margin: auto;
+        padding-bottom: 10px;
+    }
+}
+
+.servicetiles {
+    padding-top: 0px;
+    margin: 0px;
+}    
+
+.text-padding {
+    padding-top: 16px;
+}
+
+.hr-under-heading {
+    width: 35px;
+    height: 2px;
+    margin-top: 0px;
+    background-color: $hr-colour;
+}
+
+/* ---------------------------------------------------------- Footer */
+
+
+footer {
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 12pt;
+    color: $footer-text-colour;
+    background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+}
+
+ul {
+    list-style: none;
+}
+
+.fas-icons {
+    padding-right: 5px;
+}
+
+.footertiles-divs {
+        padding-top: 15px;
+    }
+
+/* ---------------------------------------------------------- Other */
+
+.font-bold {
+    font-weight: bold;
+}
+
+.icon-bar {
+    background-color: #fff;
+}
+
+.accountform {
+    padding-top: 20px;
+}
+
+.header-image { background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
+    background-size: cover;
+    height: 750px;
+    overflow: hidden;
+    position: relative;
+}
+
+.parallax-overlay {
+    background-image: url("/static/img/parallax-overlay.png");
+}
+
+
+/* ---------------------------------------------------------- Media Queries */
+
+
+@media only screen and (min-width: 991px) {
+   .imagetiles {
+        margin: 0px;
+        padding-top: 80px;
+        
+            .img-mainpage-size {
+            height: 200px;
+            object-fit: fill;
+            }
+        }
+    
+    .servicetiles {
+        padding-top: 0px;
+    }
+}

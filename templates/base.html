@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,9 +16,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static 'js/parallax.min.js' %}" type="text/javascript"></script>
-    
 </head>
+
 <body>
+
     <!-- Fixed masthead -->
     <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
         <div class="container">
@@ -30,74 +32,72 @@
                 </button>
                 <a class="navbar-brand" href="/">AutoWraps</a>
             </div>
+
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'about' %}">About Us</a></li>
                     <li><a href="#">Gallery</a></li>
                     <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}">Profile</a></li>
-                        <li><a href="#">Qoutes</a></li>
-                        <li><a href="{% url 'logout' %}">Log Out</a></li>
-                    {%  else %}
-                        <li><a href="{% url 'register' %}">Register</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="#">Qoutes</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Log In</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
     {% if messages %}
-        <div class="alert alert-success">
-            <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
+    <div class="alert alert-success">
+        <div class="messages">
+            {% for message in messages %} {{ message }} {% endfor %}
         </div>
+    </div>
     {% endif %}
+
     <main>
         {% block content %} 
         {% endblock %}
     </main>
-    
+
     <footer>
         <div class="container">
             <div class="row footertiles">
-                
+
                 <div class="col-sm-12 col-md-4 footertiles-divs">
                     <p class="font-bold"> CONTACT US </p>
                     <ul>
                         <li>
-                            <p><span class="fas fa-map-pin fas-icons"></span>
-                             Unit 4, Enterprise Units, Kent, Ro38 9RU</p>
+                            <p><span class="fas fa-map-pin fas-icons"></span> Unit 4, Enterprise Units, Kent, Ro38 9RU</p>
                         </li>
-                        
+
                         <li>
-                            <p><span class="fas fa-mobile fas-icons"></span>
-                            01243 605588</p>
+                            <p><span class="fas fa-mobile fas-icons"></span> 01243 605588</p>
                         </li>
-                        
+
                         <li>
                             <p><span class="fas fa-envelope-open fas-icons"></span>
-                            <a href="mailto:info@example.com">info@example.com</a></p>
+                                <a href="mailto:info@example.com">info@example.com</a></p>
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="col-sm-12 col-md-4 footertiles-divs">
                     <p class="font-bold"> ABOUT US </p>
-                    <p> <span class="fas fa-angle-right fas-icons"></span>At AutoWraps we specialise in vehicle wraps, Nano Coatings & Paint Protection Films.
-                    You have no worries!</p>
+                    <p> <span class="fas fa-angle-right fas-icons"></span>At AutoWraps we specialise in vehicle wraps, Nano Coatings & Paint Protection Films. You have no worries!</p>
                 </div>
-                
+
                 <div class="col-sm-12 col-md-4 footertiles-divs">
                     <p class="font-bold"> AREAS WE COVER </p>
-                    <p> <span class="fas fa-route fas-icons"></span> Winchester, West Sussex, Chichester, Goodwood, Worthing, Littlehampton, Guildford, Eastleigh,
-                    Bognor Regis, Rustington, Surrey, London,</p>
+                    <p> <span class="fas fa-route fas-icons"></span> Winchester, West Sussex, Chichester, Goodwood, Worthing, Littlehampton, Guildford, Eastleigh, Bognor Regis, Rustington, Surrey, London,</p>
                 </div>
             </div>
         </div>
     </footer>
 </body>
+
 </html>

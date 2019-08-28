@@ -6,6 +6,56 @@
 
 {% block content %}
 
-<h1> About Us </h1>
+{% load static %}
+
+<div class="about-header-image">
+    <div class="container"> 
+        <h1 class="about-header-container-text"> | ABOUT US | </h1>
+    </div>
+</div>
+
+<div class="container main-content">
+    
+    <div class="row">
+        
+        <h1 class="text-center header-text">WHO ARE AUTOWRAPS?</h1>
+    
+        <hr class="hr-under-heading">
+    
+        <div class="text-center header-sub-text">
+            
+            <p class="text-padding"> Specialists in <strong>Paint Correction, Ceramic Coatings & PPF (Paint Protection Films.)</strong></p>
+            
+            <p class="text-padding">We keep it <strong>simple</strong>. It has to be <strong>perfect!</strong> All about going the extra miles for our client. </p>
+            
+            <p class="text-padding">We only use and trust the very best materials on the market. <strong>Avery, 3M, Hexis & Ceramic Pro</strong></p>
+            
+            <p class="text-padding"><Strong>We are proud and professional</Strong> when it comes to our business and our clients.</p>
+    
+        </div>
+    </div>
+</div>
+
+<div class="brand-banner">
+    <img class="img-responsive" src="{% static "img/brandbanner.png" %}" alt="Auto Ceramic Coating">
+</div>
+
+<div class="container main-content">
+
+    <p class="text-padding"> We formed this company back in 2005 meaning we have many years of experience creating a in house <strong>design team</strong>
+    that are <strong>extremely creative</strong> and keep pushing their boundries giving the best to our customers.</p>
+    
+    <p class="text-padding"> Our extremely skilled installers have wrapped <strong>over 9000</strong> vehicles, which isn't limited to just cars!</p>
+    
+    <p class="text-padding"> Out certified & approved paint specialists have been trained by a <strong>reputable</strong> company meaning they've had to 
+    prove they can do these tasks that you'll be wanting done.</p>
+    
+    <br>
+    
+    <p class="text-center font-bold">GOT SOMETHING TO CHALLENGE US WITH? <br><br> CHALLENGE US!</p>
+    
+
+</div>    
+
 
 {% endblock %}

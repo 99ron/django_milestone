@@ -1,6 +1,7 @@
 /* ---------------------------------------------------------- Variables */
 
 $primary-text-colour: #000;
+$header-text-overlay: #ffffff;
 $secondary-text-colour: #666;
 $third-text-colour: #4bb7ff;
 $footer-text-colour: #ffffff;
@@ -10,14 +11,23 @@ $font-family: "Montserrat";
 /* ---------------------------------------------------------- Body */
 
 
-html {
-    height: 100%;
-}
-
+// This makes sure the footer is always at the bottom of the page regardless of how much content is showing.
 body {
     font-family: $font-family;
     font-size: 13pt;
     padding-top: 50px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+// same as above.
+main {
+    flex: 1 0 auto;
+}
+
+html {
+    height: 100%;
 }
 
 a:link, a:visited {
@@ -26,21 +36,43 @@ a:link, a:visited {
 
 /* ---------------------------------------------------------- Headers */
 
-.header-container {
-    margin-top: 50px;
+.header-container-text, .about-header-container-text {
+    color: $header-text-overlay;
+    margin-top: 250px;
 }
 
 .header-text {
     color: $primary-text-colour;
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 45px;
 }
 
-.header-text {
-    padding-top: 30px;
-    font-weight: 501;
-    font-size: 40px;
+.header-container-text {
+    font-weight: bold;
+    font-size: 46px;
+}
+
+.about-header-container-text {
+    font-weight: bold;
+    font-size: 55px;
+    margin-top: 235px;
 }
 
 /* ---------------------------------------------------------- Main */
+
+// About Us page banner making it be center, black background and margins set.
+.brand-banner {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: $primary-text-colour;
+    
+    img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 
 .services-text-header {
     color: $third-text-colour;
@@ -108,11 +140,20 @@ ul {
         padding-top: 15px;
     }
 
+
+
 /* ---------------------------------------------------------- Other */
+
+// Removes the gap at the bottom of the alert box.
+.alert {
+    margin-bottom: 0px;
+}
+
 
 .font-bold {
     font-weight: bold;
 }
+
 
 .icon-bar {
     background-color: #fff;
@@ -131,13 +172,17 @@ ul {
     position: relative;
 }
 
-.parallax-overlay {
-    background-image: url("/static/img/parallax-overlay.png");
+.about-header-image {
+    background: url(/static/img/about-header-image.png) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
+    background-size: cover;
+    height: 550px;
+    overflow: hidden;
+    position: relative;
 }
 
-
 /* ---------------------------------------------------------- Media Queries */
-
 
 @media only screen and (min-width: 991px) {
    .imagetiles {

@@ -9,5 +9,3 @@ def about(request):
     """ A view to show the about us page"""
     return render(request, "about.html")
     
-def contact(request):
-    return render(request, "contact.html")

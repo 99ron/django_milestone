@@ -17,9 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as urls_accounts
 from home import urls as urls_home
+from contactus import urls as urls_contactus
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(urls_home)),
     url(r'^accounts/', include(urls_accounts)),
+    url(r'^contact/', include(urls_contactus)),
 ]

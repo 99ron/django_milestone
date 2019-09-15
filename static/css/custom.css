@@ -21,6 +21,12 @@ a:link, a:visited {
   color: #ffffff;
 }
 
+.login-bg {
+  background: url(/static/img/login-bg.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  background-size: cover;
+}
+
 /* ---------------------------------------------------------- Headers */
 .header-container-text, .about-header-container-text {
   color: #ffffff;
@@ -46,6 +52,10 @@ a:link, a:visited {
 }
 
 /* ---------------------------------------------------------- Main */
+.main-content {
+  margin-bottom: 40px;
+}
+
 .brand-banner {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -54,6 +64,12 @@ a:link, a:visited {
 .brand-banner img {
   margin-left: auto;
   margin-right: auto;
+}
+
+.form-button {
+  width: 60%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .services-text-header {
@@ -97,11 +113,23 @@ a:link, a:visited {
   background-color: #4bb7ff;
 }
 
+.login-form, .register-form {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  text-align: center;
+  background-color: #f4f3e9;
+  border-radius: 10px;
+}
+.login-form a, .register-form a {
+  color: #000;
+}
+
 /* ---------------------------------------------------------- Footer */
 footer {
-  margin-top: 40px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   font-size: 12pt;
   color: #ffffff;
   background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
@@ -167,6 +195,10 @@ ul {
 
   .servicetiles {
     padding-top: 0px;
+  }
+
+  .login-form {
+    margin-top: 110px;
   }
 }
 

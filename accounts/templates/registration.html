@@ -10,16 +10,25 @@
 
 <div class="container">
     <div class="register-form">
+        <div class="row">
+            
+            <p>Simply fill out all the text fields below to get started!</p>
+            
+            <br>
+            <form method="POST">
+                
+                {% csrf_token %}
+                {{ registration_form | as_bootstrap }}
+                <button type="submit" class="btn btn-success form-button">Register</button>
+                
+            </form>
+        </div>
         
-        <p>Simply fill out all the text fields below to get started!</p>
+        <div class="row">
+            <p>Or if you've got an account already:</p>
+            <a href="{% url 'login' %}" class="col-xs-12"><button class="btn btn-primary ">Sign in</button></a>
+        </div>
         
-        <form method="POST">
-            {% csrf_token %}
-            {{ registration_form | as_bootstrap }}
-            <button type="submit" class="btn btn-success form-button">Register</button>
-        </form>
-        
-        <p>If you already have an account, you can <a href="{% url 'login' %}">sign in</a></p>
     </div>
 </div>
 

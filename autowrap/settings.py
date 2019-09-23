@@ -133,8 +133,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-PROFILEPIC_URL = '/media/profile'
-PROFILEPIC_ROOT = os.path.join(BASE_DIR, 'profile')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

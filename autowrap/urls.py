@@ -19,6 +19,8 @@ from accounts import urls as urls_accounts
 from home import urls as urls_home
 from contactus import urls as urls_contactus
 from profiles import urls as urls_profiles
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +28,4 @@ urlpatterns = [
     url(r'^accounts/', include(urls_accounts)),
     url(r'^contact/', include(urls_contactus)),
     url(r'^user/', include(urls_profiles)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

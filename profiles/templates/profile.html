@@ -1,14 +1,41 @@
 {% extends 'base.html' %}
 
+{% load bootstrap_tags %}
+
 {% block content %}
 
 {% load static %}
 
-<h1> {{user}}'s Profile </h1>
-<p>{{ profile.user.email }}</p>
-<p> FK Username = {{ profile.user.username }}</p>
-<p>{{ profile.user }}</p>
-<p>{{ profile.address }}</p>
 
+<div class="container">
+  <div class="row text-center">
+      <h1> Welcome to your profile! </h1>
+      <p>Change what you need to in the form below and hit the update button.</p>
+  </div>
+
+<div class="row">
+    <div class="col-xs-6">
+        <img src="{{ profile.image.url }}" class="img-responsive" alt="Profile Image">
+    </div>
+    
+</div>
+
+<div class="row">
+
+    <div class="profile-form">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %} 
+            
+            {{ form | as_bootstrap }}
+
+            <button type="submit" class="btn btn-success">Update</button>
+
+        </form>
+
+    </div>
+</div>
+</div>
 
 {% endblock %}

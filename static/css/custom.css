@@ -126,6 +126,19 @@ a:link, a:visited {
   color: #000;
 }
 
+.profile-form {
+  margin-top: 70px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  text-align: center;
+  background-color: #f4f3e9;
+  border-radius: 10px;
+}
+.profile-form a {
+  color: #000;
+}
+
 /* ---------------------------------------------------------- Footer */
 footer {
   padding-top: 15px;
@@ -150,6 +163,10 @@ ul {
 /* ---------------------------------------------------------- Other */
 .alert {
   margin-bottom: 0px;
+}
+
+.messages {
+  text-align: center;
 }
 
 .font-bold {

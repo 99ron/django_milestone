@@ -106,6 +106,17 @@ a:link, a:visited {
   padding-top: 16px;
 }
 
+.text-padding-top-bottom {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.hr-break {
+  width: 50%;
+  height: 2px;
+  background-color: #4bb7ff;
+}
+
 .hr-under-heading {
   width: 35px;
   height: 2px;
@@ -126,16 +137,16 @@ a:link, a:visited {
   color: #000;
 }
 
-.profile-form {
+.profile-form, .contact-form {
   margin-top: 70px;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   padding: 50px;
   text-align: center;
   background-color: #f4f3e9;
   border-radius: 10px;
 }
-.profile-form a {
+.profile-form a, .contact-form a {
   color: #000;
 }
 

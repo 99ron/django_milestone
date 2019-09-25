@@ -8,12 +8,21 @@
 
 {% block content %}
 
-<h1> Contact Us </h1>
 <div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form | as_bootstrap }}
-        <button type="submit">Submit</button>
-    </form>
+<div class="contact-form">
+    <h1> Contact Us </h1>
+        <hr class="hr-under-heading">
+
+        <p class="text-padding-top-bottom">If you have any questions fill out the form below
+        and we'll try to get back to you as soon as possible.</p>
+        
+        <hr class="hr-break">
+        
+        <form method="POST">
+            {% csrf_token %} 
+            {{ form | as_bootstrap }}
+            <button type="submit" class="btn btn-success form-button">Send</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

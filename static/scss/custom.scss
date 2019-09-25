@@ -157,7 +157,7 @@ a:link, a:visited {
     }
 }
 
-.profile-form, .contact-form {
+.profile-form, .contact-form  {
     margin-top: 70px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -169,8 +169,23 @@ a:link, a:visited {
     a {
         color: $primary-text-colour;
     }
-    
 }
+
+.quotes-form {
+    margin-top: 50px;
+    margin-bottom: 70px;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    background-color: #bbf7df;
+    border-radius: 10px;
+    
+    a {
+        color: $primary-text-colour;
+    }
+}
+    
+
 
 /* ---------------------------------------------------------- Footer */
 
@@ -240,6 +255,9 @@ ul {
     position: relative;
 }
 
+.service-image {
+ margin-top: 25px;
+}    
 /* ---------------------------------------------------------- Media Queries */
 
 @media only screen and (min-width: 991px) {
@@ -267,5 +285,13 @@ ul {
     
     .form-button {
         width: 60%;
+    }
+    
+    .service-image {
+    max-width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
     }
 }

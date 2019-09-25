@@ -12,19 +12,7 @@ def increment_quote_number():
     return new_quote_no
 
 # Main table used for displaying on the Quotes page.
-class Services(models.Model):
-    invoice_no = models.CharField(max_length=500, default=increment_quote_number, null=True, blank=True)
-    type_of_service = models.ManyToManyField('TypeOfService')
-    optional_service = models.ManyToManyField('OptionalService')
-    damage = models.ManyToManyField('Damage')
-    car_make = models.CharField(max_length=30, null=False)
-    car_model = models.CharField(max_length=30, null=False)
-    total_price = models.DecimalField(max_digits=6, decimal_places=2)
-    user = models.IntegerField()
-    
-    def __str__(self):
-        return self.name
-        
+
 class TypeOfService(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='quotes', blank=True)
@@ -48,4 +36,16 @@ class Damage(models.Model):
     
     def __str__(self):
         return self.name
+
+class Services(models.Model):
+    invoice_no = models.CharField(max_length=500, default=increment_quote_number, null=True, blank=True)
+    type_of_service = models.ManyToManyField(TypeOfService)
+    optional_service = models.ManyToManyField(OptionalService)
+    damage = models.ManyToManyField(Damage)
+    car_make = models.CharField(max_length=30, null=False)
+    car_model = models.CharField(max_length=30, null=False)
+    total_price = models.DecimalField(max_digits=6, decimal_places=2)
+    user = models.IntegerField()
     
+    def __str__(self):
+        return self.invoice_no

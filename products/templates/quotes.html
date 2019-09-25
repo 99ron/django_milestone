@@ -25,18 +25,25 @@
                 
                 <div class="form-group TypeOfService">
                     <label for="type-of-service">{{ form.type_of_service.label }}</label>
+                    
                     <select class="form-control" id="type-of-service">
-                        
-                        {% for service in form.type_of_service %} 
-                            <option value="{{ service }}"><img src="{{ service.image.url }}" alt="Image"></option>
+                        {% for s in serviceType %} 
+                            <option value="{{ s.id }}" id="{{ s.id }}"> {{ s.name }}</option>
                         {% endfor %}
-                        
                     </select>
                     
+                    <div id="service-image" class="service-image">
+                        <img class='img-responsive' src="/media/quotes/Large_veh.jpg" alt="Image">
+                    </div>
                 </div>
                 
+                <div class="form-group OptionalService">
+                    <label for="optional-service">{{ form.optional_service.label }}</label>
+                    {% for i in optionalService %}
+                        <input class="" type="checkbox" value="{{ i.id }}">{{ i.name }}
+                    {% endfor %}                
+                </div>
               
-                
             </form>
             
         </div>

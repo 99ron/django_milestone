@@ -15,9 +15,7 @@ def user_profile(request):
         """The user's profile"""
         
         form = userProfileForm(instance=user)
-        
-        print(form)
-        
+
     else:
         form = userProfileForm(request.POST, request.FILES)
         
@@ -36,13 +34,9 @@ def user_profile(request):
                 
                 if image:
                     up.image = image
-                    print("Went to image == Yes")
                     print(up.image)
                 else:
                     form.image= user.image
-                    print("Went to image == NO")
-                    print(form.image)
-                
                 up.save()
                 
                 messages.success(request, "Updated successfully!")

@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from products.views import get_qoute
+from products.views import get_quote
 
 urlpatterns = [
-    url(r'^qoutes/$', get_qoute, name="qoute"),
+    url(r'^quotes/$', get_quote, name="quotes"),
 ]

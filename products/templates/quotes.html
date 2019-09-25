@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block page_title %} About Us {% endblock %}
+
+{% block page_heading %} About Us {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container">
+    <div class="row text-center">
+        <h1>Quotes Page</h1>
+        <p>If you can enter the details below and submit the form. <br>
+        It will then be added to your ORDERS page to finalise the order.</p>
+    </div>
+    
+    <div class="row">
+        
+        <div class="quotes-form">
+            
+            <form method="POST">
+                
+                {% csrf_token %}
+                
+                <div class="form-group TypeOfService">
+                    <label for="type-of-service">{{ form.type_of_service.label }}</label>
+                    <select class="form-control" id="type-of-service">
+                        
+                        {% for service in form.type_of_service %} 
+                            <option value="{{ service }}"><img src="{{ service.image.url }}" alt="Image"></option>
+                        {% endfor %}
+                        
+                    </select>
+                    
+                </div>
+                
+              
+                
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -17,7 +17,7 @@ def get_quote(request):
         optionalService = OptionalService.objects.all()
         damage = Damage.objects.all()
             
-        quotes_form = quotesForm()
+        car_info = quotesForm()
 
-        return render(request, 'quotes.html', { 'form' : quotes_form, 'serviceType' : serviceType,
+        return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
         'optionalService' : optionalService, 'damage' : damage })

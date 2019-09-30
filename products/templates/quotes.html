@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load bootstrap_tags %}
+
 {% block page_title %} About Us {% endblock %}
 
 {% block page_heading %} About Us {% endblock %}
@@ -14,8 +16,6 @@
         <p>If you can enter the details below and submit the form. <br>
         It will then be added to your ORDERS page to finalise the order.</p>
     </div>
-    
-    <div class="row">
         
         <div class="quotes-form">
             
@@ -24,11 +24,11 @@
                 {% csrf_token %}
                 
                 <div class="form-group TypeOfService">
-                    <label for="type-of-service">{{ form.type_of_service.label }}</label>
+                    <label for="type-of-service"> Service Type</label>
                     
-                    <select class="form-control" id="type-of-service">
-                        {% for s in serviceType %} 
-                            <option value="{{ s.id }}" id="{{ s.id }}"> {{ s.name }}</option>
+                    <select class="form-control type-of-service" id="type-of-service">
+                        {% for i in serviceType %} 
+                            <option class="type-of-service-option" value="{{ i.id }}" id="{{ i.id }}" data-price="{{ i.price }}"> {{ i.name }} --- £{{i.price}}</option>
                         {% endfor %}
                     </select>
                     
@@ -37,17 +37,93 @@
                     </div>
                 </div>
                 
+                <hr>
+                
+                <div class="form-group Make-Model">
+                    
+                   <p>Please enter the boxes below and hit submit when you're done!</p>
+                   
+                <br>
+                
+                    {{ form | as_bootstrap }}
+                        
+                </div>
+                
+                <hr>
+                
                 <div class="form-group OptionalService">
-                    <label for="optional-service">{{ form.optional_service.label }}</label>
-                    {% for i in optionalService %}
-                        <input class="" type="checkbox" value="{{ i.id }}">{{ i.name }}
-                    {% endfor %}                
+                    
+                    <label for="optional-service"> Optional Services </label>
+                    
+                    <br>
+                     
+                    <a href="#OptionalServiceID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                    
+                    <div id="OptionalServiceID" class="collapse">
+                        
+                        <hr class="hr-break">
+                        
+                        <p> Do you need your old wrap removed and the door shuts wrapped? <br>
+                        (Door shuts is the bits inside when you open the doors or boot)</p>
+                        
+                        {% for i in optionalService %}
+                            
+                            <div class="form-group checkboxes">
+                                <input type="checkbox" class="optional-services" name="{{ i.name }}" id="{{ i.name }}" autocomplete="off" value="{{ i.id }}" data-price="{{ i.price }}" />
+                                <div class="btn-group">
+                                    <label for="{{ i.name }}" class="[ btn btn-primary ]">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span> </span>
+                                    </label>
+                                    <label for="{{ i.name }}" class="btn btn-default active">
+                                        {{ i.name }}
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        {% endfor %}  
+                    </div> 
+                    
+                </div>
+                
+                <hr>
+                
+                <div class="form-group Damage">
+                    <label for="damage"> Vehicle Damage </label>
+                     
+                    <br>
+                     
+                    <a href="#DamageID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                        
+                    <div id="DamageID" class="collapse">
+                        
+                        <hr class="hr-break">
+                        
+                        <p> Do you currently have damage to any panels on your vehicle? <br>
+                        if you can let us know which panels have damage and we can amend the quote as needed.</p>
+                        
+                        <select class="selectpicker" data-style="btn-primary" id="damage-dropdown" multiple title="No Damage">
+                            {% for i in damage %}
+                                <option data-price="{{ i.price }}" value="{{ i.id }}"> {{ i.name }} </option>
+                            {% endfor %}   
+                        </select>
+                            
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="form-group Price">
+                    
+                    <div class="row text-center total-price" id="total-price" data-price="0.00">&pound;0.00</div> 
+                    
+                    <button class="btn btn-primary">Submit Form</button>
+              
                 </div>
               
             </form>
             
         </div>
-    </div>
 </div>
 
 

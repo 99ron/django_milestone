@@ -5,6 +5,7 @@ $header-text-overlay: #ffffff;
 $secondary-text-colour: #666;
 $third-text-colour: #4bb7ff;
 $footer-text-colour: #ffffff;
+$a-link-text-colour: #ffffff;
 $hr-colour: #4bb7ff;
 $font-family: "Montserrat";
 
@@ -42,6 +43,8 @@ a:link, a:visited {
 }
 
 /* ---------------------------------------------------------- Headers */
+
+
 
 .header-container-text, .about-header-container-text {
     color: $header-text-overlay;
@@ -175,13 +178,13 @@ a:link, a:visited {
     margin-top: 50px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    padding: 50px;
+    padding: 25px;
     text-align: center;
     background-color: #bbf7df;
     border-radius: 10px;
     
     a {
-        color: $primary-text-colour;
+        color: $a-link-text-colour;
     }
 }
     
@@ -258,6 +261,38 @@ ul {
 .service-image {
  margin-top: 25px;
 }    
+
+.OptionalService, .TypeOfService, .Damage, .Make-Model, .Price {
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+// required for the nice looking checkboxes to hide and show the ticks.
+
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
+}
+
 /* ---------------------------------------------------------- Media Queries */
 
 @media only screen and (min-width: 991px) {
@@ -277,12 +312,16 @@ ul {
     
     .login-form {
         margin-top: 200px;
+        margin-left: 20%;
+        margin-right: 20%;
     }
     
     .register-form {
         margin-top: 145px;
+        margin-left: 20%;
+        margin-right: 20%;
     }
-    
+
     .form-button {
         width: 60%;
     }
@@ -295,3 +334,4 @@ ul {
     margin-top: 25px;
     }
 }
+

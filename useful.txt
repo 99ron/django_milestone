@@ -1,0 +1,10 @@
+# Generates a unique quote number. 
+def increment_quote_number():
+    last_quote = Services.objects.all().order_by('id').last()
+    if not last_quote:
+         return 'QUOTE0001'
+    quote_no = last_quote.quote_no
+    quote_int = int(quote_no.split('QUOTE')[-1])
+    new_quote_int = quote_int + 1
+    new_quote_no = 'QUOTE' + str(new_quote_int)
+    return new_quote_no

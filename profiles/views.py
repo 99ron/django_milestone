@@ -8,6 +8,9 @@ from .forms import userProfileForm
 
 def user_profile(request):
     
+    '''
+    This sets the username of the logged in User to
+    '''
     user = UserProfile.objects.get(pk=request.user.id)
     
     if request.method == 'GET':
@@ -15,7 +18,7 @@ def user_profile(request):
         """The user's profile"""
         
         form = userProfileForm(instance=user)
-
+        
     else:
         form = userProfileForm(request.POST, request.FILES)
         
@@ -34,9 +37,9 @@ def user_profile(request):
                 
                 if image:
                     up.image = image
-                    print(up.image)
                 else:
                     form.image= user.image
+                    
                 up.save()
                 
                 messages.success(request, "Updated successfully!")

@@ -1,6 +1,6 @@
 /* global $ */
 
-let tos, os;
+let tos, os, totalPrice;
 
 // Updates the image on the quotes page to show vehicle sizing.
 $('#type-of-service').change(function(){
@@ -22,8 +22,6 @@ $('#type-of-service').change(function(){
 
 // This will read what the price is for the selected items and then add it to show a total before processing.
 
-
-
 $('#type-of-service').change(function() {
     tos = $(this).children(":selected").data("price");
     return tos;
@@ -41,17 +39,29 @@ let osArray = $('.optional-services:checked').map(function() {
 osArray = osArray.map(Number);
 
 // This takes 2 of the numbers from the conversion and adds them together
-// ready to be display in the total cost box.
+// ready to be display in the total cost box and if no numbers are found it defaults to 0.
 os = osArray.reduce(function(a,b){
     return a+b}, 0);
 });
 
 
-
+// These are my function(s) to check on the total price which is currently updated every second.
 $(function(){
     setInterval(priceCheckerFunction, 1000);
 });
 
 function priceCheckerFunction() {
-  $(".total-price").html('£' + os);  
+    if (tos > 0) {
+        if (os > 0) {
+            totalPrice = parseInt(tos) + parseInt(os);
+            $(".total-price").html('£' + totalPrice);
+        } else {
+            totalPrice = tos;
+            $(".total-price").html('£' + totalPrice);
+        }
+    } else {
+        totalPrice = 0;
+        $(".total-price").html('£' + totalPrice);
+    }
+    
 }

@@ -19,7 +19,7 @@ class TypeOfService(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class OptionalService(models.Model):
     name = models.CharField(max_length=60)
@@ -27,19 +27,20 @@ class OptionalService(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Damage(models.Model):
     name = models.CharField(max_length=120)
     is_damaged = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField(max_length=500, blank=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Services(models.Model):
-    invoice_no = models.CharField(max_length=500, default=increment_quote_number, null=True, blank=True)
-    type_of_service = models.ManyToManyField(TypeOfService)
+    invoice_no = models.CharField(max_length=6, default=increment_quote_number, null=True , blank=True)
+    type_of_service = models.ForeignKey(TypeOfService, on_delete=models.CASCADE)
     optional_service = models.ManyToManyField(OptionalService)
     damage = models.ManyToManyField(Damage)
     car_make = models.CharField(max_length=30, null=False)
@@ -48,4 +49,4 @@ class Services(models.Model):
     user = models.IntegerField()
     
     def __str__(self):
-        return self.invoice_no
+        return str(self.invoice_no)

@@ -26,7 +26,7 @@
                 <div class="form-group TypeOfService">
                     <label for="type-of-service"> Service Type</label>
                     
-                    <select class="form-control type-of-service" id="type-of-service">
+                    <select class="form-control type-of-service" name="tos-option" id="type-of-service">
                         {% for i in serviceType %} 
                             <option class="type-of-service-option" value="{{ i.id }}" id="{{ i.id }}" data-price="{{ i.price }}"> {{ i.name }} --- £{{i.price}}</option>
                         {% endfor %}
@@ -69,13 +69,13 @@
                         {% for i in optionalService %}
                             
                             <div class="form-group checkboxes">
-                                <input type="checkbox" class="optional-services" name="{{ i.name }}" id="{{ i.name }}" autocomplete="off" value="{{ i.id }}" data-price="{{ i.price }}" />
+                                <input type="checkbox" class="optional-services" name="OS" id="{{ i.name }}" autocomplete="off" value="{{ i.id }}" data-price="{{ i.price }}" />
                                 <div class="btn-group">
-                                    <label for="{{ i.name }}" class="[ btn btn-primary ]">
+                                    <label for="{{ i.name }}" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-ok"></span>
                                         <span> </span>
                                     </label>
-                                    <label for="{{ i.name }}" class="btn btn-default active">
+                                    <label for="{{ i.name }}" class="btn btn-default active optional-services-label">
                                         {{ i.name }}
                                     </label>
                                 </div>
@@ -102,20 +102,22 @@
                         <p> Do you currently have damage to any panels on your vehicle? <br>
                         if you can let us know which panels have damage and we can amend the quote as needed.</p>
                         
-                        <select class="selectpicker" data-style="btn-primary" id="damage-dropdown" multiple title="No Damage">
+                        <select class="selectpicker" name="TD" data-style="btn-primary" id="damage-dropdown" multiple title="No Damage">
                             {% for i in damage %}
                                 <option data-price="{{ i.price }}" value="{{ i.id }}"> {{ i.name }} </option>
                             {% endfor %}   
                         </select>
-                            
+                        
                     </div>
                 </div>
                 
                 <hr>
                 
                 <div class="form-group Price">
+                    <label>Total Price</label>
+                    <div class="row text-center total-price" name="total-price" id="total-price" data-price="0.00">&pound;0.00</div> 
                     
-                    <div class="row text-center total-price" id="total-price" data-price="0.00">&pound;0.00</div> 
+                    <hr class="hr-break">
                     
                     <button class="btn btn-primary">Submit Form</button>
               

@@ -3,6 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm
+from profiles.models import UserProfile
 
 # Create your views here.
 def index(request):
@@ -50,9 +51,12 @@ def registration(request):
             
             user = auth.authenticate(username=request.POST['username'],
                                      password=request.POST['password1']) 
-        
+
             if user:
                 auth.login(user=user, request=request)
+                """ Creates a blank profile page """
+                makeProfile(request)
+                
                 messages.success(request, "You have succesfully registered")
                 return redirect(reverse('index'))
             else:
@@ -61,3 +65,13 @@ def registration(request):
         registration_form = UserRegistrationForm()
     return render(request, 'registration.html', {
         "registration_form" : registration_form})
+        
+
+def makeProfile(request):
+    """ This creates a empty profile for the user to fill out """
+    upr = UserProfile()
+    upr.user = request.user
+    upr.image = "images/no-pic.png"
+    upr.save()
+    
+    

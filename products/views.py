@@ -31,29 +31,47 @@ def get_quote(request):
         
         if form.is_valid():
             
-            print("Try to get tos options")
-            sv.type_of_service = request.POST.getlist('tos-option')
+            tosGet = request.POST.get('tos-option')
+            ToSToInt = int(tosGet)
+            tosModel = TypeOfService.objects.get(id=ToSToInt)
             
-            print("Try to get OS options")
-            sv.optional_service = request.POST.getlist('OS')
+            print("Service Type: " + str(tosModel) )
             
-            print("Try to get car make")
-            sv.car_make = form.cleaned_data['car_make']
             
-            print("Try to get car model")
-            sv.car_model = form.cleaned_data['car_model']
+            osGet = request.POST.getlist('OS')
             
-            print("Try to get TD options")
-            sv.damage = request.POST.getlist('TD')
+            osList = []
             
-            print("Try to get TP options")
-            sv.total_price = request.POST.get('total-price')
+            for i in osGet:
+                osModel = OptionalService.objects.get(id=str(i))
+                osList.append(osModel)
+            print("Optional: " + str(osList))
             
-            print("Try to get tos options")
-            sv.user = request.user.id
-        
-            print(sv)
-            #sv.save()
+            
+            carmaGet = form.cleaned_data['car_make']
+            print("Car Make: " + carmaGet)
+            
+            
+            carmoGet = form.cleaned_data['car_model']
+            print("Car Model: " + carmoGet) 
+            
+            
+            vdGet = request.POST.getlist('TD')
+            
+            vdList = []
+            
+            for i in vdGet:
+                vdModel = Damage.objects.get(id=str(i))
+                vdList.append(vdModel)
+            print("Vehicle Damage: " + str(vdList))
+            
+            
+            
+            tpGet = request.POST.get('tp-name')
+            print("Total Price: " + str(tpGet))
+            
+            userGet = request.user.id
+            print("Submitted User: " + str(userGet))
             
             messages.success(request, "Test Succesful!")
             return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,

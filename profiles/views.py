@@ -9,7 +9,7 @@ from .forms import userProfileForm
 def user_profile(request):
     
     '''
-    This sets the username of the logged in User to
+    This gets the profile page for the logged in User
     '''
     user = UserProfile.objects.get(pk=request.user.id)
     

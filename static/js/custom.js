@@ -27,9 +27,12 @@ $('#type-of-service').change(function() {
     return tos;
 });
 
-// Checks if the checkbox for the optional services on the quotes page have been
-// toggled and if so the price gets extracted and returned for the live update
-// on price.
+    /*
+    Checks if the checkbox for the optional services on the quotes page have been
+    toggled and if so the price gets extracted and returned for the live update
+    on price. 
+    */
+ 
 $('.optional-services').change(function() {
 let osArray = $('.optional-services:checked').map(function() {
     return $(this).data('price');
@@ -50,18 +53,19 @@ $(function(){
     setInterval(priceCheckerFunction, 1000);
 });
 
+
 function priceCheckerFunction() {
     if (tos > 0) {
         if (os > 0) {
             totalPrice = parseInt(tos) + parseInt(os);
-            $(".total-price").html('£' + totalPrice);
+            $(".total-price").val(totalPrice); 
         } else {
             totalPrice = tos;
-            $(".total-price").html('£' + totalPrice);
+            $(".total-price").val(totalPrice); 
         }
     } else {
         totalPrice = 0;
-        $(".total-price").html('£' + totalPrice);
+        $(".total-price").val(totalPrice); 
     }
     
 }

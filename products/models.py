@@ -40,9 +40,9 @@ class Damage(models.Model):
 
 class Services(models.Model):
     invoice_no = models.CharField(max_length=6, default=increment_quote_number, null=True , blank=True)
-    type_of_service = models.ForeignKey(TypeOfService, on_delete=models.CASCADE)
-    optional_service = models.ForeignKey(OptionalService, on_delete=models.CASCADE)
-    damage = models.ForeignKey(Damage, on_delete=models.CASCADE)
+    type_of_service = models.CharField(max_length=50)
+    optional_service = models.CharField(max_length=50)
+    damage = models.CharField(max_length=240)
     car_make = models.CharField(max_length=30, null=False)
     car_model = models.CharField(max_length=30, null=False)
     total_price = models.DecimalField(max_digits=6, decimal_places=2, default=0)

@@ -65,13 +65,14 @@ def get_quote(request):
                 vdList.append(vdModel)
             print("Vehicle Damage: " + str(vdList))
             
-            
-            
+    
             tpGet = request.POST.get('tp-name')
             print("Total Price: " + str(tpGet))
             
             userGet = request.user.id
             print("Submitted User: " + str(userGet))
+
+            
             
             messages.success(request, "Test Succesful!")
             return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,

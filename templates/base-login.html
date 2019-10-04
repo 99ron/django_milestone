@@ -34,9 +34,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'about' %}">About Us</a></li>
                     <li><a href="#">Gallery</a></li>
-                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' %}">Profile</a></li>
+                        <li><a href="#">Orders</a></li>
                         <li><a href="{% url 'quotes' %}">Quotes</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}

@@ -14,28 +14,28 @@
   </div>
 
 <div class="row">
-    <div class="col-xs-6">
-        <img src="{{ profile.image.url }}" class="img-responsive" alt="Profile Image">
+    <div class="col-xs-12">
+        <img src="{{ profile.image.url }}" class="img-responsive profile-image " alt="Profile Image">
     </div>
     
 </div>
 
-<div class="row">
+<div class="profile-form">
 
-    <div class="profile-form">
+    <form method="POST" enctype="multipart/form-data">
 
-        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} 
+        
+        {{ form | as_bootstrap }}
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-success profile-button">Update</button>
+        </div>
+        
+    </form>
 
-            {% csrf_token %} 
-            
-            {{ form | as_bootstrap }}
-
-            <button type="submit" class="btn btn-success">Update</button>
-
-        </form>
-
-    </div>
 </div>
+
 </div>
 
 {% endblock %}

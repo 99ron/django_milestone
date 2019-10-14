@@ -6,6 +6,7 @@ $secondary-text-colour: #666;
 $third-text-colour: #4bb7ff;
 $footer-text-colour: #ffffff;
 $a-link-text-colour: #ffffff;
+$background-colour: #54b4eb;
 $hr-colour: #4bb7ff;
 $font-family: "Montserrat";
 
@@ -194,7 +195,7 @@ a:link, a:visited {
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
     padding: 25px;
     text-align: center;
-    background-color: #bbf7df;
+    background-image: linear-gradient(#8ad4ff, #2da1e3 60%, #8bd2fb);
     border-radius: 10px;
     
     a {

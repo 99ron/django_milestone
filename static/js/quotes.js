@@ -2,33 +2,50 @@
 
 let tos, os, totalPrice;
 
+// Hides all the containers until options are selected.
+$("#optional-service-container").hide();
+$("#damage-container").hide();
+$("#make-model-container").hide(); 
+$("#price-container").hide();
+
 // Updates the image on the quotes page to show vehicle sizing which also hides or show's certain div's depending on choosen option.
 $('#type-of-service').change(function(){
     var dropdown = this.value;
-
+    
+    // Changes the image and fades in the needed containers.
     if(dropdown=="1") {
         $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Large_veh.jpg'>");
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
+        $("#make-model-container").fadeIn(); 
+        $("#price-container").fadeIn();
     }
     
+    // Changes the image and fades in the needed containers.
     if(dropdown=="2") {
         $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Mid_veh.jpg'>");
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
+        $("#make-model-container").fadeIn(); 
+        $("#price-container").fadeIn();
     }
-        
+    
+    // Changes the image and fades in the needed containers.    
     if(dropdown=="3") {
         $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Small_veh.jpg'>");
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
+        $("#make-model-container").fadeIn(); 
+        $("#price-container").fadeIn();
     }
     
+    // Changes the image and fades in/out the needed containers.
     if(dropdown=="4") {
         $("#service-image").html( "<img class='img-responsive' src='/media/quotes/bonnet_wrap.jpg'>");
         $("#optional-service-container").fadeOut();
         $("#damage-container").fadeOut();
-        
+        $("#make-model-container").fadeIn(); 
+        $("#price-container").fadeIn();
     }
  });
 

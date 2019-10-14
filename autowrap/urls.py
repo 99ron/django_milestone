@@ -20,6 +20,7 @@ from home import urls as urls_home
 from contactus import urls as urls_contactus
 from profiles import urls as urls_profiles
 from products import urls as urls_products
+from orders import urls as urls_orders
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -30,4 +31,5 @@ urlpatterns = [
     url(r'^contact/', include(urls_contactus)),
     url(r'^user/', include(urls_profiles)),
     url(r'^services/', include(urls_products)),
+    url(r'^orders/', include(urls_orders)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

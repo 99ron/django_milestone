@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from profiles.models import UserProfile
 from .forms import userProfileForm
 
-# Create your views here.
+# User Profile Function
 
 def user_profile(request):
     
@@ -20,6 +20,7 @@ def user_profile(request):
         form = userProfileForm(instance=user)
         
     else:
+        
         form = userProfileForm(request.POST, request.FILES)
         
         if form.is_valid():
@@ -35,21 +36,20 @@ def user_profile(request):
                 up.country = form.cleaned_data['country']
                 image = form.cleaned_data['image']
                 
+                # This checks if any data was collected during validation.
                 if image:
                     up.image = image
                 else:
-                    form.image= user.image
+                    # If no data was collected it sets the image before form was submitted.
+                    form.image = user.image
                     
                 up.save()
-                
                 messages.success(request, "Updated successfully!")
                 return render(request, 'profile.html', {'form' : form, 'profile' : user})
                 
             except:
-                
+                # If an error occurs it throws up a message and asks to retry.
                 messages.error(request, "Failed to update, try again.")
                 return render(request, 'profile.html', {'form' : form, 'profile' : user})
                 
-            
-
     return render(request, 'profile.html', {'form' : form, 'profile' : user})

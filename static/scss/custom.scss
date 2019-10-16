@@ -207,6 +207,15 @@ a:link, a:visited {
     padding: 0px;
 }
 
+.order-list-table > table {
+    border-collapse: collapse;
+    table-layout: auto;
+    
+    td {
+    width: 50%;
+ }
+} 
+
 /* ---------------------------------------------------------- Footer */
 
 

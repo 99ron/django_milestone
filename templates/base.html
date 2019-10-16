@@ -37,7 +37,7 @@
                     <li><a href="#">Gallery</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' %}">Profile</a></li>
-                        <li><a href="#">Orders</a></li>
+                        <li><a href="{% url 'orders' %}">Orders</a></li>
                         <li><a href="{% url 'quotes' %}">Quotes</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}

@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 def increment_quote_number():
     last_quote = Services.objects.all().order_by('invoice_no').last()
     if not last_quote:
-         return 'QUOTE1'
+         return 'QUOTE_1001'
     quote_no = last_quote.invoice_no
-    quote_int = int(quote_no.split('QUOTE')[-1])
+    quote_int = int(quote_no.split('_')[1])
     new_quote_int = quote_int + 1
-    new_quote_no = 'QUOTE' + str(new_quote_int)
+    new_quote_no = 'QUOTE_' + str(new_quote_int)
     return new_quote_no
 
 # Table for types of service the company offers.

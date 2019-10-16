@@ -181,6 +181,14 @@ a:link, a:visited {
   padding: 0px;
 }
 
+.order-list-table > table {
+  border-collapse: collapse;
+  table-layout: auto;
+}
+.order-list-table > table td {
+  width: 50%;
+}
+
 /* ---------------------------------------------------------- Footer */
 footer {
   padding-top: 15px;

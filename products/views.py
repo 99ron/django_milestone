@@ -2,14 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from orders.models import OrderList
 from products.forms import quotesForm
 from products.models import TypeOfService, OptionalService, Damage, Services
 
 
 # This view deals with both POST and GET for the quotes page which then saves it into two tables, Services and Orders.
+@login_required
 def get_quote(request):
-    
+
     # Gets required information from the required models/tables.
     car_info = quotesForm()
     serviceType = TypeOfService.objects.all()
@@ -82,6 +84,7 @@ def get_quote(request):
                 sv.save()
                 sv.type_of_service = tosModel
                 sv.optional_service.set(osList)
+                #sv.wrap_colour = 
                 sv.car_make = carmaGet
                 sv.car_model = carmoGet
                 sv.damage.set(vdList)
@@ -97,11 +100,14 @@ def get_quote(request):
                 '''
                 
                 latestInvoice = Services.objects.latest('invoice_no')
-
+                
+                
                 if latestInvoice.user == str(user):
                     try:
                         ol.service_id = latestInvoice
                         ol.order_date = datetime.now()
+                        ol.order_status = "Waiting On Employee"
+                        ol.username = str(user)
                         ol.save()
 
                     except Exception as e:

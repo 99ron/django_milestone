@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{load bootstrap_tags %}
+
+{% block content %}
+<div class="container">
+
+    {% for order in orders %}
+    
+    <div class="col-xs-12 panel panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |  </div>
+                <div class="panel-body">
+                    
+                    <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse">Show More</a>
+                    
+                    <a href="#" type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Pay </a>
+                    
+                    <p class="pull-right">Total Price: <strong>{{ order.service_id.total_price }}</strong></p>
+
+                    <div id="{{ order.service_id }}" class="collapse">
+                    
+                    <br>
+                    
+                    <div class="col-xs-12 order-list-table">
+                        
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Type of Service: </td>
+                                    <td>{{ order.service_id.type_of_service }} </td>
+                                </tr>
+                                <tr>
+                                    <td>Wrap Colour: </td>
+                                    <td>{{ order.service_id.wrap_colour}} </td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Make: </td>
+                                    <td>{{ order.service_id.car_make}} </td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Model: </td>
+                                    <td>{{ order.service_id.car_model}} </td>
+                                </tr>
+                                
+                                {% for i in order.service_id.optional_service.all %}
+                                <tr>
+                                    <td>Optional Services: </td>
+                                    <td>{{ i.name }}</td>
+                                {% empty %}
+                                </tr>
+                                {% endfor %}
+
+                                {% for i in order.service_id.damage.all %}
+                                <tr>
+                                    <td>Optional Services: </td>
+                                    <td>{{ i.name }}</td>
+                                {% empty %}
+                                </tr>
+                                {% endfor %}
+                                
+                                {% if order.service_id.damage_details %}
+                                <tr>
+                                    <td>Damage Details: </td>
+                                    <td>{{ order.service_id.damage_details }}</td>
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Total Price: </td>
+                                    <td>£{{ order.service_id.total_price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <a href="#" type="submit" class="btn btn-warning pull-center"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </a>
+                        
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+    
+    </div>
+
+    {% if orders.has_other_pages %}
+      <ul class="pagination">
+        {% if orders.has_previous %}
+          <li><a href="?page={{ orders.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in orders.paginator.page_range %}
+          {% if orders.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if orders.has_next %}
+          <li><a href="?page={{ orders.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+{% endblock %}

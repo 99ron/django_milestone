@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -9,9 +8,10 @@ from products.models import Services
 from profiles.models import UserProfile
 
 ol = OrderList.objects.all()
-os = ol.filter(service_id__optional_service__isnull=False)
+#os = ol.filter(service_id__optional_service__isnull=False)
 
-# Create your views here.
+# Orders page views.
+
 @login_required
 def view_order(request):
     """ A view that renders the orders contents """
@@ -48,26 +48,27 @@ def view_order(request):
 
 
 @login_required
-def delete_order(request, order_id):
+def delete_order(request, order, user_id):
     """ Deletes a selected order """
+    current_user = request.user.username
     user = UserProfile.objects.get(user=request.user)
-    getUser = ol.filter(pk=order_id)
+    order = OrderList.objects.filter(pk=order)
     
+    # This checks if the logged in user is the owner of the order trying to be deleted
+    # or if the user is an employee who then has the write to remove the order.
     
-    print(confirm)
-    confirm = getUser.service_id
-    
-    
-    if user == ol:
+    if user_id == current_user or user.employee == True:
         try:
-            order = OrderList.objects.filter(pk=order_id)
+            order = OrderList.objects.filter(pk=order)
             order.delete()
-            messages.success(request, "Order " + order_id + " has been removed.")
+            messages.success(request, "Order has been removed.")
             return redirect(view_order) 
         except Exception as e:
             print(e)
             messages.error(request, "Couldn't delete object.")
             return redirect(view_order)
+            
+    # If they're not the owner then it returns to the orders page with a message. 
     else:
         messages.error(request, "Couldn't delete the order, you aren't the owner.")
         return redirect(view_order)

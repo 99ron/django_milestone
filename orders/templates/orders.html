@@ -10,7 +10,8 @@
     <div class="col-xs-12 panel panel-group">
         <div class="panel panel-primary">
             <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |  </div>
-                <div class="panel-body">
+            
+                <div class="panel-body order-panel-body">
                     
                     <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse">Show More</a>
                     
@@ -20,7 +21,6 @@
 
                     <div id="{{ order.service_id }}" class="collapse">
                     
-                    <br>
                     
                     <div class="col-xs-12 order-list-table">
                         
@@ -72,7 +72,7 @@
                             </tbody>
                         </table>
                         
-                        <a href="{% url 'delete' order_id=order.pk %}" type="submit" class="btn btn-warning pull-center"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </a>
+                        <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit </a>
                         
                     </div>
                 </div>    

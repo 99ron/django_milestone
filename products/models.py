@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Generates a unique quote number when the user submits the form. 
-# *** Won't go past number 10 ***
+
 def increment_quote_number():
     last_quote = Services.objects.all().order_by('invoice_no').last()
     if not last_quote:
@@ -27,7 +27,10 @@ class WrapColour(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to='wrap_colour')
     price = models.DecimalField(max_digits=6, decimal_places=2)
-
+    
+    def __str__(self):
+        return str(self.name)
+    
 # Table for extra services the company would like to offer.
 class OptionalService(models.Model):
     name = models.CharField(max_length=60)

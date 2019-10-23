@@ -5,6 +5,7 @@ $header-text-overlay: #ffffff;
 $secondary-text-colour: #666;
 $third-text-colour: #4bb7ff;
 $footer-text-colour: #ffffff;
+$cell-text-colour: #ffffff;
 $a-link-text-colour: #ffffff;
 $background-colour: #54b4eb;
 $hr-colour: #4bb7ff;
@@ -210,6 +211,7 @@ a:link, a:visited {
 .order-list-table > table {
     border-collapse: collapse;
     table-layout: auto;
+    margin-top: 15px;
     
     td {
     width: 50%;
@@ -293,7 +295,7 @@ ul {
     width: 200px;
 }
 
-.OptionalService, .TypeOfService, .Damage, .Make-Model, .Price {
+.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price {
     background-color: white;
     border: black solid 2px;
     border-radius: 5px;
@@ -328,6 +330,35 @@ ul {
     display: none;   
 }
 
+// Hide radio button on quotes page
+.quote-radio [type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.blue-cell-white-text {
+   background: #4bb7ff;
+   color: $cell-text-colour;
+}
+
+.quote-table-image {
+    max-width: 30px;
+    max-height: 30px;
+    border: 2px solid white;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.order-panel-body {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+.order-total-price {
+    margin-right: 15px;
+}
 /* ---------------------------------------------------------- Media Queries */
 
 @media only screen and (min-width: 991px) {

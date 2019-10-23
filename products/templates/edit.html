@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_tags %}
+
+{% block page_title %} About Us {% endblock %}
+
+{% block page_heading %} About Us {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container">
+    <div class="row text-center">
+        <h1>Edit Quote Page</h1>
+        
+        <p>Change any details below as necessary and hit the update button below.<br>
+    </div>
+        
+        <div class="quotes-form">
+            
+            <form method="POST">
+                
+                {% csrf_token %}
+                
+                <div class="form-group TypeOfService">
+                    <label for="type-of-service"> Service Type</label>
+                    
+                    <select class="form-control type-of-service" name="tos-option" id="type-of-service">
+                        
+                        {% if origOrder.type_of_service %}
+                            
+                            <option class="type-of-service-option" value="{{ origOrder.type_of_service.id }}" id="{{ origOrder.type_of_service.id }}" data-price="{{ origOrder.type_of_service.price }}" disabled selected> Currently Selected: {{ origOrder.type_of_service.name }} </option>
+                            
+                        {% else %}
+                        
+                            <option value="Choose an option below" disabled selected> Choose an option! </option>
+                            
+                        {% endif %} 
+                        
+                        {% for i in serviceType %} 
+                        
+                            <option class="type-of-service-option" value="{{ i.id }}" id="{{ i.id }}" data-price="{{ i.price }}"> {{ i.name }} --- £{{i.price}}</option>
+                            
+                        {% endfor %}  
+                      
+                    </select>
+                    
+                    <div id="service-image" class="service-image">
+                        <img class='img-responsive' src="{{ origOrder.type_of_service.image.url }}" alt="">
+                    </div>
+
+                </div>
+                
+                <hr>
+            
+                <div class="WrapColour">
+            
+                    <label> Wrap Colour </label>
+            
+                    <div class="quote-table-container">
+                        <table class="table table-responsive table-bordered" id="quotes-table">
+                            <tbody>
+                                {% for i in wrapColour %}
+                                <tr>
+                                    <td>
+                                        {% if origOrder.wrap_colour == '{{ i.id }}' %}
+                                        
+                                            <div class="quote-radio">
+                                                <label><input type="radio" id='{{ i.id }}' name="wc-option" value="{{ i.id }}" checked> Selected: {{ i.name }} </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="radiotext">
+                                                <label for='{{i.id}}'><img src="{{i.image.url}}" class="quote-table-image"></label>
+                                        </div>
+                                                
+                                        {% else %}   
+                                            
+                                            <div class="quote-radio">
+                                                <label><input type="radio" id='{{ i.id }}' name="wc-option" value="{{ i.id }}"> {{ i.name }} </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="radiotext">
+                                                <label for='{{i.id}}'><img src="{{i.image.url}}" class="quote-table-image"></label>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="make-model-container">
+                    <hr>
+                    
+                    <div class="form-group Make-Model">
+                    
+                        {{ form | as_bootstrap }}
+                            
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="form-group OptionalService">
+                    
+                    <label for="optional-service"> Optional Services </label>
+                    
+                    <br>
+                     
+                    <a href="#OptionalServiceID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                    
+                    <div id="OptionalServiceID" class="collapse">
+                        
+                        <hr class="hr-break">
+                        
+                        <p> Do you need your old wrap removed and the door shuts wrapped? <br>
+                        (Door shuts is the bits inside when you open the doors or boot)</p>
+                        
+                        {% for i in optionalService %}
+                        
+                            {%  if origOrder.optional_service  %}
+                                <div class="form-group checkboxes">
+                                        <input type="checkbox" class="optional-services" name="OS" id="{{ i.name }}" autocomplete="off" value="{{ i.id }}" data-price="{{ i.price }}" checked/>
+                                        <div class="btn-group">
+                                            <label for="{{ i.name }}" class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                                <span> </span>
+                                            </label>
+                                            <label for="{{ i.name }}" class="btn btn-default active optional-services-label">
+                                                {{ i.name }}
+                                            </label>
+                                        </div>
+                                    </div>
+                            {% else %}
+
+                                <div class="form-group checkboxes">
+                                    <input type="checkbox" class="optional-services" name="OS" id="{{ i.name }}" autocomplete="off" value="{{ i.id }}" data-price="{{ i.price }}" />
+                                    <div class="btn-group">
+                                        <label for="{{ i.name }}" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="{{ i.name }}" class="btn btn-default active optional-services-label">
+                                            {{ i.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            
+                           
+                         {% endif %}   
+                        {% endfor %}  
+                        
+                    </div> 
+                    
+                </div>
+            
+                <hr>
+                
+                <div class="form-group Damage">
+                    <label for="damage"> Vehicle Damage </label>
+                     
+                    <br>
+                     
+                    <a href="#DamageID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                        
+                    <div id="DamageID" class="collapse">
+                        
+                        <hr class="hr-break">
+                        
+                        <p> Do you currently have damage to any panels on your vehicle? <br>
+                        if you can let us know which panels have damage and we can amend the quote as needed.</p>
+                        
+                        <select class="selectpicker" name="TD" data-style="btn-primary" id="damage-dropdown" multiple title="No Damage">
+                            {% for i in damage %}
+                                <option data-price="{{ i.price }}" value="{{ i.id }}"> {{ i.name }} </option>
+                            {% endfor %}   
+                        </select>
+                        
+                        <div class="form-group text-padding">
+                            <label for="damageDetailsInput">Damage Details</label>
+                            <textarea class="form-control" id="damageDetailsInput" name="ddInput" rows="3"></textarea>
+                        </div>
+                        
+                    </div>
+                </div>
+           
+                <hr>
+                
+                <div class="form-group Price">
+                    
+                    <label>Total Price</label>
+                    
+                    <div class="text-center input-group">
+
+                        <span class="input-group-btn total-price">
+                            <label class="btn btn-default btn-lg ">£</label>
+                         </span>
+                        <input type="text" class="total-price form-control input-lg" id="total-price" name="tp-name" data-price="0" readonly> 
+                    </div> 
+                    
+                    <hr class="hr-break">
+                    
+                    <button class="btn btn-success">Submit Order</button>
+              
+                </div>
+
+            </form>
+            
+        </div>
+</div>
+
+
+{% endblock %}

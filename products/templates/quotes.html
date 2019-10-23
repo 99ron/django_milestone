@@ -28,20 +28,45 @@
                     <label for="type-of-service"> Service Type</label>
                     
                     <select class="form-control type-of-service" name="tos-option" id="type-of-service">
-                        <option value="Choose an option below" disabled selected>Choose an option!</option>
+                        <option value="Choose an option below" disabled selected> Choose an option! </option>
                         {% for i in serviceType %} 
                             <option class="type-of-service-option" value="{{ i.id }}" id="{{ i.id }}" data-price="{{ i.price }}"> {{ i.name }} --- £{{i.price}}</option>
                         {% endfor %}
                     </select>
                     
-                    <br>
-                    
-                    <select class="form-control" name="wrap-colour" id="wrap-colour-id">
-                        
-                    </select>
-                    
                     <div id="service-image" class="service-image">
                         <img class='img-responsive' src="" alt="">
+                    </div>
+
+                </div>
+                
+                <div id="wrap-colour-container">
+                    <hr>
+                
+                    <div class="WrapColour">
+                
+                        <label> Wrap Colour </label>
+                
+                        <div class="quote-table-container">
+                            <table class="table table-responsive table-bordered" id="quotes-table">
+                                <tbody>
+                                    {% for i in wrapColour %}
+                                    <tr>
+                                        <td>
+                                            <div class="quote-radio">
+                                                <label><input type="radio" id='{{ i.id }}' name="wc-option" value="{{ i.id }}"> {{ i.name }} </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="radiotext">
+                                                <label for='{{i.id}}'><img src="{{i.image.url}}" class="quote-table-image"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 
@@ -144,7 +169,7 @@
                         
                         <hr class="hr-break">
                         
-                        <button class="btn btn-success">Submit Form</button>
+                        <button class="btn btn-success">Submit Order</button>
                   
                     </div>
                 </div>

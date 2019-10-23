@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from datetime import datetime
+import requests, json
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from orders.models import OrderList
 from products.forms import quotesForm
-from products.models import TypeOfService, OptionalService, Damage, Services
+from products.models import TypeOfService, OptionalService, Damage, Services, WrapColour
 
 
 # This view deals with both POST and GET for the quotes page which then saves it into two tables, Services and Orders.
@@ -16,15 +17,47 @@ def get_quote(request):
     car_info = quotesForm()
     serviceType = TypeOfService.objects.all()
     optionalService = OptionalService.objects.all()
+    wrapColour = WrapColour.objects.all()
     user = User.objects.get(pk=request.user.id)
     damage = Damage.objects.all()    
+    
+    ''' This needs to be implemented, made in repl.it '''
+    '''
+    car_make = "toyota"
 
+    url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/{0}?format=json'.format(car_make)
+    
+    #print(url)
+    
+    # Gets the modified string above to request data.
+    response = requests.get(url)
+    
+    def jsonDump(response):
+      json.dumps(response, sort_keys=True, indent=4)
+      # text = json.dumps(response, sort_keys=True, indent=4)
+      # print(text)
+    
+    # Filters by the Results key and then jsonDumps the results
+    manuResults = response.json()['Results']
+    jsonDump(manuResults)
+    
+    manuList = []
+    
+    for i in manuResults:
+      # For each model in results append to list
+      list = i["Model_Name"]
+      manuList.append(list)
+    
+    # Print newly made list
+    print(manuList)
+    '''
+    
     if request.method == 'GET':
         
         "Show the quotes page"
-
+        
         return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
-        'optionalService' : optionalService, 'damage' : damage })
+        'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour })
         
     else: 
         
@@ -43,6 +76,11 @@ def get_quote(request):
             tosGet = request.POST.get('tos-option')
             ToSToInt = int(tosGet)
             tosModel = TypeOfService.objects.get(id=ToSToInt)
+            
+            # This gets the selected wrap colour which is a radio button, then compares it to 
+            # the table to see what the match is.
+            wcGet = request.POST.get('wc-option')
+            wcModel = WrapColour.objects.get(id=wcGet)
 
             # This gets the option from the Optional Services list, compares the int to the 
             # OptionalServices table and then appends it to a list.
@@ -84,7 +122,7 @@ def get_quote(request):
                 sv.save()
                 sv.type_of_service = tosModel
                 sv.optional_service.set(osList)
-                #sv.wrap_colour = 
+                sv.wrap_colour = wcModel
                 sv.car_make = carmaGet
                 sv.car_model = carmoGet
                 sv.damage.set(vdList)
@@ -113,23 +151,38 @@ def get_quote(request):
                     except Exception as e:
                         print(e)
                         messages.error(request, "Couldn't save your order, please try again shortly.")
-                        return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
-                        'optionalService' : optionalService, 'damage' : damage })
+                        return redirect(get_quote)
                 else:
                     messages.error(request, "Couldn't match the user to the invoice, please try again.")
-                    return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
-                    'optionalService' : optionalService, 'damage' : damage })
+                    return redirect(get_quote)
             
             except Exception as e:
                 # If it fails on one of the options above it'll ask the user to try again.
                 print(e)
-                messages.error(request, "Something went wrong: " + e)
-                return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
-                'optionalService' : optionalService, 'damage' : damage })
+                messages.error(request, "Something went wrong: " + e + " , please try again.")
+                return redirect(get_quote)
             
             # All being well it ends here!
             messages.success(request, "Success! Your order has been sent for review.")
-            return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
-            'optionalService' : optionalService, 'damage' : damage })
-            
-           
+            return redirect(get_quote)
+
+
+@login_required
+def edit_quote(request, order_id):
+
+    orderList = OrderList.objects.get(pk=order_id)
+    origOrder = orderList.service_id
+    
+    os = origOrder.optional_service.all()
+    
+    print(os)
+    print(origOrder.wrap_colour)
+    
+    car_info = quotesForm()
+    serviceType = TypeOfService.objects.all()
+    optionalService = OptionalService.objects.all()
+    wrapColour = WrapColour.objects.all()
+    damage = Damage.objects.all() 
+    return render(request, 'edit.html', { 'form' : car_info, 'serviceType' : serviceType,
+    'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour, 'origOrder' : origOrder })
+    

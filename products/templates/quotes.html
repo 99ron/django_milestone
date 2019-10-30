@@ -28,7 +28,7 @@
                     <label for="type-of-service"> Service Type</label>
                     
                     <select class="form-control type-of-service" name="tos-option" id="type-of-service">
-                        <option value="Choose an option below" disabled selected> Choose an option! </option>
+                        <option value="0" disabled selected> Choose an option! </option>
                         {% for i in serviceType %} 
                             <option class="type-of-service-option" value="{{ i.id }}" id="{{ i.id }}" data-price="{{ i.price }}"> {{ i.name }} --- £{{i.price}}</option>
                         {% endfor %}

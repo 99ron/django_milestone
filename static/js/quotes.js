@@ -1,17 +1,35 @@
 /* global $ */
 
-let tos, os, totalPrice;
+let tos, os, totalPrice, dropdown;
 
-// Hides all the containers until options are selected.
-$("#wrap-colour-container").hide();
-$("#optional-service-container").hide();
-$("#damage-container").hide();
-$("#make-model-container").hide(); 
-$("#price-container").hide();
+// Upon page loading this checks what the value is of the service dropdown to dictate what's shown on the screen.
+$( document ).ready(function() {
+    dropdown = $("#type-of-service option:selected").val();
+    
+    // If the option is set the default "select an option" it will hide everything bar the service option.
+    if (dropdown ==  "0"  ) {
+
+        $("#wrap-colour-container").hide();
+        $("#optional-service-container").hide();
+        $("#damage-container").hide();
+        $("#make-model-container").hide(); 
+        $("#price-container").hide();
+        
+    } else if (dropdown == "4") {
+        // If option 4 (bonnet wrap) is chosen it hides the optional extras as they're not needed.
+        $("#optional-service-container").hide();    
+        
+    } else {
+       // Any of the other options is selected the optional extras are displayed. 
+       $("#optional-service-container").fadeIn(); 
+    }    
+});
+
+
 
 // Updates the image on the quotes page to show vehicle sizing which also hides or show's certain div's depending on choosen option.
 $('#type-of-service').change(function(){
-    var dropdown = this.value;
+    dropdown = this.value;
     
     // Changes the image and fades in the needed containers.
     if(dropdown=="1") {
@@ -48,7 +66,7 @@ $('#type-of-service').change(function(){
         $("#service-image").html( "<img class='img-responsive' src='/media/quotes/bonnet_wrap.jpg'>");
         $("#wrap-colour-container").fadeIn();
         $("#optional-service-container").fadeOut();
-        $("#damage-container").fadeOut();
+        $("#damage-container").fadeIn();
         $("#make-model-container").fadeIn(); 
         $("#price-container").fadeIn();
     }
@@ -99,7 +117,8 @@ function priceCheckerFunction() {
             $(".total-price").val(totalPrice); 
         }
     } else {
-        totalPrice = 0;
+        // This is mainly for the orders page as it's hidden on the quotes page until an option is slected which will then display the correct page.
+        totalPrice = $(".total-price-input").val();
         $(".total-price").val(totalPrice); 
     }
 }

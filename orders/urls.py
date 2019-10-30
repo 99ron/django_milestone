@@ -3,5 +3,5 @@ from .views import view_order, delete_order
 
 urlpatterns = [
     url(r'^view/$', view_order, name='orders'),
-    url(r'^delete/(?P<order>\d+)/(?P<user_id>\w+)/$$', delete_order, name='delete'),
+    url(r'^delete/(?P<order>\d+)(?P<user_id>\w+)/$', delete_order, name='delete'),
     ]

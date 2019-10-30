@@ -88,9 +88,11 @@ def get_quote(request):
             
             osList = []
             
+            
             for i in osGet:
                 osModel = OptionalService.objects.get(id=i)
                 osList.append(osModel)
+
                
             # This gathers the text inputted for the 'car make'.
             carmaGet = form.cleaned_data['car_make']
@@ -169,20 +171,23 @@ def get_quote(request):
 
 @login_required
 def edit_quote(request, order_id):
-
+    
     orderList = OrderList.objects.get(pk=order_id)
     origOrder = orderList.service_id
-    
-    os = origOrder.optional_service.all()
-    
-    print(os)
-    print(origOrder.wrap_colour)
-    
-    car_info = quotesForm()
+    service = Services.objects.get(invoice_no=origOrder)
+    car_info = quotesForm(instance=service)
     serviceType = TypeOfService.objects.all()
     optionalService = OptionalService.objects.all()
     wrapColour = WrapColour.objects.all()
     damage = Damage.objects.all() 
-    return render(request, 'edit.html', { 'form' : car_info, 'serviceType' : serviceType,
-    'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour, 'origOrder' : origOrder })
+    
+    origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
+    origDamageList = origOrder.damage.all().values_list('name', flat=True)
+    
+    print(str(origOrder.total_price))
+    context = { 'form' : car_info, 'serviceType' : serviceType, 'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour,
+                'origOrder' : origOrder, 'origOSlist' : origOSlist, 'origDamageList' : origDamageList}
+
+
+    return render(request, 'edit.html', context)
     

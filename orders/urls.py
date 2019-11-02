@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .views import view_order, delete_order
+from orders.views import view_order, delete_order
 
 urlpatterns = [
     url(r'^view/$', view_order, name='orders'),

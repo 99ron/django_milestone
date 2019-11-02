@@ -8,7 +8,6 @@ from products.models import Services
 from profiles.models import UserProfile
 
 ol = OrderList.objects.all()
-#os = ol.filter(service_id__optional_service__isnull=False)
 
 # Orders page views.
 
@@ -72,3 +71,4 @@ def delete_order(request, order, user_id):
     else:
         messages.error(request, "Couldn't delete the order, you aren't the owner.")
         return redirect(view_order)
+        

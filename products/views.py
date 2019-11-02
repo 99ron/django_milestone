@@ -5,6 +5,8 @@ import requests, json
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from orders.models import OrderList
+from orders.views import view_order
+from profiles.models import UserProfile
 from products.forms import quotesForm
 from products.models import TypeOfService, OptionalService, Damage, Services, WrapColour
 
@@ -21,36 +23,6 @@ def get_quote(request):
     user = User.objects.get(pk=request.user.id)
     damage = Damage.objects.all()    
     
-    ''' This needs to be implemented, made in repl.it '''
-    '''
-    car_make = "toyota"
-
-    url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/{0}?format=json'.format(car_make)
-    
-    #print(url)
-    
-    # Gets the modified string above to request data.
-    response = requests.get(url)
-    
-    def jsonDump(response):
-      json.dumps(response, sort_keys=True, indent=4)
-      # text = json.dumps(response, sort_keys=True, indent=4)
-      # print(text)
-    
-    # Filters by the Results key and then jsonDumps the results
-    manuResults = response.json()['Results']
-    jsonDump(manuResults)
-    
-    manuList = []
-    
-    for i in manuResults:
-      # For each model in results append to list
-      list = i["Model_Name"]
-      manuList.append(list)
-    
-    # Print newly made list
-    print(manuList)
-    '''
     
     if request.method == 'GET':
         
@@ -70,7 +42,7 @@ def get_quote(request):
         
         if form.is_valid():
             ''' If the form is valid it then collects the information on the form before saving it.'''
-            
+
             # This gets the info from the 'type of service' select menu, converts it to an int 
             # and then compares it to the option in TypesOfService table.
             tosGet = request.POST.get('tos-option')
@@ -81,7 +53,7 @@ def get_quote(request):
             # the table to see what the match is.
             wcGet = request.POST.get('wc-option')
             wcModel = WrapColour.objects.get(id=wcGet)
-
+    
             # This gets the option from the Optional Services list, compares the int to the 
             # OptionalServices table and then appends it to a list.
             osGet = request.POST.getlist('OS')
@@ -92,13 +64,13 @@ def get_quote(request):
             for i in osGet:
                 osModel = OptionalService.objects.get(id=i)
                 osList.append(osModel)
-
+    
                
             # This gathers the text inputted for the 'car make'.
             carmaGet = form.cleaned_data['car_make']
-            
+
             # This gathers the text inputted for the 'car model'.            
-            carmoGet = form.cleaned_data['car_model']
+            carmoGet = request.POST.get('car_model')
 
             # This gets the text from the 'Damage Details' text box.
             damageDetailsGet = request.POST.get('ddInput')
@@ -117,7 +89,6 @@ def get_quote(request):
             # on what options are selected by the user.
             tpGet = request.POST.get('tp-name')
             
-
             # Once the data has been collected above it then attempts to add it to the neccessary fields in the 
             # Services table.
             try:
@@ -149,12 +120,13 @@ def get_quote(request):
                         ol.order_status = "Waiting On Employee"
                         ol.username = str(user)
                         ol.save()
-
+    
                     except Exception as e:
-                        print(e)
+                        print("Error: " + str(e))
                         messages.error(request, "Couldn't save your order, please try again shortly.")
                         return redirect(get_quote)
                 else:
+                    print("Failed on matching user to invoice.")
                     messages.error(request, "Couldn't match the user to the invoice, please try again.")
                     return redirect(get_quote)
             
@@ -167,27 +139,161 @@ def get_quote(request):
             # All being well it ends here!
             messages.success(request, "Success! Your order has been sent for review.")
             return redirect(get_quote)
+            
+        else: 
+
+            print(form.errors)
+            # If form isn't valid!
+            messages.error(request, "Form didn't validate, please try again.")
+            return redirect(get_quote)
 
 
 @login_required
 def edit_quote(request, order_id):
     
+    current_user = request.user.username
+    user = UserProfile.objects.get(user=request.user)
     orderList = OrderList.objects.get(pk=order_id)
-    origOrder = orderList.service_id
-    service = Services.objects.get(invoice_no=origOrder)
-    car_info = quotesForm(instance=service)
-    serviceType = TypeOfService.objects.all()
-    optionalService = OptionalService.objects.all()
-    wrapColour = WrapColour.objects.all()
-    damage = Damage.objects.all() 
     
-    origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
-    origDamageList = origOrder.damage.all().values_list('name', flat=True)
-    
-    print(str(origOrder.total_price))
-    context = { 'form' : car_info, 'serviceType' : serviceType, 'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour,
-                'origOrder' : origOrder, 'origOSlist' : origOSlist, 'origDamageList' : origDamageList}
+    if current_user == orderList.username or user.employee == True:
+        
+        try:
+            origOrder = orderList.service_id
+            service = Services.objects.get(invoice_no=origOrder)
+            car_info = quotesForm(instance=service)
+            serviceType = TypeOfService.objects.all()
+            optionalService = OptionalService.objects.all()
+            wrapColour = WrapColour.objects.all()
+            damage = Damage.objects.all() 
+            
+            origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
+            origDamageList = origOrder.damage.all().values_list('name', flat=True)
+        
+            context = { 'form' : car_info, 'serviceType' : serviceType, 'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour,
+                        'origOrder' : origOrder, 'origOSlist' : origOSlist, 'origDamageList' : origDamageList}
+                        
+            return render(request, 'edit.html', context)
+       
+        except Exception as e:
+            print("Error: " + str(e))
+            messages.error(request, "Sorry, something went wrong while trying to get your order.")
+            return redirect(view_order)
+            
+    else:
+        messages.error(request, "You are not an employee or the creator for this order.")
+        return render(request, 'orders.html')
 
 
-    return render(request, 'edit.html', context)
+
+
+
+@login_required
+def update_quote(request, order_id):
+
+    """ This will collect the new (if updated) data from the quotes page """
+
+    current_user = request.user.username
+    user = UserProfile.objects.get(user=request.user) 
     
+    # Gets the Current Service by matching the invoice numbers.
+    cs = Services.objects.get(invoice_no=order_id)
+    form = quotesForm(request.POST)
+    
+    # This confirms the user trying to update the order is the owner or an employee.
+    if current_user == cs.user or user.employee == True:
+    
+        # Taken from the get_quote function.
+        if form.is_valid():
+            ''' If the form is valid it then collects the information on the form before saving it.'''
+            
+            # This gets the info from the 'type of service' select menu, converts it to an int 
+            # and then compares it to the option in TypesOfService table.
+            tosGet = request.POST.get('tos-option')
+            ToSToInt = int(tosGet)
+            tosModel = TypeOfService.objects.get(id=ToSToInt)
+            
+
+            # This gets the selected wrap colour which is a radio button, then compares it to 
+            # the table to see what the match is.
+            wcGet = request.POST.get('wc-option')
+
+            
+            # This checks to see if an input has been chosen and if not gets the original colour choice from the database.
+            if wcGet == None:
+                wcRetreive = cs.wrap_colour.id
+                wcModel = WrapColour.objects.get(id=wcRetreive)
+            else:
+                wcModel = WrapColour.objects.get(id=wcGet)
+
+           
+            # This gets the option from the Optional Services list, compares the int to the 
+            # OptionalServices table and then appends it to a list.
+            osGet = request.POST.getlist('OS')
+            
+            osList = []
+            
+            for i in osGet:
+                osModel = OptionalService.objects.get(id=i)
+                osList.append(osModel)
+
+               
+            # This gathers the text inputted for the 'car make'.
+            carmaGet = form.cleaned_data['car_make']
+
+            # This gathers the text inputted for the 'car model'.            
+            carmoGet = request.POST.get('car_model')
+            
+            # This checks if an input was selected, if not then gets the previous selection from the database.
+            if carmoGet == None:
+                carmoGet = cs.car_model
+            
+            # This gets the text from the 'Damage Details' text box.
+            damageDetailsGet = request.POST.get('ddInput')
+
+            
+            # This gets the selected (if any) options to then compare to the Damage table
+            # and then adds it to list.
+            vdGet = request.POST.getlist('TD')
+            
+            vdList = []
+            
+            for i in vdGet:
+                vdModel = Damage.objects.get(id=i)
+                vdList.append(vdModel)
+
+            
+            # This gets the total price from the read-only text box which is updated by JS depending
+            # on what options are selected by the user.
+            tpGet = request.POST.get('tp-name')
+
+        
+            # Once the data has been collected above, it then attempts to add it to the neccessary fields in the 
+            # matched Services table.
+            try:
+
+                cs.save()
+                cs.type_of_service = tosModel
+                cs.optional_service.set(osList)
+                cs.wrap_colour = wcModel
+                cs.car_make = carmaGet
+                cs.car_model = carmoGet
+                cs.damage.set(vdList)
+                cs.damage_details = damageDetailsGet
+                cs.total_price = tpGet
+                cs.user = str(user)
+                cs.save()
+                
+                messages.success(request, "This order was updated successfully!")
+                return redirect(view_order)
+                
+            except Exception as e:
+                messages.error(request, "Error occured updating this order, please try again.")
+                print("Error : " + str(e))
+                return redirect(view_order)
+        
+        else:
+            messages.error(request, "Sorry, there was an error with the form, please try again.")
+            return redirect(view_order)
+    else:
+        messages.error(request, "You don't have permission to update this quote!")
+        return redirect(view_order)

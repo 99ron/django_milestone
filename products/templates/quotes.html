@@ -10,8 +10,11 @@
 
 {% load static %}
 
+
+
 <div class="container">
     <div class="row text-center">
+        
         <h1>Quotes Page</h1>
         
         <p>If you enter the required  details below and submit the form. <br>
@@ -76,7 +79,13 @@
                     <div class="form-group Make-Model">
                     
                         {{ form | as_bootstrap }}
-                            
+                        
+                        <label for="car_model"> Car Model</label>
+                    
+                        <select class="form-control car_model" name="car_model" id="car_model">
+                            <option value="none" disabled selected> Choose an option! </option>
+                        </select>
+                    
                     </div>
                 </div>
                 
@@ -173,6 +182,7 @@
                   
                     </div>
                 </div>
+                
             </form>
             
         </div>

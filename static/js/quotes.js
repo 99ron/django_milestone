@@ -1,6 +1,6 @@
 /* global $ */
 
-let tos, os, totalPrice, dropdown;
+let tos, os, totalPrice, dropdown, car_make;
 
 // Upon page loading this checks what the value is of the service dropdown to dictate what's shown on the screen.
 $( document ).ready(function() {
@@ -22,10 +22,71 @@ $( document ).ready(function() {
     } else {
        // Any of the other options is selected the optional extras are displayed. 
        $("#optional-service-container").fadeIn(); 
-    }    
+    } 
+    
+    
+    // This renders the list of models if there's an option selected for the car model. Ie. The Edit page.
+    car_make = $('select[name=car_make] option:selected').val();
+    var request_url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/' + car_make + '?format=json';
+
+    $.ajax({
+        url: request_url,
+        success: function(data){
+      
+            for (let i=0, item; item=data.Results[i]; i++) {
+                let car_model = item.Model_Name;
+
+                $('select[name=car_model]').append(
+                $('<option></option>').val(car_model).html(car_model)
+                );
+                
+            }
+       }
+    });
+    
+    // Fetches the current selected options price on page load.
+    tos = $('#type-of-service').children(":selected").data("price");
+    
+    // Gets the selected options on page load and returns the price.
+    $('.optional-services').ready(function() {
+    let osArray = $('.optional-services:checked').map(function() {
+        return $(this).data('price');
+    }).get();
+    
+    // This converts the array to be int.
+    osArray = osArray.map(Number);
+    
+    // This takes 2 of the numbers from the conversion and adds them together
+    // ready to display in the total cost box and if no numbers are found it defaults to 0.
+    os = osArray.reduce(function(a,b){
+        return a+b}, 0);
+    });
+
+    
 });
 
+// This collects the option in car_make, and when changed it pulls the options for the car_model option list.
+$('select[name=car_make]').change(function(){
+    car_make = $(this).val();
+    var request_url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/' + car_make + '?format=json';
+        
+    $('select[name=car_model]').empty();
+    
+    $.ajax({
+        url: request_url,
+        success: function(data){
+      
+            for (let i=0, item; item=data.Results[i]; i++) {
+                let car_model = item.Model_Name;
 
+                $('select[name=car_model]').append(
+                $('<option></option>').val(car_model).html(car_model)
+                );
+                
+            }
+       }
+    });
+});
 
 // Updates the image on the quotes page to show vehicle sizing which also hides or show's certain div's depending on choosen option.
 $('#type-of-service').change(function(){
@@ -74,16 +135,15 @@ $('#type-of-service').change(function(){
 
 
 // This will read what the price is for the selected items and then add it to show a total before processing.
-
 $('#type-of-service').change(function() {
     tos = $(this).children(":selected").data("price");
     return tos;
 });
 
 /*
-Checks if the checkbox for the optional services on the quotes page have been
-toggled and if so the price gets extracted and returned for the live update
-on price. 
+    Checks if the checkbox for the optional services on the quotes page have been
+    toggled and if so the price gets extracted and returned for the live update
+    on price. 
 */
  
 $('.optional-services').change(function() {

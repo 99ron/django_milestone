@@ -18,8 +18,8 @@
                         <div class="panel-body order-panel-body">
                             
                             <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
+                            <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
                             
-                            <a href="#" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
                             
                             <p class="pull-right order-total-price">Total Price: <strong>{{ order.service_id.total_price }}</strong></p>
         

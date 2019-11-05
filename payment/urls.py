@@ -1,6 +1,8 @@
 from django.conf.urls import url
-from payment.views import checkout
+from django.contrib import admin
+from payment.views import checkout, payment
 
 urlpatterns = [
-    url(r'^$', checkout, name="checkout"),
+    url(r'^(?P<order_id>\w+)/$', checkout, name="checkout"),
+    url(r'^payment/(?P<order_id>\w+)', payment, name="payment"),
     ]

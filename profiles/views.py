@@ -28,10 +28,10 @@ def user_profile(request):
             up = user
             
             try:
-                up.first_name = form.cleaned_data['first_name']
-                up.last_name = form.cleaned_data['last_name']
+                up.full_name = form.cleaned_data['full_name']
                 up.phone_number = form.cleaned_data['phone_number']
-                up.address = form.cleaned_data['address']
+                up.street_address1 = form.cleaned_data['street_address1']
+                up.street_address2 = form.cleaned_data['street_address2']
                 up.postcode = form.cleaned_data['postcode']
                 up.country = form.cleaned_data['country']
                 image = form.cleaned_data['image']
@@ -47,8 +47,9 @@ def user_profile(request):
                 messages.success(request, "Updated successfully!")
                 return render(request, 'profile.html', {'form' : form, 'profile' : user})
                 
-            except:
+            except Exception as e:
                 # If an error occurs it throws up a message and asks to retry.
+                print("Error: " + str(e))
                 messages.error(request, "Failed to update, try again.")
                 return render(request, 'profile.html', {'form' : form, 'profile' : user})
                 

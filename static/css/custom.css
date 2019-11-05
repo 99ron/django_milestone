@@ -21,12 +21,6 @@ a:link, a:visited {
   color: #ffffff;
 }
 
-.login-bg {
-  background: url(/static/img/login-bg.jpg) center no-repeat;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
-  background-size: cover;
-}
-
 /* ---------------------------------------------------------- Headers */
 .header-container-text, .about-header-container-text {
   color: #ffffff;
@@ -56,6 +50,10 @@ a:link, a:visited {
   margin-bottom: 40px;
 }
 
+.pagination-container {
+  text-align: center;
+}
+
 .brand-banner {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -73,6 +71,10 @@ a:link, a:visited {
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
   margin-left: auto;
   margin-right: auto;
+}
+
+.payment-button {
+  text-align: center;
 }
 
 .form-button {
@@ -181,13 +183,36 @@ a:link, a:visited {
   padding: 0px;
 }
 
-.order-list-table > table {
-  border-collapse: collapse;
-  table-layout: auto;
-  margin-top: 15px;
+/* ---------------------------------------------------------- Background Images */
+.login-bg {
+  background: url(/static/img/login-bg.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  background-size: cover;
 }
-.order-list-table > table td {
-  width: 50%;
+
+.header-image {
+  background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  height: 750px;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-header-image {
+  background: url(/static/img/about-header-image.png) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  background-size: cover;
+  height: 550px;
+  overflow: hidden;
+  position: relative;
+}
+
+.background-order-page {
+  background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 8px 9px;
+  background-color: #282828;
+  background-size: 16px 16px;
+  height: 100%;
 }
 
 /* ---------------------------------------------------------- Footer */
@@ -212,6 +237,34 @@ ul {
   padding-top: 15px;
 }
 
+/* ---------------------------------------------------------- Tables */
+.previous-quote-table-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.blue-cell-white-text {
+  background: #4bb7ff;
+  color: #ffffff;
+}
+
+.quote-table-image {
+  max-width: 30px;
+  max-height: 30px;
+  border: 2px solid white;
+  padding: 1px;
+  border-radius: 5px;
+}
+
+.order-list-table > table {
+  border-collapse: collapse;
+  table-layout: auto;
+  margin-top: 15px;
+}
+.order-list-table > table td {
+  width: 50%;
+}
+
 /* ---------------------------------------------------------- Other */
 .alert {
   margin-bottom: 0px;
@@ -233,24 +286,6 @@ ul {
   padding-top: 20px;
 }
 
-.header-image {
-  background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) center no-repeat;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
-  background-size: cover;
-  height: 750px;
-  overflow: hidden;
-  position: relative;
-}
-
-.about-header-image {
-  background: url(/static/img/about-header-image.png) center no-repeat;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
-  background-size: cover;
-  height: 550px;
-  overflow: hidden;
-  position: relative;
-}
-
 .service-image {
   margin-top: 25px;
   max-width: 600px;
@@ -260,13 +295,13 @@ ul {
   width: 200px;
 }
 
-.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price {
+.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price, .order-nothing {
   background-color: white;
   border: black solid 2px;
   border-radius: 5px;
   padding: 10px;
 }
-.OptionalService a, .TypeOfService a, .Damage a, .Make-Model a, .WrapColour a, .Price a {
+.OptionalService a, .TypeOfService a, .Damage a, .Make-Model a, .WrapColour a, .Price a, .order-nothing a {
   margin: 5px;
 }
 
@@ -301,26 +336,32 @@ ul {
   height: 0;
 }
 
-.blue-cell-white-text {
-  background: #4bb7ff;
-  color: #ffffff;
+.order-panel-container {
+  margin-top: 20px;
 }
-
-.quote-table-image {
-  max-width: 30px;
-  max-height: 30px;
-  border: 2px solid white;
-  padding: 1px;
-  border-radius: 5px;
-}
-
-.order-panel-body {
+.order-panel-container .order-panel-body {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
 
 .order-total-price {
   margin-right: 15px;
+}
+
+.order-container {
+  margin-top: 100px;
+  margin-bottom: 70px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  text-align: center;
+  background-image: linear-gradient(#8ad4ff, #2da1e3 60%, #8bd2fb);
+  border-radius: 10px;
+}
+.order-container .order-nothing {
+  font-size: 30px;
+}
+.order-container a {
+  color: #000;
 }
 
 /* ---------------------------------------------------------- Media Queries */

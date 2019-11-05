@@ -3,6 +3,8 @@
 $primary-text-colour: #000;
 $header-text-overlay: #ffffff;
 $secondary-text-colour: #666;
+$white-colour: #fff;
+$link-colour: #000;
 $third-text-colour: #4bb7ff;
 $footer-text-colour: #ffffff;
 $cell-text-colour: #ffffff;
@@ -29,20 +31,16 @@ main {
     flex: 1 0 auto;
 }
 
+// Forces content to always be 100% height.
 html {
     height: 100%;
 }
 
+// Colour for visited links.
 a:link, a:visited {
     color: $footer-text-colour;
 }
 
-.login-bg {
-    background: url(/static/img/login-bg.jpg) 
-    center no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
-    background-size: cover;
-}
 
 /* ---------------------------------------------------------- Headers */
 
@@ -77,6 +75,11 @@ a:link, a:visited {
     margin-bottom: 40px;
 }
 
+// Pagination list display.
+.pagination-container {
+    text-align: center;
+}
+
 // About Us page banner making it be center, black background and margins set.
 .brand-banner {
     margin-top: 50px;
@@ -99,6 +102,11 @@ a:link, a:visited {
     margin-right: auto;
 }
 
+.payment-button {
+    text-align: center;
+}
+
+// Form buttons structure.
 .form-button {
     width: 100%;
     margin-top: 20px;
@@ -110,6 +118,8 @@ a:link, a:visited {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+
 .services-text-header {
     color: $third-text-colour;
     padding-top: 25px;
@@ -208,15 +218,50 @@ a:link, a:visited {
     padding: 0px;
 }
 
-.order-list-table > table {
-    border-collapse: collapse;
-    table-layout: auto;
-    margin-top: 15px;
+
+/* ---------------------------------------------------------- Background Images */
+
+// Login and registration page background image.
+.login-bg {
+    background: url(/static/img/login-bg.jpg) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
+    background-size: cover;
+}
+
+// Main page top image used for the parralax effect.
+.header-image { background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
+    background-size: cover;
+    height: 750px;
+    overflow: hidden;
+    position: relative;
+}
+
+// About Us page top image used for the parralax effect.
+.about-header-image {
+    background: url(/static/img/about-header-image.png) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
+    background-size: cover;
+    height: 550px;
+    overflow: hidden;
+    position: relative;
+}
+
+// Carbon Fibre pattern effect.
+.background-order-page {
+    background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
     
-    td {
-    width: 50%;
- }
-} 
+    height: 100%;
+}
 
 /* ---------------------------------------------------------- Footer */
 
@@ -243,6 +288,39 @@ ul {
 }
 
 
+/* ---------------------------------------------------------- Tables */
+
+// Order page previous selected wrap table.
+.previous-quote-table-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+// Used for an onclick event to change background and text colours.
+.blue-cell-white-text {
+   background: #4bb7ff;
+   color: $cell-text-colour;
+}
+
+// Sets the image to be a static maximum size.
+.quote-table-image {
+    max-width: 30px;
+    max-height: 30px;
+    border: 2px solid white;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+// Makes the wrap colour table scrollable and sets the margins.
+.order-list-table > table {
+    border-collapse: collapse;
+    table-layout: auto;
+    margin-top: 15px;
+    
+    td {
+    width: 50%;
+ }
+} 
 
 /* ---------------------------------------------------------- Other */
 
@@ -267,25 +345,7 @@ ul {
     padding-top: 20px;
 }
 
-.header-image { background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
-    center no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
-    background-size: cover;
-    height: 750px;
-    overflow: hidden;
-    position: relative;
-}
-
-.about-header-image {
-    background: url(/static/img/about-header-image.png) 
-    center no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
-    background-size: cover;
-    height: 550px;
-    overflow: hidden;
-    position: relative;
-}
-
+// Margins for the images that change on the quotes and orders page.
 .service-image {
  margin-top: 25px;
  max-width: 600px;
@@ -295,7 +355,7 @@ ul {
     width: 200px;
 }
 
-.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price {
+.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price, .order-nothing {
     background-color: white;
     border: black solid 2px;
     border-radius: 5px;
@@ -307,7 +367,6 @@ ul {
 }
 
 // required for the nice looking checkboxes to hide and show the ticks.
-
 .form-group input[type="checkbox"] {
     display: none;
 }
@@ -338,27 +397,41 @@ ul {
   height: 0;
 }
 
-.blue-cell-white-text {
-   background: #4bb7ff;
-   color: $cell-text-colour;
-}
+.order-panel-container{
+    
+    margin-top: 20px;
 
-.quote-table-image {
-    max-width: 30px;
-    max-height: 30px;
-    border: 2px solid white;
-    padding: 1px;
-    border-radius: 5px;
-}
-
-.order-panel-body {
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 5px;
+    .order-panel-body {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
 }
 
 .order-total-price {
     margin-right: 15px;
 }
+
+.order-container {
+    margin-top: 100px;
+    margin-bottom: 70px;
+    box-shadow: 0px 0px 8px 4px
+    rgba(0, 0, 0, 0.3), 0 6px 20px 0
+    rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    text-align: center;
+    background-image: linear-gradient(#8ad4ff, #2da1e3 60%, #8bd2fb);
+    border-radius: 10px;
+    
+    .order-nothing {
+        font-size: 30px;
+    }
+    
+    a {
+        color: $primary-text-colour;
+    }
+
+}
+
 /* ---------------------------------------------------------- Media Queries */
 
 @media only screen and (min-width: 991px) {

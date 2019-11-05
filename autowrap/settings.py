@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'products',
     'profiles',
     'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,6 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_PORT = 1025
 
+# Setup keys needed for stripe.
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")

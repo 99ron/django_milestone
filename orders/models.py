@@ -9,7 +9,6 @@ class OrderList(models.Model):
     username = models.CharField(max_length=25)
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=25)
-    order_date = models.DateTimeField(auto_now_add=True, blank=True)
     paid = models.BooleanField(default=False)
     
     def __str__(self):

@@ -116,7 +116,6 @@ def get_quote(request):
                 if latestInvoice.user == str(user):
                     try:
                         ol.service_id = latestInvoice
-                        ol.order_date = datetime.now()
                         ol.order_status = "Waiting On Employee"
                         ol.username = str(user)
                         ol.save()

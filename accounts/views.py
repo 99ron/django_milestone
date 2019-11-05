@@ -4,11 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm
 from profiles.models import UserProfile
+from profiles.urls import user_profile 
 
 # Create your views here.
 def index(request):
     """Return the home html file"""
     return render(request, 'home.html')
+
+
 
 @login_required    
 def logout(request):
@@ -17,6 +20,8 @@ def logout(request):
     messages.success(request, "You have logged out succesfully")
     return redirect(reverse('index'))
     
+
+
 def login(request):
     """Return a login page"""
     if request.user.is_authenticated:
@@ -38,6 +43,9 @@ def login(request):
         login_form = UserLoginForm()
     return render(request, 'login.html', {"login_form" : login_form})
 
+
+
+
 def registration(request):
     """Render the registration page"""
     if request.user.is_authenticated:
@@ -57,8 +65,9 @@ def registration(request):
                 """ Creates a blank profile page """
                 makeProfile(request)
                 
+                # This sends the user to the profile page to fill out their information.
                 messages.success(request, "You have succesfully registered")
-                return redirect(reverse('index'))
+                return redirect(user_profile)
             else:
                 messages.error(request, "Unable to register your account at this time")
     else:
@@ -66,6 +75,8 @@ def registration(request):
     return render(request, 'registration.html', {
         "registration_form" : registration_form})
         
+
+
 
 def makeProfile(request):
     """ This creates a empty profile for the user to fill out """

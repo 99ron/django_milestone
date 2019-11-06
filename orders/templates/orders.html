@@ -13,15 +13,20 @@
                 
                 <div class="panel panel-primary">
                     
-                    <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |  </div>
+                    <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} | {% if order.paid %} PAID | {% endif %}  </div>
                     
                         <div class="panel-body order-panel-body">
                             
                             <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
-                            <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
+                            {% if not order.paid %}
+                                <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
+                                <p class="pull-right order-total-price">Total Price: <strong>{{ order.service_id.total_price }}</strong></p>
+                            {% else %}
+                                <a href="#" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
+                                <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
+                            {% endif %}
                             
                             
-                            <p class="pull-right order-total-price">Total Price: <strong>{{ order.service_id.total_price }}</strong></p>
         
                             <div id="{{ order.service_id }}" class="collapse row">
                             
@@ -56,28 +61,37 @@
         
                                         {% for i in order.service_id.damage.all %}
                                         <tr>
-                                            <td>Optional Services: </td>
+                                            <td>Damaged Part: </td>
                                             <td>{{ i.name }}</td>
                                         {% empty %}
                                         </tr>
                                         {% endfor %}
                                         
-                                        {% if order.service_id.damage_details %}
+                                        {% if order.service_id.damage_details|length %}
                                         <tr>
                                             <td>Damage Details: </td>
                                             <td>{{ order.service_id.damage_details }}</td>
                                         </tr>
                                         {% endif %}
+                                        
                                         <tr>
                                             <td>Total Price: </td>
                                             <td>£{{ order.service_id.total_price }}</td>
                                         </tr>
+                                        
                                     </tbody>
                                 </table>
-        
-                                <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left "><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
-                                <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
-        
+                                
+                                <div class="order-delete-container">
+                                    <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left "><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
+                                </div>
+                                
+                                {% if not order.paid %}
+                                    <div class="order-edit-container">
+                                        <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
+                                    </div>
+                                {% endif %}
+
                             </div>
                             
                         </div>
@@ -92,11 +106,11 @@
             
         {% else %}
         
-            <div class="col-xs-12 panel panel-group">
+            <div class="col-xs-12  panel-group">
                 
                 <div class="panel panel-primary text-center order-container">
                     <div class="order-nothing">
-                        <p> You have no orders, click <a href="{% url 'quotes' %}" class=""> "here" </a> to create one!</p>
+                        <p> You have no orders, click <a href="{% url 'quotes' %}" class="black-font"> "here" </a> to create one!</p>
                     </div>
                 </div>
                 

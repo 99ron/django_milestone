@@ -1,7 +1,5 @@
 /*global Stripe $*/
 
-//Stripe.setPublishableKey('pk_test_cakx2lnvjTCoXAvX6JfzjPhB00dmyLVVF3');
-
 $(function() {
     $("#payment_form").submit(function() {
         var form = this;

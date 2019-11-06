@@ -154,6 +154,11 @@ a:link, a:visited {
   color: #000;
 }
 
+.checkout-payment-form {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form {
   margin-top: 70px;
   margin-bottom: 70px;
@@ -276,6 +281,13 @@ ul {
 
 .messages {
   text-align: center;
+}
+
+.credit-card-errors {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: red;
 }
 
 .font-bold {

@@ -22,13 +22,14 @@ def checkout(request, order_id):
         payment_form = makePaymentForm()
         order_form = orderForm(instance=user)
         
-        return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder })
+        return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder, 'publishable': settings.STRIPE_PUBLIC_KEY })
         
  
 
 @login_required
 def payment(request, order_id):
     if request.method == "POST":
+        
         
         order = OrderList.objects.get(pk=order_id)
         user = UserProfile.objects.get(user=request.user)

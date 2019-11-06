@@ -6,7 +6,7 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     //<![CDATA[
-    Stripe.setPublishableKey = '{{ publishable }}';
+    Stripe.publishableKey = '{{ publishable }}';
     //]]>
 </script>
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
@@ -17,8 +17,8 @@
 {% block content %}
 <div class="background-order-page">
     <div class="container">
-        <h1> {{ publishable }}</h1>
-        <div class="panel panel-group order-panel-container  text-center">
+        
+        <div class="panel panel-group order-panel-container text-center">
                     
             <div class="panel panel-primary">
                 
@@ -54,6 +54,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>
@@ -69,7 +70,7 @@
     
                 <legend>Payment Details</legend>
                 
-                <div id="credit-card-errors" style="display:none;">
+                <div id="credit-card-errors" class="credit-card-errors" style="display:none;">
                     <div class="alert-message block-message error" id="stripe-error-message"></div>
                 </div>
                 

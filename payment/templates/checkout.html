@@ -4,10 +4,10 @@
 
 {% block head_js %}
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript"></script>
-    <!--<![CDATA[-->
-    <!--Stripe.setPublishableKey = '{{ publishable }}';-->
-    <!--//]]>-->
+<script type="text/javascript">
+    //<![CDATA[
+    Stripe.setPublishableKey = '{{ publishable }}';
+    //]]>
 </script>
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 {% endblock head_js %}

@@ -1,6 +1,9 @@
 /*global Stripe $*/
+
+//Stripe.setPublishableKey('pk_test_cakx2lnvjTCoXAvX6JfzjPhB00dmyLVVF3');
+
 $(function() {
-    $("#payment-form").submit(function() {
+    $("#payment_form").submit(function() {
         var form = this;
         var card = {
             number: $("#id_credit_card_number").val(),

@@ -8,28 +8,45 @@ from django.conf import settings
 from django.utils import timezone
 import stripe
 
-
-
-
 # Payment View below.
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
-stripe_api_key = settings.STRIPE_SECRET_KEY
+@login_required
+def checkout(request, order_id):
+    if request.method == "GET":
+        
+        user = UserProfile.objects.get(pk=request.user.id)
+        serviceOrder = OrderList.objects.get(pk=order_id)
+        
+        payment_form = makePaymentForm()
+        order_form = orderForm(instance=user)
+        
+        return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder })
+        
+ 
 
 @login_required
 def payment(request, order_id):
     if request.method == "POST":
+        
+        order = OrderList.objects.get(pk=order_id)
+        user = UserProfile.objects.get(user=request.user)
         order_form = orderForm(request.POST)
         payment_form = makePaymentForm(request.POST)
 
         if order_form.is_valid() and payment_form.is_valid():
-            order = order_form.save(commit=False)
-            order.date = timezone.now()
-            order.save()
-
+            orderF = order_form.save(commit=False)
+            orderF.user = user
+            orderF.order = order
+            orderF.date = timezone.now()
+            orderF.save()
+            
+            total = order.service_id.total_price
+            
             try:
                 customer = stripe.Charge.create(
-                    amount = int('total' * 100),
+                    amount = int(total),
                     currency = "GBP",
                     description = request.user.email,
                     card = payment_form.cleaned_data['stripe_id'],
@@ -39,28 +56,19 @@ def payment(request, order_id):
             
             
             if customer.paid:
+                # This sets the paid checkbox to true.
+                order.paid = True
+                order.save()
+                
                 messages.success(request, "You've paid successfully")
                 return redirect(reverse('orders'))
+            
+            else:
+                messages.error(request, "Unable to take payment")
        
         else:
             print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
 
-    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_SECRET_KEY, })
+    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLIC_KEY, 'order' : order})
 
-
-@login_required
-def checkout(request, order_id):
-    if request.method == "GET":
-        user = UserProfile.objects.get(pk=request.user.id)
-        
-        print(str(order_id))
-        serviceOrder = OrderList.objects.get(pk=order_id)
-        print(str(serviceOrder))
-        
-        payment_form = makePaymentForm()
-        order_form = orderForm(instance=user)
-        
-    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder })
-        
- 

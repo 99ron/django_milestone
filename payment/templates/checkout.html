@@ -3,11 +3,11 @@
 {% load static %}
 
 {% block head_js %}
-<script type="text/javascript" src="https://js.stripe.com/v2"></script>
-<script type="text/javascript" src=""></script>
-    //<![CDATA[
-    Stripe.publishableKey = '{{ publishable }}';
-    //]]>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript"></script>
+    <!--<![CDATA[-->
+    <!--Stripe.setPublishableKey = '{{ publishable }}';-->
+    <!--//]]>-->
 </script>
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 {% endblock head_js %}
@@ -15,38 +15,79 @@
 
 
 {% block content %}
-
-<div class="container">
-    <div class="row">
-        <div class="order-payment-container">
-            
+<div class="background-order-page">
+    <div class="container">
+        <h1> {{ publishable }}</h1>
+        <div class="panel panel-group order-panel-container  text-center">
+                    
+            <div class="panel panel-primary">
+                
+                <div class="panel-heading"> Service Checkout </div>
+                
+                    <div class="panel-body order-panel-body">
+        
+                    <div class="col-xs-12 order-list-table">
+                        
+                        <p>Check the order details below and fill out the form. <br>
+                        Click the submit form button and we'll get in touch to arrange a date <br> 
+                        for you to drop the vehicle off.</p>
+                        
+                        <hr class="hr-break">
+                        
+                        <table class="table table-bordered text-center checkout-table">
+                            <tbody>
+                                <tr>
+                                    <td>Type of Service: </td>
+                                    <td>{{ order.service_id.type_of_service }} </td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Make: </td>
+                                    <td>{{ order.service_id.car_make }} </td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Model: </td>
+                                    <td>{{ order.service_id.car_model }} </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Price: </td>
+                                    <td>£{{ order.service_id.total_price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
- 
-    <div>
-        
-        <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
             
-            {% csrf_token %}
             
-            <legend>Payment Details</legend>
-            <div id="credit-card-errors" style="display:none">
-                <div class="alert-message block-message error" id="stripe-error-message"></div>
-            </div>
-            
-            <div class="form-group col-md-6">
-                {{ order_form | as_bootstrap }}
-            </div>
-            
-            <div class="form-group col-md-6">
-                {{ payment_form | as_bootstrap }}
-            </div>
+     
+        <div class="row checkout-payment-form">
 
-            <div class="form-group payment-button col-md-12">
-                <input class="btn btn-primary" id="submit_payment_btn" name="commit" type=submit value="Submit Payment">
-            </div>
-        </form>
-        
+            <form role="form" method="post" class="" id="payment_form" action="{% url 'payment' order.pk %}">
+                
+                {% csrf_token %}
+    
+                <legend>Payment Details</legend>
+                
+                <div id="credit-card-errors" style="display:none;">
+                    <div class="alert-message block-message error" id="stripe-error-message"></div>
+                </div>
+                
+                <div class="form-group col-xs-12 col-md-6">
+                    {{ order_form | as_bootstrap }}
+                </div>
+                
+                <div class="form-group col-xs-12 col-md-6">
+                    {{ payment_form | as_bootstrap }}
+                </div>
+    
+                <div class="form-group payment-button col-md-12">
+                    <input class="btn btn-success" id="submit_payment_btn" name="commit" type=submit value="Submit Payment">
+                </div>
+    
+            </form>
+
+        </div>
     </div>
 </div>
 

@@ -116,7 +116,6 @@ def get_quote(request):
                 if latestInvoice.user == str(user):
                     try:
                         ol.service_id = latestInvoice
-                        ol.order_status = "Waiting On Employee"
                         ol.username = str(user)
                         ol.save()
     
@@ -151,8 +150,8 @@ def get_quote(request):
 def edit_quote(request, order_id):
     
     current_user = request.user.username
-    user = UserProfile.objects.get(user=request.user)
     orderList = OrderList.objects.get(pk=order_id)
+    user = UserProfile.objects.get(user=request.user) 
     
     if current_user == orderList.username or user.employee == True:
         
@@ -176,7 +175,6 @@ def edit_quote(request, order_id):
         except Exception as e:
             print("Error: " + str(e))
             messages.error(request, "Sorry, something went wrong while trying to get your order.")
-            return redirect(view_order)
             
     else:
         messages.error(request, "You are not an employee or the creator for this order.")

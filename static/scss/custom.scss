@@ -187,7 +187,8 @@ a:link, a:visited {
     }
 }
 
-.profile-form, .contact-form  {
+
+.profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form  {
     margin-top: 70px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -322,6 +323,10 @@ ul {
  }
 } 
 
+.checkout-table {
+    font-weight: bold;
+}
+
 /* ---------------------------------------------------------- Other */
 
 // Removes the gap at the bottom of the alert box.
@@ -335,6 +340,10 @@ ul {
 
 .font-bold {
     font-weight: bold;
+}
+
+.black-font {
+    color: black !important;
 }
 
 .icon-bar {
@@ -364,6 +373,11 @@ ul {
     a {
         margin: 5px;
     }
+}
+
+// Order page delete button used for spacing.
+.order-delete-container > a {
+    margin-right: 10px;
 }
 
 // required for the nice looking checkboxes to hide and show the ticks.
@@ -399,7 +413,7 @@ ul {
 
 .order-panel-container{
     
-    margin-top: 20px;
+    margin-top: 30px;
 
     .order-panel-body {
         background-color: rgba(0,0,0,0.1);
@@ -430,6 +444,10 @@ ul {
         color: $primary-text-colour;
     }
 
+}
+
+.checkout-payment-table {
+     background-color: rgba(0,0,0,0.1);
 }
 
 /* ---------------------------------------------------------- Media Queries */

@@ -8,24 +8,31 @@
 
 {% block content %}
 
-<div class="container">
-<div class="contact-form">
+<div class="contact-us-background-image">
 
-    <h1 class="text-center"> Contact Us </h1>
-        <hr class="hr-under-heading">
-
-        <p class="text-padding-top-bottom text-center">If you have any questions fill out the form below
-        and we'll try to get back to you as soon as possible.</p>
-        
-        <hr class="hr-break">
-        
-        <form method="POST">
-            {% csrf_token %} 
-            {{ form | as_bootstrap }}
-            <div class="text-center">
-                <button type="submit" class="btn btn-success contact-button">Send</button>
-            </div>
-        </form>
+    <div class="container">
+        <div class="contact-form">
+    
+            <h1 class="text-center"> Contact Us </h1>
+            
+            <hr class="hr-under-heading">
+    
+            <p class="text-padding-top-bottom text-center">Please fill out the form below
+            and we'll try to get back to you as soon as possible.</p>
+            
+            <hr class="hr-break">
+            
+            <form method="POST" action="{% url 'contact' %} ">
+                {% csrf_token %}
+                
+                {{ form | as_bootstrap }}
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success contact-button">Send</button>
+                </div>
+                
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

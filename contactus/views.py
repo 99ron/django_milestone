@@ -3,7 +3,8 @@ from django.contrib import messages
 from django.core.mail import BadHeaderError, EmailMessage, send_mail
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.conf import settings
-from .forms import contactForm
+from contactus.forms import contactForm
+from home.views import home
 
 # Create your views here.
 
@@ -17,12 +18,16 @@ def contact(request):
             from_email = form.cleaned_data['from_email']
             from_name = form.cleaned_data['from_name']
             subject = form.cleaned_data['subject']
-            
+
             try:
-                send_to = settings.DEFAULT_FROM_EMAIL
-                message = "{0} has sent a query: \n\n{1}".format(from_name, form.cleaned_data['message'])
-                send_mail(subject, message, from_email, send_to, from_name)
-                return redirect (successView)
+
+                send_to = settings.DEFAULT_SEND_TO
+                message = "Name: {0} \nEmail: {1} \n\nMessage: {2}".format(from_name, from_email, form.cleaned_data['message'])
+                send_mail(subject, message, from_email, [send_to], from_name)
+                
+                messages.success(request, "Your email has been sent, We'll get back to you soon as possible.")
+                return redirect (home)
+                
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect (successView)
@@ -30,9 +35,3 @@ def contact(request):
             form = contactForm()
             return render(request, 'contact.html', {'form' : form})
     return render(request, "contact.html", {'form' : form})
-
-def successView(request):
-    form = contactForm()
-    messages.success(request, "Your email has been sent, thank you.")
-    return render(request, 'contact.html', {'form' : form})
-

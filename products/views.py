@@ -114,8 +114,10 @@ def get_quote(request):
                 
                 
                 if latestInvoice.user == str(user):
+                    
                     try:
                         ol.service_id = latestInvoice
+                        ol.user = user
                         ol.username = str(user)
                         ol.save()
     

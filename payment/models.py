@@ -20,5 +20,6 @@ class paymentDetails(models.Model):
     street_address2 = models.CharField(max_length=40, blank=False )
     
     
+    
     def __str__(self):
         return "{0} --- Paid: {1}".format(self.order.service_id.invoice_no, self.order.paid)

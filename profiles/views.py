@@ -30,6 +30,7 @@ def user_profile(request):
             try:
                 up.full_name = form.cleaned_data['full_name']
                 up.phone_number = form.cleaned_data['phone_number']
+                up.town_city = form.cleaned_data['town_city']
                 up.street_address1 = form.cleaned_data['street_address1']
                 up.street_address2 = form.cleaned_data['street_address2']
                 up.postcode = form.cleaned_data['postcode']

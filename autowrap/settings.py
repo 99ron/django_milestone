@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['e0d353a3a84b4c87b40b6ee5ce55763b.vfs.cloud9.us-east-1.amazonaws.com', 'https://autowraps-django-milestone.herokuapp.com/']
+ALLOWED_HOSTS = ['e0d353a3a84b4c87b40b6ee5ce55763b.vfs.cloud9.us-east-1.amazonaws.com', 'autowraps-django-milestone.herokuapp.com']
 
 
 # Application definition

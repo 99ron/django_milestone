@@ -94,7 +94,7 @@ $('#type-of-service').change(function(){
     
     // Changes the image and fades in the needed containers.
     if(dropdown=="1") {
-        $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Large_veh.jpg'>");
+        $("#service-image").html( "<img class='img-responsive' src='/quotes/Large_veh.jpg'>");
         $("#wrap-colour-container").fadeIn();
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
@@ -104,7 +104,7 @@ $('#type-of-service').change(function(){
     
     // Changes the image and fades in the needed containers.
     if(dropdown=="2") {
-        $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Mid_veh.jpg'>");
+        $("#service-image").html( "<img class='img-responsive' src='/quotes/Mid_veh.jpg'>");
         $("#wrap-colour-container").fadeIn();
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
@@ -114,7 +114,7 @@ $('#type-of-service').change(function(){
     
     // Changes the image and fades in the needed containers.    
     if(dropdown=="3") {
-        $("#service-image").html( "<img class='img-responsive' src='/media/quotes/Small_veh.jpg'>");
+        $("#service-image").html( "<img class='img-responsive' src='/quotes/Small_veh.jpg'>");
         $("#wrap-colour-container").fadeIn();
         $("#optional-service-container").fadeIn();
         $("#damage-container").fadeIn();
@@ -124,7 +124,7 @@ $('#type-of-service').change(function(){
     
     // Changes the image and fades in/out the needed containers.
     if(dropdown=="4") {
-        $("#service-image").html( "<img class='img-responsive' src='/media/quotes/bonnet_wrap.jpg'>");
+        $("#service-image").html( "<img class='img-responsive' src='/quotes/bonnet_wrap.jpg'>");
         $("#wrap-colour-container").fadeIn();
         $("#optional-service-container").fadeOut();
         $("#damage-container").fadeIn();

@@ -6,6 +6,13 @@
 
 <div class="background-order-page">
     <div class="container">
+        <div class="row text-center">
+        
+        <h1 class="header-text-alternative">Orders Page</h1>
+        
+        <hr class="hr-break">
+        
+    </div>
         {% if orders %}
             {% for order in orders %}
             
@@ -13,31 +20,31 @@
                 
                 <div class="panel panel-primary">
                     
-                    <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} | {% if order.paid %} PAID | {% endif %}  </div>
+                    <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |{% if order.paid %} PAID | {% endif %}  </div>
+                    
                     
                         <div class="panel-body order-panel-body">
                             
+                            <p> Service: {{ order.service_id.type_of_service }} </p>
+                           
+                            <hr class="hr-break--full">
+                           
                             <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
+                            
                             {% if not order.paid %}
                                 <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
-                                <p class="pull-right order-total-price">Total Price: <strong>{{ order.service_id.total_price }}</strong></p>
+                                <p class="pull-right order-total-price ">Price: <strong>{{ order.service_id.total_price }}</strong></p>
                             {% else %}
                                 <a href="#" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
                                 <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
                             {% endif %}
                             
-                            
-        
                             <div id="{{ order.service_id }}" class="collapse row">
                             
                             <div class="col-xs-12 order-list-table">
                                 
                                 <table class="table">
                                     <tbody>
-                                        <tr>
-                                            <td>Type of Service: </td>
-                                            <td>{{ order.service_id.type_of_service }} </td>
-                                        </tr>
                                         <tr>
                                             <td>Wrap Colour: </td>
                                             <td>{{ order.service_id.wrap_colour}} </td>
@@ -83,7 +90,7 @@
                                 </table>
                                 
                                 <div class="order-delete-container">
-                                    <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left" id="delete_order"><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
+                                    <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
                                 </div>
                                 
                                 {% if not order.paid %}

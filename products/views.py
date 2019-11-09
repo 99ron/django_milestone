@@ -52,8 +52,13 @@ def get_quote(request):
             # This gets the selected wrap colour which is a radio button, then compares it to 
             # the table to see what the match is.
             wcGet = request.POST.get('wc-option')
+            
+            if wcGet == None:
+                wcGet = 1
             wcModel = WrapColour.objects.get(id=wcGet)
-    
+
+            
+            
             # This gets the option from the Optional Services list, compares the int to the 
             # OptionalServices table and then appends it to a list.
             osGet = request.POST.getlist('OS')
@@ -117,7 +122,6 @@ def get_quote(request):
                     
                     try:
                         ol.service_id = latestInvoice
-                        ol.user = user
                         ol.username = str(user)
                         ol.save()
     

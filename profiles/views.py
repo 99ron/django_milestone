@@ -2,15 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
+from django.contrib.auth.decorators import login_required
+from home.views import home
 from .forms import userProfileForm
 
 # User Profile Function
-
+@login_required
 def user_profile(request):
     
     '''
     This gets the profile page for the logged in User
     '''
+    
     user = UserProfile.objects.get(pk=request.user.id)
     
     if request.method == 'GET':

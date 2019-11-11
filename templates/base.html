@@ -36,7 +36,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'about' %}">About Us</a></li>
-                    <li><a href="#">Gallery</a></li>
+                    <li><a href="{% url 'gallery' %}">Gallery</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'profile' %}">Profile</a></li>
                         <li><a href="{% url 'orders' %}">Orders</a></li>

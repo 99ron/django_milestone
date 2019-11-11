@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+<div class="background-order-page">
+    
+    <div class="container">
+        <div class="row text-center">
+        
+        <h1 class="header-text-alternative">Gallery and Reviews</h1>
+        
+        <hr class="hr-break">
+        
+        </div>
+    
+    {% if reviews %}
+    
+    <div class="row">
+        <div class="image-carosel-container">
+            <p>Images go here</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="review-container">
+            
+            <div class="col-xs-12 panel-group">
+                
+                {% for review in reviews %}
+                
+                    <div class="panel panel-primary">
+                        <p> some information</p>
+                    </div>
+                
+                {% endfor %}
+                
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    {% else %}
+        
+        <div class="col-xs-12 panel-group">
+                
+            <div class="panel panel-primary text-center gallery-container">
+                <div class="gallery-nothing">
+                    <p> There are currently no reviews to show you at this moment in time. <br> Please pop by again later!</p>
+                </div>
+            </div>
+            
+        </div>
+    
+    {% endif %}
+    
+    </div>
+</div>
+    
+        
+    
+{% endblock %}
+

@@ -33,7 +33,7 @@
             
                 <div class="panel panel-primary">
                 
-                    <div class="panel-heading"> {{ review.message.title }} </div>
+                    <div class="panel-heading"> {{ review.reviews.title }} </div>
                     
                         <div class="panel-body">
                             <div class="col-xs-12 col-sm-4">
@@ -42,9 +42,9 @@
                             
                             
                             <div class="col-xs-12 col-sm-8 testimonial-text">
-                                <p> <b>{{ review.message.username }}</b> rated this service a <b>{{ review.message.rating }} out of 5!</b></p>
+                                <p> <b>{{ review.reviews.username }}</b> rated this service a <b>{{ review.reviews.rating }} out of 5!</b></p>
                                 <hr class="hr-break--full">
-                                <p class="gallery-text"> {{ review.message.comment }}</p>
+                                <p class="gallery-text"> {{ review.reviews.comment }}</p>
                                 <a href="#" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
                             </div>
                             

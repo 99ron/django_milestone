@@ -23,7 +23,7 @@ class Reviews(models.Model):
         return self.title
 
 class Attachment(models.Model):
-    reviews = models.ForeignKey(Reviews, on_delete=models.CASCADE)
+    review_table = models.ForeignKey(Reviews, on_delete=models.CASCADE)
     file = models.FileField(upload_to='gallery')
     
     def __str__(self):

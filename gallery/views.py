@@ -21,6 +21,7 @@ def add_review(request, order_id):
     
     order = OrderList.objects.get(pk=order_id)
     rev = Reviews()
+    att = Attachment()
     
     if request.method=="GET":
         
@@ -35,12 +36,16 @@ def add_review(request, order_id):
             
             try:
                 
-                rev = form.save(commit=False) 
-                rev.username = request.user
-                rev.rating = form.cleaned_data['rating']
-                rev.title = form.cleaned_data['title']
-                rev.comment = form.cleaned_data['comment']
-                rev.save()
+                formForm = form.save(commit=False)
+                formForm.save()
+                
+                # rev.username = request.user
+                # rev.rating = form.cleaned_data['rating']
+                # rev.title = form.cleaned_data['title']
+                # rev.comment = form.cleaned_data['comment']
+                # rev.save()
+                
+                
                 
                 return redirect(view_gallery)
                 

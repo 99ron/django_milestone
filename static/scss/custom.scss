@@ -51,6 +51,13 @@ a:link, a:visited {
     margin-top: 250px;
 }
 
+.gallery-header-container-text {
+    color: $header-text-overlay;
+    margin-top: 150px;
+    font-weight: bold;
+    font-size: 55px;
+}
+
 .header-text {
     color: $primary-text-colour;
     padding-top: 30px;
@@ -75,8 +82,12 @@ a:link, a:visited {
 
 /* ---------------------------------------------------------- Main */
 
-.main-content {
+.gallery-main-content {
     margin-bottom: 40px;
+}
+
+.header-box-shadow {
+    box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
 // Pagination list display.
@@ -104,6 +115,18 @@ a:link, a:visited {
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
     margin-left: auto;
     margin-right: auto;
+}
+
+// Testimonial images
+.testimonial-image {
+    width: 400px;
+    border: 1px gray solid;
+    border-radius: 7px;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .payment-button {
@@ -206,7 +229,7 @@ a:link, a:visited {
     margin-right: 0px;
 }
 
-.profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form  {
+.profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form, .add-review-form  {
     margin-top: 70px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -276,6 +299,17 @@ a:link, a:visited {
     height: 550px;
     overflow: hidden;
     position: relative; 
+}
+
+.gallery-header-image {
+    background: url(/img/gallery-header-background.jpg) 
+    center no-repeat;
+    
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
+    height: 350px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 // Carbon Fibre pattern effect.
@@ -356,6 +390,13 @@ ul {
 
 /* ---------------------------------------------------------- Other */
 
+.gallery-text {
+    height: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+}
+
 // Removes the gap at the bottom of the alert box.
 .alert {
     margin-bottom: 0px;
@@ -398,7 +439,7 @@ ul {
     width: 200px;
 }
 
-.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price, .order-nothing {
+.OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price, .order-nothing, .gallery-nothing {
     background-color: white;
     border: black solid 2px;
     border-radius: 5px;
@@ -445,7 +486,7 @@ ul {
   height: 0;
 }
 
-.order-panel-container{
+.order-panel-container, .review-panel-container{
     
     margin-top: 30px;
 
@@ -459,7 +500,7 @@ ul {
     margin-right: 15px;
 }
 
-.order-container {
+.order-container, .gallery-container {
     margin-top: 100px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px
@@ -470,7 +511,7 @@ ul {
     background-image: linear-gradient(#8ad4ff, #2da1e3 60%, #8bd2fb);
     border-radius: 10px;
     
-    .order-nothing {
+    .order-nothing, .gallery-container {
         font-size: 30px;
     }
     
@@ -483,6 +524,10 @@ ul {
 .checkout-payment-table {
      background-color: rgba(0,0,0,0.1);
 }
+
+/* ---------------------------------------------------------- SlideShow in Gallery /*
+
+
 
 /* ---------------------------------------------------------- Media Queries */
 
@@ -513,22 +558,32 @@ ul {
         margin-right: 20%;
     }
     
-    .contact-form, .profile-form {
-        
+    .contact-form, .profile-form, .add-review-form {
         margin-left: 20%;
         margin-right: 20%;
     }
+    
     .form-button, .profile-button, .contact-button {
         width: 60%;
     }
     
     .service-image {
-    max-width: 600px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
+        max-width: 600px;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
     }
+    
+    // Testimonial images
+    .testimonial-image {
+        width: 345px;
+        border: 1px gray solid;
+        border-radius: 7px;
+        box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+        margin-left: auto;
+        margin-right: auto;
+}
 
 //----------------------------------------------------------- Background Images
 
@@ -538,7 +593,6 @@ ul {
     center no-repeat;
     
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
-    background-size: cover;
     height: 550px;
 
 // Create the parallax scrolling effect.
@@ -546,16 +600,25 @@ ul {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+}
+
+.gallery-header-image {
+    background: url(/img/gallery-header-background.jpg) 
+    center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.7);
+
+    height: 350px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 // Main page top image used for the parralax effect.
 .header-image { background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
     center no-repeat;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
-    background-size: cover;
     height: 750px;
-    
+
 // Create the parallax scrolling effect.
     background-attachment: fixed;
     background-position: center;

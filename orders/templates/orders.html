@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
-{load bootstrap_tags %}
+{% load bootstrap_tags %}
 
 {% block content %}
 
@@ -12,7 +12,8 @@
         
         <hr class="hr-break">
         
-    </div>
+        </div>
+        
         {% if orders %}
             {% for order in orders %}
             
@@ -35,7 +36,7 @@
                                 <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
                                 <p class="pull-right order-total-price ">Price: <strong>{{ order.service_id.total_price }}</strong></p>
                             {% else %}
-                                <a href="#" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
+                                <a href="{% url 'add_review' order.pk %}" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
                                 <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
                             {% endif %}
                             

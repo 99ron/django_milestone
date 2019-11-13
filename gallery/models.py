@@ -13,12 +13,18 @@ RATING_CHOICES = (
     )
 
 
-class reviews(models.Model):
-    username = models.CharField(max_length=25)
+class Reviews(models.Model):
+    username = models.CharField(max_length=25, blank=False)
     rating = models.IntegerField(choices=RATING_CHOICES, default=1)
+    title = models.CharField(max_length=50, blank=False)
     comment = models.TextField(max_length=500, blank=False)
+    
+    def __str__(self):
+        return self.title
 
-
-class attachment(models.Model):
-    message = models.ForeignKey(reviews, verbose_name=_('reviews'), on_delete=models.CASCADE)
-    file = models.FileField(_('attachment'), upload_to='gallery')
+class Attachment(models.Model):
+    reviews = models.ForeignKey(Reviews, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='gallery')
+    
+    def __str__(self):
+        return " '{0}' is part of '{1}' ".format(self.file, self.reviews.title)

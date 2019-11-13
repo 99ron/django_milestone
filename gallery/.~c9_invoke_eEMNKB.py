@@ -20,36 +20,40 @@ def add_review(request, order_id):
     """ This will either fetch the page for the review or post a review """
     
     order = OrderList.objects.get(pk=order_id)
-    rev = Reviews()
+    reviews = Reviews.objects.all()
+    rev = Attachment()
     
     if request.method=="GET":
         
-        form = reviewForm()
+        form = reviewForm(instance=order)
         return render(request, "add_review.html", {'form' : form, 'order': order})
     
     else:
         
         form = reviewForm(request.POST, request.FILES)
         
+        
         if form.is_valid():
-            
+
             try:
                 
-                rev = form.save(commit=False) 
-                rev.username = request.user
-                rev.rating = form.cleaned_data['rating']
-                rev.title = form.cleaned_data['title']
-                rev.comment = form.cleaned_data['comment']
+                rev.message.username = request.user
+                rev.message.rating = form.cleaned_data['rating']
+                rev.message.title = form.cleaned_data['title']
+                rev.message.comment = form.cleaned_data['comment']
                 rev.save()
                 
-                return redirect(view_gallery)
-                
+                def form_valid(self, form):
+                    for each in form.cleaned_data['attachments']:
+                        Attachment.objects.create(file=each)
+                    return super(UploadView, self).form_valid(form)
+
             except Exception as e:
                 messages.error(request, "Error occured: " + str(e))
-                print("Error occured: " + str(e))
                 return render(request, "add_review.html", {'form' : form, 'order': order})
                 
-
+            return redirect(view_gallery)
+        
         else:
             print(form.errors)
             return render(request, "add_review.html", {'form' : form, 'order': order})

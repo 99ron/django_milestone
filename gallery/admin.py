@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import reviews
+from .models import Reviews, Attachment
 
 # Register your models here.
 
-admin.site.register(reviews)
+admin.site.register(Reviews)
+admin.site.register(Attachment)

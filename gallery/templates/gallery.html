@@ -5,57 +5,75 @@
 {% block content %}
 
 <div class="background-order-page">
+
+    <div class="gallery-header-image">
+        <div class="container"> 
+            <h1 class="gallery-header-container-text"> | GALLERY & REVIEWS | </h1>
+        </div>
+    </div>
     
-    <div class="container">
+    <div class="header-box-shadow">
+
+    <div class="container gallery-main-content">
         <div class="row text-center">
         
-        <h1 class="header-text-alternative">Gallery and Reviews</h1>
+        <!--<h1 class="header-text-alternative">Gallery and Reviews</h1>-->
         
         <hr class="hr-break">
         
         </div>
     
-    {% if reviews %}
-    
-    <div class="row">
-        <div class="image-carosel-container">
-            <p>Images go here</p>
-        </div>
-    </div>
-    
-    <div class="row">
+        {% if reviews %}
+        
+        
         <div class="review-container">
             
-            <div class="col-xs-12 panel-group">
-                
-                {% for review in reviews %}
-                
-                    <div class="panel panel-primary">
-                        <p> some information</p>
-                    </div>
-                
-                {% endfor %}
-                
-            </div>
+        {% for review in reviews %}    
+            <div class="panel panel-group review-panel-container">
             
-        </div>
-    </div>
-    
-    
-    {% else %}
-        
-        <div class="col-xs-12 panel-group">
+                <div class="panel panel-primary">
                 
-            <div class="panel panel-primary text-center gallery-container">
-                <div class="gallery-nothing">
-                    <p> There are currently no reviews to show you at this moment in time. <br> Please pop by again later!</p>
+                    <div class="panel-heading"> {{ review.message.title }} </div>
+                    
+                        <div class="panel-body">
+                            <div class="col-xs-12 col-sm-4">
+                                <img src="{{ review.file.url }}" class="img-responsive testimonial-image" alt="Gallery Image">
+                            </div>
+                            
+                            
+                            <div class="col-xs-12 col-sm-8 testimonial-text">
+                                <p> <b>{{ review.message.username }}</b> rated this service a <b>{{ review.message.rating }} out of 5!</b></p>
+                                <hr class="hr-break--full">
+                                <p class="gallery-text"> {{ review.message.comment }}</p>
+                                <a href="#" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
+                            </div>
+                            
+                            <div class="">
+                                
+                            </div>
+                            
+                        </div>
                 </div>
             </div>
-            
+        {% endfor %}    
+        
         </div>
-    
-    {% endif %}
-    
+
+        {% else %}
+            
+            <div class="col-xs-12 panel-group">
+                    
+                <div class="panel panel-primary text-center gallery-container">
+                    <div class="gallery-nothing">
+                        <p> There are currently no reviews to show you at this moment in time. <br> Please pop by again later!</p>
+                    </div>
+                </div>
+                
+            </div>
+        
+        {% endif %}
+        
+    </div>
     </div>
 </div>
     

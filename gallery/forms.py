@@ -1,6 +1,6 @@
 from django import forms
 from gallery.models import Reviews, Attachment
-from multiupload.fields import MultiMediaField, MultiImageField
+from multiupload.fields import MultiMediaField
 
 
 class reviewForm(forms.ModelForm):
@@ -15,7 +15,8 @@ class reviewForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super(reviewForm, self).save(commit)
         for each in self.cleaned_data['files']:
-            Attachment.objects.create(file=each)
+            Attachment.objects.create(file=each, review_table=instance)
         return instance
+
         
         

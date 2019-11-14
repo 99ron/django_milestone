@@ -14,66 +14,62 @@
     <div class="header-box-shadow">
 
         <div class="container gallery-main-content">
-            <div class="row text-center">
-
-                <!--<h1 class="header-text-alternative">Gallery and Reviews</h1>-->
-
-                <hr class="hr-break">
-
-            </div>
-
-            {% if reviews %}
+            
+        <hr class="hr-break">
 
 
-            <div class="review-container">
+        {% if reviews %}
 
-                {% for review in reviews %}
-                <div class="panel panel-group review-panel-container">
 
-                    <div class="panel panel-primary">
+        <div class="review-container">
 
-                        <div class="panel-heading"> {{ review.title }} </div>
+            {% for review in reviews %}
+            <div class="panel panel-group review-panel-container">
 
-                        <div class="panel-body">
-                            <div class="col-xs-12 col-sm-4">
-                                {% for image in review.attachment.all %} 
-                                    {% if forloop.counter < 2 %} 
-                                        <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image" alt="Gallery Image">
-                                    {% endif %} 
-                                {% endfor %}
-                            </div>
+                <div class="panel panel-primary">
 
-                            <div class="col-xs-12 col-sm-8 testimonial-text">
-                                <p> <b>{{ review.username }}</b> rated this service a <b>{{ review.rating }} out of 5!</b></p>
-                                <hr class="hr-break--full">
-                                <p class="gallery-text"> {{ review.comment }}</p>
-                                <a href="#" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
-                            </div>
+                    <div class="panel-heading"> {{ review.title }} </div>
 
-                            <div class="">
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-4">
+                            {% for image in review.attachment.all %} 
+                                {% if forloop.counter < 2 %} 
+                                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image" alt="Gallery Image">
+                                {% endif %} 
+                            {% endfor %}
+                        </div>
 
-                            </div>
+                        <div class="col-xs-12 col-sm-8 testimonial-text">
+                            <p> <b>{{ review.username }}</b> rated this service a <b>{{ review.rating }} out of 5!</b></p>
+                            <hr class="hr-break--full">
+                            <p class="gallery-text"> {{ review.comment }}</p>
+                            <a href="{% url 'review_more' review.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
+                        </div>
+
+                        <div class="">
 
                         </div>
+
                     </div>
                 </div>
-                {% endfor %}
-
             </div>
+            {% endfor %}
 
-            {% else %}
+        </div>
 
-            <div class="col-xs-12 panel-group">
+        {% else %}
 
-                <div class="panel panel-primary text-center gallery-container">
-                    <div class="gallery-nothing">
-                        <p> There are currently no reviews to show you at this moment in time. <br> Please pop by again later!</p>
-                    </div>
+        <div class="col-xs-12 panel-group">
+
+            <div class="panel panel-primary text-center gallery-container">
+                <div class="gallery-nothing">
+                    <p> There are currently no reviews to show you at this moment in time. <br> Please pop by again later!</p>
                 </div>
-
             </div>
 
-            {% endif %}
+        </div>
+
+        {% endif %}
 
         </div>
     </div>

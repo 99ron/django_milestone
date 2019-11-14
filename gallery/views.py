@@ -65,4 +65,9 @@ def add_review(request, order_id):
             return render(request, "add_review.html", {'form' : form, 'order': order})
             
             
-            
+def review_more(request, review_id):
+    """ This view is used for more info on the review """
+    
+    reviewID = Reviews.objects.get(pk=review_id)
+    
+    return render(request, "review_more.html", { 'review' : reviewID })

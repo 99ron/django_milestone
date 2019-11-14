@@ -57,12 +57,12 @@ a:link, a:visited {
 }
 
 /* ---------------------------------------------------------- Main */
-.gallery-main-content {
+.gallery-main-content, .main-content {
   margin-bottom: 40px;
 }
 
 .header-box-shadow {
-  box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px -4px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .pagination-container {
@@ -504,6 +504,7 @@ ul {
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
     margin-left: auto;
     margin-right: auto;
+    height: 230px;
   }
 
   .about-header-image {

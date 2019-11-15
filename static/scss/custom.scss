@@ -69,6 +69,8 @@ a:link, a:visited {
     color: $header-text-overlay;
 }
 
+
+
 .header-container-text {
     font-weight: bold;
     font-size: 46px;
@@ -109,13 +111,17 @@ a:link, a:visited {
 
 // Profile image on the profile page 
 .profile-image {
-    width: 450px;
+    width: 250px !important;
     border: 1px gray solid;
     border-radius: 7px;
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
     margin-left: auto;
     margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: block !important;
 }
+
 
 // Testimonial images
 .testimonial-image {
@@ -127,6 +133,7 @@ a:link, a:visited {
     margin-right: auto;
     margin-top: 10px;
     margin-bottom: 10px;
+    display: block !important;
 }
 
 .payment-button {
@@ -229,7 +236,7 @@ a:link, a:visited {
     margin-right: 0px;
 }
 
-.profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form, .add-review-form  {
+.profile-form, .contact-form, .checkout-payment-table, .checkout-payment-form, .add-review-form, .review-more-container  {
     margin-top: 70px;
     margin-bottom: 70px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -313,7 +320,7 @@ a:link, a:visited {
 }
 
 // Carbon Fibre pattern effect.
-.background-order-page {
+.background-carbon-fibre {
     background:
     radial-gradient(black 15%, transparent 16%) 0 0,
     radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -396,6 +403,12 @@ ul {
     overflow: hidden;
     white-space: normal;
 }
+
+.review-avatar {
+    border-radius: 20px;
+    display: block !important;
+}
+
 
 // Removes the gap at the bottom of the alert box.
 .alert {
@@ -488,7 +501,7 @@ ul {
 
 .order-panel-container, .review-panel-container{
     
-    margin-top: 30px;
+    margin-top: 70px;
 
     .order-panel-body {
         background-color: rgba(0,0,0,0.1);
@@ -530,6 +543,24 @@ ul {
 
 
 /* ---------------------------------------------------------- Media Queries */
+
+@media only screen and (max-width: 768px) {
+    
+    .review-avatar {
+        border-radius: 20px;
+        max-height: 130px;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        display: block !important;
+    }
+    
+    .review-more-container {
+        margin-top: 20px;
+    }
+    
+}
+
 
 @media only screen and (min-width: 991px) {
    .imagetiles {
@@ -578,12 +609,26 @@ ul {
     // Testimonial images
     .testimonial-image {
         width: 345px;
+        max-height: 200px !important ;
         border: 1px gray solid;
         border-radius: 7px;
         box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
         margin-left: auto;
         margin-right: auto;
-        max-height: 200px;
+        display: block !important;
+        
+}
+
+.carousel {
+    position: relative;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.review-carousel-image {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 //----------------------------------------------------------- Background Images

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from orders.models import OrderList
 from django.utils.translation import ugettext_lazy as _
 
 # review models
@@ -12,12 +13,13 @@ RATING_CHOICES = (
         (5, '5'),
     )
 
-
 class Reviews(models.Model):
+    order_number = models.ForeignKey(OrderList, related_name="review_table", on_delete=models.CASCADE)
     username = models.CharField(max_length=25, blank=False)
     rating = models.IntegerField(choices=RATING_CHOICES, default=1)
     title = models.CharField(max_length=50, blank=False)
     comment = models.TextField(max_length=500, blank=False)
+    review_left = models.BooleanField(default=False)
     
     
     def __str__(self):

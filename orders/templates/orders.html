@@ -4,7 +4,8 @@
 
 {% block content %}
 
-<div class="background-order-page">
+<div class="background-carbon-fibre">
+    
     <div class="container">
         <div class="row text-center">
         
@@ -16,100 +17,101 @@
         
         {% if orders %}
             {% for order in orders %}
-            
-            <div class="panel panel-group order-panel-container">
-                
-                <div class="panel panel-primary">
-                    
-                    <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |{% if order.paid %} PAID | {% endif %}  </div>
-                    
-                    
-                        <div class="panel-body order-panel-body">
+                {% for i in order.review_table.all %}
+                    {% if i.review_left == False %}
+                        <div class="panel panel-group order-panel-container">
                             
-                            <p> Service: {{ order.service_id.type_of_service }} </p>
-                           
-                            <hr class="hr-break--full">
-                           
-                            <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
-                            
-                            {% if not order.paid %}
-                                <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
-                                <p class="pull-right order-total-price ">Price: <strong>{{ order.service_id.total_price }}</strong></p>
-                            {% else %}
-                                <a href="{% url 'add_review' order.pk %}" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
-                                <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
-                            {% endif %}
-                            
-                            <div id="{{ order.service_id }}" class="collapse row">
-                            
-                            <div class="col-xs-12 order-list-table">
+                            <div class="panel panel-primary">
                                 
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Wrap Colour: </td>
-                                            <td>{{ order.service_id.wrap_colour}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vehicle Make: </td>
-                                            <td>{{ order.service_id.car_make}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vehicle Model: </td>
-                                            <td>{{ order.service_id.car_model}} </td>
-                                        </tr>
+                                <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |{% if order.paid %} PAID | {% endif %}  </div>
+                                
+                                    <div class="panel-body order-panel-body">
                                         
-                                        {% for i in order.service_id.optional_service.all %}
-                                        <tr>
-                                            <td>Optional Services: </td>
-                                            <td>{{ i.name }}</td>
-                                        {% empty %}
-                                        </tr>
-                                        {% endfor %}
-        
-                                        {% for i in order.service_id.damage.all %}
-                                        <tr>
-                                            <td>Damaged Part: </td>
-                                            <td>{{ i.name }}</td>
-                                        {% empty %}
-                                        </tr>
-                                        {% endfor %}
+                                        <p> Service: {{ order.service_id.type_of_service }} </p>
+
+                                        <hr class="hr-break--full">
+                                       
+                                        <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
                                         
-                                        {% if order.service_id.damage_details|length %}
-                                        <tr>
-                                            <td>Damage Details: </td>
-                                            <td>{{ order.service_id.damage_details }}</td>
-                                        </tr>
+                                        {% if not order.paid %}
+                                            <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
+                                            <p class="pull-right order-total-price ">Price: <strong>{{ order.service_id.total_price }}</strong></p>
+                                        {% else %}
+                                            <a href="{% url 'add_review' order.pk %}" type="submit" class="btn btn-info pull-right"><i class="fas fa-book" aria-hidden="true"></i> Leave Review </a>
+                                            <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
                                         {% endif %}
                                         
-                                        <tr>
-                                            <td>Total Price: </td>
-                                            <td>£{{ order.service_id.total_price }}</td>
-                                        </tr>
+                                        <div id="{{ order.service_id }}" class="collapse row">
                                         
-                                    </tbody>
-                                </table>
-                                
-                                <div class="order-delete-container">
-                                    <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
+                                        <div class="col-xs-12 order-list-table">
+                                            
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Wrap Colour: </td>
+                                                        <td>{{ order.service_id.wrap_colour}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Vehicle Make: </td>
+                                                        <td>{{ order.service_id.car_make}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Vehicle Model: </td>
+                                                        <td>{{ order.service_id.car_model}} </td>
+                                                    </tr>
+                                                    
+                                                    {% for i in order.service_id.optional_service.all %}
+                                                    <tr>
+                                                        <td>Optional Services: </td>
+                                                        <td>{{ i.name }}</td>
+                                                    {% empty %}
+                                                    </tr>
+                                                    {% endfor %}
+                    
+                                                    {% for i in order.service_id.damage.all %}
+                                                    <tr>
+                                                        <td>Damaged Part: </td>
+                                                        <td>{{ i.name }}</td>
+                                                    {% empty %}
+                                                    </tr>
+                                                    {% endfor %}
+                                                    
+                                                    {% if order.service_id.damage_details|length %}
+                                                    <tr>
+                                                        <td>Damage Details: </td>
+                                                        <td>{{ order.service_id.damage_details }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    
+                                                    <tr>
+                                                        <td>Total Price: </td>
+                                                        <td>£{{ order.service_id.total_price }}</td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                            
+                                            <div class="order-delete-container">
+                                                <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
+                                            </div>
+                                            
+                                            {% if not order.paid %}
+                                                <div class="order-edit-container">
+                                                    <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
+                                                </div>
+                                            {% endif %}
+            
+                                        </div>
+                                        
+                                    </div>
+                                    
                                 </div>
                                 
-                                {% if not order.paid %}
-                                    <div class="order-edit-container">
-                                        <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
-                                    </div>
-                                {% endif %}
-
                             </div>
                             
                         </div>
-                        
-                    </div>
-                    
-                </div>
-                
-            </div>
-         
+                    {% endif %}
+                {% endfor %} 
             {% endfor %}
             
         {% else %}

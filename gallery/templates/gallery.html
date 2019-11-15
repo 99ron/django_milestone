@@ -3,7 +3,7 @@
 {% load bootstrap_tags %} 
 {% block content %}
 
-<div class="background-order-page">
+<div class="background-carbon-fibre">
 
     <div class="gallery-header-image">
         <div class="container">
@@ -14,9 +14,6 @@
     <div class="header-box-shadow">
 
         <div class="container gallery-main-content">
-            
-        <hr class="hr-break">
-
 
         {% if reviews %}
 
@@ -32,11 +29,13 @@
 
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-4">
+                            
                             {% for image in review.attachment.all %} 
                                 {% if forloop.counter < 2 %} 
-                                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image" alt="Gallery Image">
+                                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image img-thumbnail" alt="Gallery Image">
                                 {% endif %} 
                             {% endfor %}
+                            
                         </div>
 
                         <div class="col-xs-12 col-sm-8 testimonial-text">

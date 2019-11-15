@@ -5,6 +5,7 @@ from django.contrib import messages
 from gallery.models import Reviews, Attachment
 from gallery.forms import reviewForm
 from orders.models import OrderList
+from profiles.models import UserProfile
 
 
 # Views for the Gallery app.
@@ -50,7 +51,9 @@ def add_review(request, order_id):
             try:
                 rev.save()
                 current_review = form.save(commit=False)
+                current_review.order_number = order
                 current_review.username = request.user.username
+                current_review.review_left = True
                 current_review.save()
 
                 return redirect(view_gallery)
@@ -69,5 +72,6 @@ def review_more(request, review_id):
     """ This view is used for more info on the review """
     
     reviewID = Reviews.objects.get(pk=review_id)
+    uPro = UserProfile.objects.get(pk=request.user.id)
     
-    return render(request, "review_more.html", { 'review' : reviewID })
+    return render(request, "review_more.html", { 'review' : reviewID, 'profile' : uPro })

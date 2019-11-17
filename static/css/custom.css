@@ -27,7 +27,7 @@ a:link, a:visited {
   margin-top: 250px;
 }
 
-.gallery-header-container-text {
+.gallery-header-container-text, .orders-header-container-text, .profile-header-container-text {
   color: #ffffff;
   margin-top: 150px;
   font-weight: bold;
@@ -258,12 +258,37 @@ a:link, a:visited {
   position: relative;
 }
 
+.orders-header-images {
+  background: url(/img/orders-bg-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  height: 350px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile-header-image {
+  background: url(/img/profile-header-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .gallery-header-image {
   background: url(/img/gallery-header-background.jpg) center no-repeat;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
   height: 350px;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile-background-image {
+  background: url(/img/profile-background-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-size: cover;
 }
 
@@ -548,6 +573,15 @@ ul {
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
     height: 550px;
     background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .profile-header-image {
+    background: url(/img/profile-header-image.jpg) center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+    height: 350px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

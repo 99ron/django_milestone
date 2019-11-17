@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
-
 {% block content %}
 
 <div class="background-carbon-fibre">
     
-    <div class="container">
-        <div class="row text-center">
-        
-        <h1 class="header-text-alternative">Orders Page</h1>
-        
-        <hr class="hr-break">
-        
+    <div class="container orders-header-images">
+        <div class="container">
+            <h1 class="orders-header-container-text"> | ORDERS PAGE |</h1>
         </div>
+    </div>
         
+    <div class="header-box-shadow">
+        
+        <div class="container main-content">
+
+
         {% if orders %}
             {% for order in orders %}
                 {% for i in order.review_table.all %}
@@ -128,35 +129,36 @@
             
         {% endif %}
         
-    </div>       
+        </div>       
         
-    <div class="pagination-container">
-    <!--This checks if there's more than 1 page worth of results  -->
-    {% if orders.has_other_pages %}
-    
-        <ul class="pagination">
-        {% if orders.has_previous %}
-          <li><a href="?page={{ orders.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-          <li class="disabled"><span>&laquo;</span></li>
+        <div class="pagination-container">
+        <!--This checks if there's more than 1 page worth of results  -->
+        {% if orders.has_other_pages %}
+        
+            <ul class="pagination">
+            {% if orders.has_previous %}
+              <li><a href="?page={{ orders.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            
+            {% for i in orders.paginator.page_range %}
+              {% if orders.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            
+            {% if orders.has_next %}
+              <li><a href="?page={{ orders.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+            </ul>
+            
         {% endif %}
-        
-        {% for i in orders.paginator.page_range %}
-          {% if orders.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-          {% else %}
-            <li><a href="?page={{ i }}">{{ i }}</a></li>
-          {% endif %}
-        {% endfor %}
-        
-        {% if orders.has_next %}
-          <li><a href="?page={{ orders.next_page_number }}">&raquo;</a></li>
-        {% else %}
-          <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-        </ul>
-        
-    {% endif %}
-    </div>
+        </div>
+    </div> 
 </div>
 {% endblock %}

@@ -49,7 +49,7 @@ def user_profile(request):
                     
                 up.save()
                 messages.success(request, "Updated successfully!")
-                return render(request, 'profile.html', {'form' : form, 'profile' : user})
+                return render(request, 'home.html')
                 
             except Exception as e:
                 # If an error occurs it throws up a message and asks to retry.

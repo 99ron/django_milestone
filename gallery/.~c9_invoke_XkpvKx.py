@@ -34,7 +34,6 @@ def add_review(request, order_id):
     """ This will either fetch the page for the review or post a review """
     
     order = OrderList.objects.get(pk=order_id)
-    userID = UserProfile.objects.get(pk=request.user.id)
     rev = Reviews()
     
     if request.method=="GET":
@@ -49,11 +48,12 @@ def add_review(request, order_id):
         if form.is_valid():
             
             try:
-                rev.order_number = order
-                rev.user_int = userID
-                rev.review_left = True
                 rev.save()
-                form.save()
+                current_review = form.save(commit=False)
+                current_review.order_number = order
+                current_review.username = request.user.username
+                current_review.review_left = True
+                current_review.save()
 
                 return redirect(view_gallery)
                 
@@ -71,6 +71,6 @@ def review_more(request, review_id):
     """ This view is used for more info on the review """
     
     reviewID = Reviews.objects.get(pk=review_id)
-    uPro = UserProfile.objects.get(pk=reviewID.user_int)
+    uPro = UserProfile.objects.get(user=reviewID.username)
     
     return render(request, "review_more.html", { 'review' : reviewID, 'profile' : uPro })

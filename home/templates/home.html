@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
-
 {% block page_title %} Home Page {% endblock %}
-
 {% block page_heading %} Mainpage {% endblock %}
-
 {% block content %}
-
 {% load static %}
 
+<!--This is the div for the header image which uses the parrallax effect.-->
 <div class="header-image">
     <div class="container"> 
         <h1 class="header-container-text"> | DARE TO BE DIFFERENT? | </h1>
     </div>
 </div>
 
+<!--Container which has the main content for the page.-->
 <div class="container main-content">
     
     <div class="row">
@@ -35,7 +33,8 @@
         </div>
 
     </div>
-
+    
+    <!--Row for my images which fade in when the page loads.-->
     <div class="row imagetiles">
         
         <div class="col-sm-12 col-md-3">
@@ -54,7 +53,8 @@
             <img class="img-responsive img-mainpage-size" src="{% static "img/PPF.png" %}" alt="Paint Protection FIlm">
         </div>
     </div>
-
+    
+    <!--This row is the section of services the company supplies.-->
     <div class="row">
         <h1 class="text-center header-text">OUR SERVICES</h1>
         

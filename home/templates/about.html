@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
-
 {% block page_title %} About Us {% endblock %}
-
 {% block page_heading %} About Us {% endblock %}
-
 {% block content %}
-
 {% load static %}
 
+<!--This is the div for the header image which uses the parrallax effect.-->
 <div class="about-header-image">
     <div class="container"> 
         <h1 class="about-header-container-text"> | ABOUT US | </h1>
     </div>
 </div>
 
+<!--Container which has the main content for the page.-->
 <div class="container main-content">
     
     <div class="row">
@@ -56,6 +54,7 @@
     
     <br>
     
+    <!--Button to link the user over to the contact us page.-->
     <div class="text-center">
         <a href="{% url 'contact' %}"><button class="btn btn-lg btn-success">Contact Us</button></a>
     </div>

@@ -3,16 +3,23 @@
 {% load bootstrap_tags %}
 {% block content %}
 
+<!--This div creates the carbon like background pattern.-->
 <div class="background-carbon-fibre">
     
+    <!--This div creates the header image with overlayed text.-->
     <div class="container orders-header-images">
         <div class="container">
             <h1 class="orders-header-container-text"> | ORDERS PAGE |</h1>
         </div>
     </div>
-        
+    
+    <!--This creates the box shadow which appears at the bottom of the header image.-->
     <div class="header-box-shadow">
         
+        <!--
+            This div contains the logic and structure to render the query to show whats been ordered, given the user the option to edit the order or to pay.
+            Once the user has paid it will show the option to leave feedback for that order. If the user has left feedback the order will no longer show.
+        -->
         <div class="container main-content">
 
         {% if orders %}
@@ -22,6 +29,7 @@
                     
                     <div class="panel panel-primary">
                         
+                        <!--panel header shows the order id, username of who created the order and if they've paid it'll put PAID at the end.-->
                         <div class="panel-heading"> {{ order.service_id }} | {{ order.username }} |{% if order.paid %} PAID | {% endif %}  </div>
                         
                             <div class="panel-body order-panel-body">
@@ -30,8 +38,10 @@
 
                                 <hr class="hr-break--full">
                                
+                                <!--This url disguised as a button once clicked will expand the lower div to show the extra content.-->
                                 <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
                                 
+                                <!--This checks whether the user has paid for the order or not and display the correct option.-->
                                 {% if not order.paid %}
                                     <a href="{% url 'checkout' order.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-shopping-cart" aria-hidden="true"></i> Pay </a>
                                     <p class="pull-right order-total-price ">Price: <strong>{{ order.service_id.total_price }}</strong></p>
@@ -40,10 +50,15 @@
                                     <p class="pull-right order-total-price">Paid: <strong>{{ order.service_id.total_price }}</strong></p>
                                 {% endif %}
                                 
+                                <!--This div is collapsable from the link above.-->
                                 <div id="{{ order.service_id }}" class="collapse row">
                                 
                                 <div class="col-xs-12 order-list-table">
-                                    
+                                    <!--
+                                    This table shows the user what they've ordered and also gives them a chance to confirm before paying.
+                                    This checks certain fields whether they were selected or had data entered to whether they are displayed
+                                    or not for that order.
+                                    -->
                                     <table class="table">
                                         <tbody>
                                             <tr>
@@ -90,10 +105,12 @@
                                         </tbody>
                                     </table>
                                     
+                                    <!--This is the delete order button, will cause a prompt if clicked to confirm.-->
                                     <div class="order-delete-container">
                                         <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
                                     </div>
                                     
+                                    <!--If the user hasn't paid then this displays the option to edit their order. -->
                                     {% if not order.paid %}
                                         <div class="order-edit-container">
                                             <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
@@ -112,7 +129,8 @@
              
              {% endfor %}   
         {% else %}
-
+            
+            <!--If no orders are found then it displays a panel with text giving the user a link to create an order.-->
             <div class="col-xs-12 panel-group no-orders-container">
                 
                 <div class="panel panel-primary text-center order-container">
@@ -122,35 +140,33 @@
                 </div>
                 
             </div>
-            
         {% endif %}
-        
-        
         </div>       
         
-        <div class="pagination-container">
-        <!--This checks if there's more than 1 page worth of results  -->
-        {% if orders.has_other_pages %}
         
+        <div class="pagination-container">
+        <!--This checks to see if there's more than 1 page worth of results (set to 5) to then display the option to view the next 'page'.-->
+        {% if orders.has_other_pages %}
             <ul class="pagination">
+                
             {% if orders.has_previous %}
-              <li><a href="?page={{ orders.previous_page_number }}">&laquo;</a></li>
+                <li><a href="?page={{ orders.previous_page_number }}">&laquo;</a></li>
             {% else %}
-              <li class="disabled"><span>&laquo;</span></li>
+                <li class="disabled"><span>&laquo;</span></li>
             {% endif %}
             
             {% for i in orders.paginator.page_range %}
-              {% if orders.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-              {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-              {% endif %}
+                {% if orders.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
             {% endfor %}
             
             {% if orders.has_next %}
-              <li><a href="?page={{ orders.next_page_number }}">&raquo;</a></li>
+                <li><a href="?page={{ orders.next_page_number }}">&raquo;</a></li>
             {% else %}
-              <li class="disabled"><span>&raquo;</span></li>
+                <li class="disabled"><span>&raquo;</span></li>
             {% endif %}
             </ul>
             

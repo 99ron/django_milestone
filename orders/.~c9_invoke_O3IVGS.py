@@ -14,20 +14,15 @@ from gallery.models import Reviews
 def view_order(request):
     """ A view that renders the orders contents """
     
-    # This collects all the objects in the Reviews table by order number and puts into a flat list.
+    # This checks for any reviews in the Reviews 
     review_true = Reviews.objects.all().values_list('order_number', flat=True)
-    
-    # This then collects the objects from the OrderList table and excludes any results from the Reviews table.
     ol = OrderList.objects.exclude(pk__in=review_true)
-    
-    # This is used for a user who isn't an employee so they can only see their own orders, expanding on the above exclude filter.
-    olf = ol.filter(username=request.user)
-    
-    # Gets the current logged in user.
+
+    olf = ol.filter(username=request.user).exclude(pk__in=review_true)
     user = UserProfile.objects.get(user=request.user)
     page = request.GET.get('page', 1)
 
-    # Checks to see if the logged in user is an employee.
+    # Checks to see if the logged in user is an employee or not.
     if user.employee == True:
         
         paginator = Paginator(ol, 5)
@@ -41,7 +36,6 @@ def view_order(request):
         
         return render(request, "orders.html", {'orders' : olpage, 'employee' : employee})
     
-    # If they aren't then they're only allowed to see their own orders.
     else:
         paginator = Paginator(olf, 5)
         employee = False
@@ -77,8 +71,7 @@ def delete_order(request, order, user_id):
             messages.error(request, "Couldn't delete object.")
             return redirect(view_order)
             
-    # If they're not the owner then it returns to the orders page with a message redirecting 
-    # them back to the orders page. 
+    # If they're not the owner then it returns to the orders page with a message. 
     else:
         messages.error(request, "Couldn't delete the order, you aren't the owner.")
         return redirect(view_order)

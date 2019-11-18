@@ -2,8 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from products.models import Services 
 
-# Orders table.
-
+# Orders table, very simple model with a foriegnkey to the Services model.
 class OrderList(models.Model):
     username = models.CharField(max_length=25)
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 from django.contrib import admin
 from .models import OrderList
 
-# Register your models here.
+# Registering the OrdersList to the admin panel.
 admin.site.register(OrderList)

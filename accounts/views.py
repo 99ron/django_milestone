@@ -6,11 +6,11 @@ from accounts.forms import UserLoginForm, UserRegistrationForm
 from profiles.models import UserProfile
 from profiles.urls import user_profile 
 
-# Create your views here.
+# Views for the accounts app.
+
 def index(request):
     """Return the home html file"""
     return render(request, 'home.html')
-
 
 
 @login_required    
@@ -21,11 +21,12 @@ def logout(request):
     return redirect(reverse('index'))
     
 
-
 def login(request):
     """Return a login page"""
     if request.user.is_authenticated:
         return redirect(reverse('index'))
+    
+    """If this is a post request it confirms that the user credentials are correct and exists."""
     if request.method=="POST":
         login_form = UserLoginForm(request.POST)
         
@@ -62,10 +63,11 @@ def registration(request):
 
             if user:
                 auth.login(user=user, request=request)
+                
                 """ Creates a blank profile page """
                 makeProfile(request)
                 
-                # This sends the user to the profile page to fill out their information.
+                """This sends the user to the profile page to fill out their information."""
                 messages.success(request, "You have succesfully registered")
                 return redirect(user_profile)
             else:
@@ -74,12 +76,10 @@ def registration(request):
         registration_form = UserRegistrationForm()
     return render(request, 'registration.html', {
         "registration_form" : registration_form})
-        
-
 
 
 def makeProfile(request):
-    """ This creates a empty profile for the user to fill out """
+    """ This creates an empty profile for the user to fill out """
     upr = UserProfile()
     upr.user = request.user
     upr.image = "images/no-pic.png"

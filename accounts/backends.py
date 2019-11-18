@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 
+# This page is used to authenticate the user for the logging/registering pages.
 
 class EmailAuth:
     """Authenticate the user by an exact match on the email and password"""

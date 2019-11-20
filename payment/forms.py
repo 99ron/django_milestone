@@ -1,8 +1,11 @@
 from django import forms
 from payment.models import paymentDetails
 
+# This is the form for the stripe payment system
 class makePaymentForm(forms.Form):
     
+    # Makes a range for the month and year choices. 
+    # Will need to be updated in the future.
     month_choices = [(i, i) for i in range(1, 12)]
     year_choices = [(i, i) for i in range( 2017, 2036)]
     
@@ -12,7 +15,7 @@ class makePaymentForm(forms.Form):
     expiry_year = forms.ChoiceField(label="Year", choices=year_choices, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
 
-
+# This form is for the user details which gets auto-filled from the user profile model.
 class orderForm(forms.ModelForm):
     class Meta:
         model = paymentDetails

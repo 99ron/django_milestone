@@ -15,20 +15,35 @@
 
 
 {% block content %}
-<div class="background-order-page">
+<!--This is used to make a background pattern.-->
+<div class="background-carbon-fibre">
+    
+    <!--This div sets the header image and text you see at the top of the page.-->
+    <div class="checkout-header-image">
+        <div class="container">
+            <h1 class="header-container-text"> | PAYMENT PAGE | </h1>
+        </div>
+    </div>
+    
+    <!--This is the box shadow effect that shows at the bottom of the header image.-->
+    <div class="header-box-shadow">
+    
+    <!--This container holds the forms for the payment details.-->
     <div class="container">
         
+        <!--This panel shows some information for the order.-->
         <div class="panel panel-group order-panel-container text-center">
                     
             <div class="panel panel-primary">
                 
-                <div class="panel-heading"> Service Checkout </div>
+                <div class="panel-heading"> Service Details </div>
                 
                     <div class="panel-body order-panel-body">
         
                     <div class="col-xs-12 order-list-table">
                         
-                        <p>Check the order details below and fill out the form. <br>
+                        <p>Check the order details below and fill out the form. 
+                        <br> <br>
                         Click the submit form button and we'll get in touch to arrange a date <br> 
                         for you to drop the vehicle off.</p>
                         
@@ -61,7 +76,7 @@
         </div>
             
             
-     
+        <!--This container displays both forms; user and payment details.-->
         <div class="row checkout-payment-form">
 
             <form role="form" method="post" class="" id="payment_form" action="{% url 'payment' order.pk %}">
@@ -85,11 +100,9 @@
                 <div class="form-group payment-button col-md-12">
                     <input class="btn btn-success" id="submit_payment_btn" name="commit" type=submit value="Submit Payment">
                 </div>
-    
             </form>
-
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}

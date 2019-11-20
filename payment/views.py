@@ -10,15 +10,20 @@ import stripe
 
 # Payment View below.
 
+# Sets the stripe api key which is set in the environment file. 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+# Confirms user is logged in.
 @login_required
 def checkout(request, order_id):
     if request.method == "GET":
         
+        # Fetches user profile details by currently logged in user. 
         user = UserProfile.objects.get(pk=request.user.id)
+        # Collects the correct order from the imported order_id.
         serviceOrder = OrderList.objects.get(pk=order_id)
         
+        # Sets the payment form up as new and the order form with the user's data.
         payment_form = makePaymentForm()
         order_form = orderForm(instance=user)
         
@@ -30,12 +35,13 @@ def checkout(request, order_id):
 def payment(request, order_id):
     if request.method == "POST":
         
-        
+        # This sets up the required information needed to process who and what order.
         order = OrderList.objects.get(pk=order_id)
         user = UserProfile.objects.get(user=request.user)
         order_form = orderForm(request.POST)
         payment_form = makePaymentForm(request.POST)
-
+        
+        # Confirms form is valid and if so sets the data needed into the database.
         if order_form.is_valid() and payment_form.is_valid():
             orderF = order_form.save(commit=False)
             orderF.user = user
@@ -43,8 +49,10 @@ def payment(request, order_id):
             orderF.date = timezone.now()
             orderF.save()
             
+            # Gets the price from the database via FK's.
             total = order.service_id.total_price
             
+            # Now attempts to charge the card details that were supplied by the user.
             try:
                 customer = stripe.Charge.create(
                     amount = int(total),
@@ -52,10 +60,12 @@ def payment(request, order_id):
                     description = request.user.email,
                     card = payment_form.cleaned_data['stripe_id'],
                 )
+            # Any issues it prompts a message and a chance for the user to try again.
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
             
-            
+            # Confirms once user has paid it will set a checkbox to true so it changes to 'leave review'
+            # instead of 'pay' as it did previously on the orders page. 
             if customer.paid:
                 # This sets the paid checkbox to true.
                 order.paid = True

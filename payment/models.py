@@ -5,6 +5,7 @@ from profiles.models import UserProfile
 
 # Payment Model.
 
+# This sets that only numbers can be inputted for the phone number field.
 numbersOnly = RegexValidator(r'^[0-9]*$', 'Only numbers are allowed.')
 
 

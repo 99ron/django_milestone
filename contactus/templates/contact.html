@@ -6,20 +6,28 @@
 
 <!--This is the page for users to submit any queries on a basic form. Uses Gmail to send the email.-->
 
-<div class="contact-us-background-image">
-
+<!--This is used to make a background pattern.-->
+<div class="background-carbon-fibre">
+    
+     <!--This div sets the header image and text you see at the top of the page.-->
+    <div class="contact-us-header-image">
+        <div class="container">
+            <h1 class="header-container-text"> | CONTACT US | </h1>
+        </div>
+    </div>
+    
+    <!--This is the box shadow effect that shows at the bottom of the header image.-->
+    <div class="header-box-shadow">
+    
     <div class="container">
         <div class="contact-form">
-    
-            <h1 class="text-center"> Contact Us </h1>
-            
-            <hr class="hr-under-heading">
-    
+
             <p class="text-padding-top-bottom text-center">Please fill out the form below
             and we'll try to get back to you as soon as possible.</p>
             
             <hr class="hr-break">
             
+            <!--When the form is submitted it uses the url 'contact'-->
             <form method="POST" action="{% url 'contact' %} ">
                 {% csrf_token %}
                 
@@ -32,5 +40,8 @@
             </form>
         </div>
     </div>
+    
+    </div>
+
 </div>
 {% endblock %}

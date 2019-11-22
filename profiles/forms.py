@@ -2,6 +2,7 @@ from django import forms
 from .models import UserProfile
 from django.contrib.auth.models import User
 
+# This is the form for the user profile.
 class userProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

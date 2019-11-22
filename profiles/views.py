@@ -23,11 +23,12 @@ def user_profile(request):
         form = userProfileForm(instance=user)
         
     else:
-        
+        # Requests the form and files data.
         form = userProfileForm(request.POST, request.FILES)
         
         if form.is_valid():
             
+            # Sets the unique user profile instance up. 
             up = user
             
             try:

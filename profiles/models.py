@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 
 # Table for the User profile
 
+# This makes it so the phone number can only have numbers entered.
 numbersOnly = RegexValidator(r'^[0-9]*$', 'Only numbers are allowed.')
 
 class UserProfile(models.Model):

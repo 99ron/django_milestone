@@ -1,35 +1,45 @@
 {% extends 'base.html' %}
-
 {% load bootstrap_tags %}
-
 {% block page_title %} About Us {% endblock %}
-
 {% block page_heading %} About Us {% endblock %}
-
 {% block content %}
-
 {% load static %}
 
-
-
-<div class="container">
-    <div class="row text-center">
-        
-        <h1>Quotes Page</h1>
-        
-        <p>If you enter the required  details below and submit the form. <br>
-        It will then be added to your <a href="{% url 'orders' %}" class="black-font">Orders</a> page to finalise the order.</p>
+<!--This is used to make a background pattern.-->
+<div class="background-carbon-fibre">
+    
+    <!--This div sets the header image and text you see at the top of the page.-->
+    <div class="quotes-header-image">
+        <div class="container">
+            <h1 class="header-container-text"> | QUOTES PAGE | </h1>
+        </div>
     </div>
-        
+    
+    <!--This is the box shadow effect that shows at the bottom of the header image.-->
+    <div class="header-box-shadow">
+    
+    <!--This page is used to create a new quote.-->
+    <div class="container">
+
         <div class="quotes-form">
             
             <form method="POST">
                 
                 {% csrf_token %}
                 
+                <!--
+                This container is for the type of service chosen, it iterates through and then adds the type of service options into a list.
+                -->
                 <div class="form-group TypeOfService">
+                    
+                    <br><p>If you enter the required details below and submit the form. 
+                    <br>It will then be added to your <a href="{% url 'orders' %}" class="black-font">Orders</a> page to finalise the order.</p>
+                    
+                    <hr class="hr-break">
+                    
                     <label for="type-of-service"> Service Type</label>
                     
+                    <!--Iterating through the options and displaying them.-->
                     <select class="form-control type-of-service" name="tos-option" id="type-of-service">
                         <option value="0" disabled selected> Choose an option! </option>
                         {% for i in serviceType %} 
@@ -37,22 +47,28 @@
                         {% endfor %}
                     </select>
                     
+                    <!--This is a dynamically rendered image via jQuery, loads the option choosen by the user first.-->
                     <div id="service-image" class="service-image">
                         <img class='img-responsive' src="" alt="">
                     </div>
 
                 </div>
                 
+                <!--
+                This container is for the wrap colour choice, it displays a table using the options from the wrap colour model.
+                -->
                 <div id="wrap-colour-container">
                     <hr>
                 
                     <div class="WrapColour">
                 
                         <label> Wrap Colour </label>
-                
+                        
+                        <!--This shows the selection of colours available for the user to choose from-->
                         <div class="quote-table-container">
                             <table class="table table-responsive table-bordered" id="quotes-table">
                                 <tbody>
+                                    <!--Iterates through the options and sets the text and image as two seperate columns.-->
                                     {% for i in wrapColour %}
                                     <tr>
                                         <td>
@@ -73,6 +89,10 @@
                     </div>
                 </div>
                 
+                <!--
+                This container is for the make and model input fields. Make is done by a list populated in the models whereas the model is populated depending on
+                which make has been chosen. This is done via ajax using an API.
+                -->
                 <div id="make-model-container">
                     <hr>
                     
@@ -82,13 +102,17 @@
                             
                             <label for="car_model"> Car Model</label>
                             
-                            <select class="form-control car_model" name="car_model" id="car_model">
+                            <!--This has size = 3 to limit how much is displayed on the screen at once.-->
+                            <select class="form-control car_model" name="car_model" id="car_model" size="3">
                                 <option value="none" disabled selected> Choose an option! </option>
                             </select>
 
                     </div>
                 </div>
                 
+                <!--
+                This container is for the optional services.
+                -->
                 <div id="optional-service-container">
                     <hr>
                     
@@ -97,8 +121,9 @@
                         <label for="optional-service"> Optional Services </label>
                         
                         <br>
-                         
-                        <a href="#OptionalServiceID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                        
+                        <!--This link enables for the below div to be hidden or shown on the users request, the text changes depending on current state.--> 
+                        <a href="#OptionalServiceID" onclick="ShowMoreChange(this.id)" class="btn btn-primary" data-toggle="collapse" id="ShowMoreOptional">More Options</a>
                         
                         <div id="OptionalServiceID" class="collapse">
                             
@@ -107,6 +132,9 @@
                             <p> Do you need your old wrap removed and the door shuts wrapped? <br>
                             (Door shuts is the bits inside when you open the doors or boot)</p>
                             
+                            <!--
+                            This iterates through all the current optional services in the database and displays them as a checkbox.
+                            -->
                             {% for i in optionalService %}
                                 
                                 <div class="form-group checkboxes">
@@ -128,6 +156,9 @@
                     </div>
                 </div>
                 
+                 <!--
+                This container is for any damages.
+                -->
                 <div id="damage-container">
                     <hr>
                     
@@ -135,8 +166,9 @@
                         <label for="damage"> Vehicle Damage </label>
                          
                         <br>
-                         
-                        <a href="#DamageID" class="btn btn-primary" data-toggle="collapse">More Options</a>
+                        
+                        <!--This link enables for the below div to be hidden or shown on the users request, the text changes depending on current state.-->
+                        <a href="#DamageID" onclick="ShowMoreChange(this.id)" class="btn btn-primary" data-toggle="collapse" id="ShowMoreDamage">More Options</a>
                             
                         <div id="DamageID" class="collapse">
                             
@@ -145,12 +177,16 @@
                             <p> Do you currently have damage to any panels on your vehicle? <br>
                             if you can let us know which panels have damage and we can amend the quote as needed.</p>
                             
+                            <!--
+                            This iterates through the damage list from the model to display, this is a multiple selected dropdown.
+                            -->
                             <select class="selectpicker" name="TD" data-style="btn-primary" id="damage-dropdown" multiple title="No Damage">
                                 {% for i in damage %}
                                     <option data-price="{{ i.price }}" value="{{ i.id }}"> {{ i.name }} </option>
                                 {% endfor %}   
                             </select>
                             
+                            <!--This is the damage details box for the user to write in some details-->
                             <div class="form-group text-padding">
                                 <label for="damageDetailsInput">Damage Details</label>
                                 <textarea class="form-control" id="damageDetailsInput" name="ddInput" rows="3"></textarea>
@@ -160,6 +196,9 @@
                     </div>
                 </div>
                 
+                <!--
+                This container is for the total price which is updated when an option is selected and the update form button.
+                -->
                 <div id="price-container">
                     
                     <hr>
@@ -172,7 +211,9 @@
     
                             <span class="input-group-btn total-price">
                                 <label class="btn btn-default btn-lg ">£</label>
-                             </span>
+                            </span>
+                             
+                            <!--This is updated via jQuery depending on what options have been chosen/selected-->
                             <input type="text" class="total-price form-control input-lg" id="total-price" name="tp-name" data-price="0" readonly> 
                         </div> 
                         
@@ -186,7 +227,8 @@
             </form>
             
         </div>
+    </div>
+    </div>
 </div>
-
 
 {% endblock %}

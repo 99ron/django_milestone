@@ -21,18 +21,15 @@ def get_quote(request):
     optionalService = OptionalService.objects.all()
     wrapColour = WrapColour.objects.all()
     user = User.objects.get(pk=request.user.id)
-    damage = Damage.objects.all()    
-    
+    damage = Damage.objects.all()  
     
     if request.method == 'GET':
-        
         "Show the quotes page"
         
         return render(request, 'quotes.html', { 'form' : car_info, 'serviceType' : serviceType,
         'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour })
         
     else: 
-        
         "Collects the data on the page to take over to the second page"
         
         sv = Services()
@@ -142,7 +139,7 @@ def get_quote(request):
             
             # All being well it ends here!
             messages.success(request, "Success! Your order has been sent for review.")
-            return redirect(get_quote)
+            return redirect(view_order)
             
         else: 
 
@@ -192,7 +189,6 @@ def edit_quote(request, order_id):
 
 @login_required
 def update_quote(request, order_id):
-
     """ This will collect the new (if updated) data from the quotes page """
 
     current_user = request.user.username

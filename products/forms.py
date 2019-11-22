@@ -1,6 +1,7 @@
 from django import forms
 from products.models import Services
 
+# This is the form for the quotes form.
 class quotesForm(forms.ModelForm):
     class Meta:
         model = Services

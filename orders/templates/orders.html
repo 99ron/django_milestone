@@ -39,7 +39,7 @@
                                 <hr class="hr-break--full">
                                
                                 <!--This url disguised as a button once clicked will expand the lower div to show the extra content.-->
-                                <a href="#{{ order.service_id }}" class="btn btn-primary pull-left" data-toggle="collapse"> Show More </a>
+                                <a href="#{{ order.service_id }}" onclick="ShowMoreChange(this.id)" class="btn btn-primary pull-left" data-toggle="collapse" id="ShowMoreOrder">Show More</a>
                                 
                                 <!--This checks whether the user has paid for the order or not and display the correct option.-->
                                 {% if not order.paid %}
@@ -143,9 +143,8 @@
         {% endif %}
         </div>       
         
-        
-        <div class="pagination-container">
         <!--This checks to see if there's more than 1 page worth of results (set to 5) to then display the option to view the next 'page'.-->
+        <div class="pagination-container">
         {% if orders.has_other_pages %}
             <ul class="pagination">
                 

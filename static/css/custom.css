@@ -21,13 +21,38 @@ a:link, a:visited {
   color: #ffffff;
 }
 
+.navbar-default .navbar-nav > li > a {
+  transition: box-shadow 0.5s, border-bottom 0.5s, margin-bottom 0.5s;
+  -webkit-transition: box-shadow 0.5s, border-bottom 0.5s, margin-bottom 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  border-bottom: solid 3px #fff;
+  margin-bottom: -3px;
+}
+
+.btn {
+  transition: box-shadow 0.2s;
+  -webkit-transition: box-shadow 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.btn:hover,
+.btn:focus {
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
 /* ---------------------------------------------------------- Headers */
 .header-container-text, .about-header-container-text {
   color: #ffffff;
   margin-top: 250px;
 }
 
-.gallery-header-container-text, .orders-header-container-text, .profile-header-container-text {
+.gallery-header-container-text, .orders-header-container-text, .profile-header-container-text,
+.header-container-text {
   color: #ffffff;
   margin-top: 150px;
   font-weight: bold;
@@ -234,12 +259,6 @@ a:link, a:visited {
   background-size: cover;
 }
 
-.contact-us-background-image {
-  background: url(/img/contact-us-image.jpg) center no-repeat;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
-  background-size: cover;
-}
-
 .header-image {
   background: url(/img/add-review-header-image.jpg) center no-repeat;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
@@ -256,6 +275,33 @@ a:link, a:visited {
   height: 550px;
   overflow: hidden;
   position: relative;
+}
+
+.edit-quote-header-image {
+  background: url(/img/amend-quote-header-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.quotes-header-image {
+  background: url(/img/quotes-header-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contact-us-header-image {
+  background: url(/img/contact-us-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .orders-header-images {
@@ -287,7 +333,16 @@ a:link, a:visited {
 }
 
 .add-review-header-image {
-  background: url(https://penworksmedia.co.uk/wp-content/uploads/2016/08/Blank-Page.jpg) center no-repeat;
+  background: url(/img/add-page-header-image.jpg) center no-repeat;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.checkout-header-image {
+  background: url(/img/payment-header-image.jpg) center no-repeat;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.7);
   height: 350px;
   background-position: center;
@@ -464,7 +519,7 @@ ul {
   margin-top: 70px;
 }
 .order-panel-container .order-panel-body, .review-panel-container .order-panel-body {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #f4f3e9;
   border-radius: 5px;
 }
 

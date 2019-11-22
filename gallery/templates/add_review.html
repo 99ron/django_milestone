@@ -3,19 +3,29 @@
 {% load bootstrap_tags %}
 {% block content %}
 
-<!--This page is for the user to write up a review for their purchase using a basic form structure.-->
-<div class="container">
-        <div class="add-review-form">
+<!--This is used to make a background pattern.-->
+<div class="background-carbon-fibre">
     
-            <h1 class="text-center"> Add Review </h1>
-            
-            <hr class="hr-under-heading">
+    <!--This div sets the header image and text you see at the top of the page.-->
+    <div class="add-review-header-image">
+        <div class="container">
+            <h1 class="header-container-text"> | ADD A REVIEW | </h1>
+        </div>
+    </div>
+    
+    <!--This is the box shadow effect that shows at the bottom of the header image.-->
+    <div class="header-box-shadow">
+
+    <!--This page is for the user to write up a review for their purchase using a basic form structure.-->
+    <div class="container">
+        <div class="add-review-form">
     
             <p class="text-padding-top-bottom text-center">Please fill out the form below
             and we'll add your review to our gallery page.</p>
             
             <hr class="hr-break">
             
+            <!--This is the form -->
             <form method="POST" action="{% url 'add_review' order.pk %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 
@@ -28,4 +38,5 @@
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

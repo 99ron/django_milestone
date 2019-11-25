@@ -10,8 +10,8 @@ numbersOnly = RegexValidator(r'^[0-9]*$', 'Only numbers are allowed.')
 
 
 class paymentDetails(models.Model):
-    order = models.ForeignKey(OrderList, null=False, on_delete=models.CASCADE)
-    user = models.ForeignKey(UserProfile, null=False, on_delete=models.CASCADE)
+    order = models.ForeignKey(OrderList, null=False, related_name="orders" ,on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, null=False, related_name="userprofile", on_delete=models.CASCADE)
     full_name = models.CharField(max_length=30, blank=False, verbose_name="Full Name")
     phone_number = models.CharField(max_length=11, validators=[numbersOnly], blank=False, verbose_name="Phone Number" )
     country = models.CharField(max_length=50, blank=False, verbose_name="Country" )

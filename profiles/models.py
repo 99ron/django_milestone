@@ -8,7 +8,7 @@ from django.core.validators import RegexValidator
 numbersOnly = RegexValidator(r'^[0-9]*$', 'Only numbers are allowed.')
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, related_name="users",on_delete=models.CASCADE, primary_key=True)
     full_name = models.CharField(max_length=30, blank=False, verbose_name="Full Name")
     phone_number = models.CharField(max_length=11, validators=[numbersOnly], blank=False, verbose_name="Phone Number")
     street_address1 = models.CharField(max_length=40, blank=False, verbose_name="Street Address 1")

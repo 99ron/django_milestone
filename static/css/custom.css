@@ -22,8 +22,8 @@ a:link, a:visited {
 }
 
 .navbar-default .navbar-nav > li > a {
-  transition: box-shadow 0.5s, border-bottom 0.5s, margin-bottom 0.5s;
-  -webkit-transition: box-shadow 0.5s, border-bottom 0.5s, margin-bottom 0.5s;
+  transition: box-shadow 0.5s;
+  -webkit-transition: box-shadow 0.5s;
   transition-timing-function: ease-in-out;
 }
 
@@ -109,6 +109,23 @@ a:link, a:visited {
   border: 1px gray solid;
   border-radius: 7px;
   box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: block !important;
+}
+
+.email-image {
+  width: 150px !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  display: block !important;
+}
+
+.green-tick-image {
+  width: 150px !important;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -205,7 +222,7 @@ a:link, a:visited {
   background-color: #4bb7ff;
 }
 
-.login-form, .register-form {
+.login-form, .register-form, .reset-form {
   margin-top: 70px;
   margin-bottom: 20px;
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -214,7 +231,7 @@ a:link, a:visited {
   background-color: #f4f3e9;
   border-radius: 10px;
 }
-.login-form a, .register-form a {
+.login-form a, .register-form a, .reset-form a {
   color: #000;
 }
 
@@ -612,7 +629,7 @@ ul {
     padding-top: 0px;
   }
 
-  .login-form {
+  .login-form, .reset-form {
     margin-top: 200px;
     margin-left: 20%;
     margin-right: 20%;

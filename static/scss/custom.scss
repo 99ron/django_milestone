@@ -153,6 +153,23 @@ a:link, a:visited {
     display: block !important;
 }
 
+// Email image on the password reset form
+.email-image {
+    width: 150px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    display: block !important;
+}
+
+.green-tick-image {
+    width: 150px !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: block !important;
+}
 
 // Testimonial images
 .testimonial-image {
@@ -248,7 +265,7 @@ a:link, a:visited {
     background-color: $hr-colour;
 }
 
-.login-form, .register-form  {
+.login-form, .register-form, .reset-form {
     margin-top: 70px;
     margin-bottom: 20px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -721,7 +738,7 @@ ul {
         padding-top: 0px;
     }
     
-    .login-form {
+    .login-form, .reset-form {
         margin-top: 200px;
         margin-left: 20%;
         margin-right: 20%;

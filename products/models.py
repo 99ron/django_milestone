@@ -12,8 +12,7 @@ MAKE_CHOICES = (
     ('mini','Mini'),
 )
 
-# Generates a unique quote number when the user submits the form. 
-
+# Generates a unique quote number when the user loads a quote but only saves when the form is submitted. 
 def increment_quote_number():
     last_quote = Services.objects.all().order_by('invoice_no').last()
     if not last_quote:

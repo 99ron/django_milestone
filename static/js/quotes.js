@@ -44,7 +44,7 @@ $( document ).ready(function() {
        }
     });
     
-    // Fetches the current selected options price on page load.
+    // Fetches the current selected type of service price on page load.
     tos = $('#type-of-service').children(":selected").data("price");
     
     // Gets the selected options on page load and returns the price.

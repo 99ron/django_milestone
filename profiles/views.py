@@ -11,10 +11,15 @@ from .forms import userProfileForm
 def user_profile(request):
     
     '''
-    This gets the profile page for the logged in User
+    This gets the profile page for the logged in User.
+    If it doesn't exist it'll return to the homepage.
     '''
-    
-    user = UserProfile.objects.get(pk=request.user.id)
+    try:
+        user = UserProfile.objects.get(pk=request.user.id)
+    except Exception as e:
+        messages.error(request, "No profile found, please contact the company.")
+        print("Error: " + str(e))
+        return render(request, 'home.html')       
     
     if request.method == 'GET':
         

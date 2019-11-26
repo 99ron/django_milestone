@@ -156,17 +156,23 @@ def edit_quote(request, order_id):
     orderList = OrderList.objects.get(pk=order_id)
     user = UserProfile.objects.get(user=request.user) 
     
+    # This checks to confirm that the order was created by the user trying to edit it or an employee of the company
     if current_user == orderList.username or user.employee == True:
         
         try:
+            # This retrieves the options selected from the original order created.
             origOrder = orderList.service_id
             service = Services.objects.get(invoice_no=origOrder)
             car_info = quotesForm(instance=service)
+            
+            # This retrieves all options from the models, these are dynamic in respect that the employer can add more as they need to.
             serviceType = TypeOfService.objects.all()
             optionalService = OptionalService.objects.all()
             wrapColour = WrapColour.objects.all()
             damage = Damage.objects.all() 
             
+            # This sets the multi choice options as a flat list. Reason for this is when the options from that model
+            # are rendered it will compare it to this list and if the option exists it'll add a checked option to it.
             origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
             origDamageList = origOrder.damage.all().values_list('name', flat=True)
         

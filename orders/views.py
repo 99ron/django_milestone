@@ -30,7 +30,7 @@ def view_order(request):
     # Checks to see if the logged in user is an employee.
     if user.employee == True:
         
-        paginator = Paginator(ol, 5)
+        paginator = Paginator(ol, 10)
         employee = True
         try:
             olpage = paginator.page(page)

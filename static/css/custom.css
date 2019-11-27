@@ -21,6 +21,16 @@ a:link, a:visited {
   color: #ffffff;
 }
 
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand > img {
+  height: 100%;
+  padding: 7px;
+  width: auto;
+}
+
 .navbar-default .navbar-nav > li > a {
   transition: box-shadow 0.5s;
   -webkit-transition: box-shadow 0.5s;
@@ -269,6 +279,13 @@ a:link, a:visited {
   padding: 0px;
 }
 
+.order-sort-container {
+  margin-top: 20px;
+}
+.order-sort-container .btn-sort-by {
+  width: 100%;
+}
+
 /* ---------------------------------------------------------- Background Images */
 .login-bg {
   background: url(/img/login-bg.jpg) center no-repeat;
@@ -277,7 +294,7 @@ a:link, a:visited {
 }
 
 .header-image {
-  background: url(/img/add-review-header-image.jpg) center no-repeat;
+  background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) center no-repeat;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-size: cover;
   height: 750px;

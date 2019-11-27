@@ -22,6 +22,30 @@
 
         {% if reviews %}
         
+        <div class="row order-sort-container">
+            <div class="order-sort-by">
+                <!--This form allows the user to sort/order the results-->
+                <form action="{% url 'gallery' %}" method="get">
+                    
+                    <div class="form-group col-xs-8">
+                        <select name="orderSortBy" class="form-control">
+                            <option value="Newest">Sort by: Newest</option>
+                            <option value="Oldest">Sort by: Oldest</option>
+                            <option value="HighRated">Sort by: Highest Rated</option>
+                            <option value="LowRated">Sort by: Lowest Rated</option>
+                        </select>
+                    </div> 
+                    
+                    <div class="col-xs-4">
+                        <input type="submit" class="btn btn-success btn-sort-by" value="Sort">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+        <hr >
+        
         <div class="review-container">
 
             {% for review in reviews %}
@@ -29,7 +53,7 @@
 
                 <div class="panel panel-primary">
 
-                    <div class="panel-heading"> {{ review.title }} </div>
+                    <div class="panel-heading"> <b>{{ review.title }}</b></div>
 
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-4">
@@ -45,10 +69,11 @@
                         
                         <!--This section is for the review comment and the service ratings.-->
                         <div class="col-xs-12 col-sm-8 testimonial-text">
-                            <p> <b>{{ review.username }}</b> rated this service a <b>{{ review.rating }} out of 5!</b></p>
+                            <p> <b>{{ review.user_int }}</b> rated this service a <b>{{ review.rating }} out of 5!</b></p>
                             <hr class="hr-break--full">
                             <p class="gallery-text"> {{ review.comment }}</p>
                             <a href="{% url 'review_more' review.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
+                            
                         </div>
 
                     </div>

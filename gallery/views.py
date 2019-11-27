@@ -10,10 +10,32 @@ from profiles.models import UserProfile
 
 # Views for the Gallery app.
 
+""" This gets the gallery page to display """
 def view_gallery(request):
-    """ This gets the gallery page to display """
     
-    reviews_list = Reviews.objects.all()
+    # This checks if any filters have been applied
+    if request.GET.get('orderSortBy'):
+        sort_by = request.GET.get('orderSortBy')
+        
+        if sort_by == "HighRated":
+            # If sort_by contains HighRated it'll display the results highest ratings first.
+            reviews_list = Reviews.objects.all().order_by('-rating')
+        
+        elif sort_by == "Newest":
+            # If sort_by contains Newest it'll display the results Newest first.
+            reviews_list = Reviews.objects.all().order_by('-review_submitted')
+        
+        elif sort_by == "LowRated":
+            # If sort_by contains LowRated it'll display the results lowest ratings first.
+            reviews_list = Reviews.objects.all().order_by('rating')
+            
+        elif sort_by == "Oldest":
+            # If sort_by contains Oldest it'll display the results oldest posts first.
+            reviews_list = Reviews.objects.all().order_by('review_submitted')
+
+    else:
+        # This is the default when the page is loaded.
+        reviews_list = Reviews.objects.all()
     
     """ This sets the pagination up for the reviews list with a maximum of 3 shown per page."""
     page = request.GET.get('page', 1)
@@ -27,7 +49,7 @@ def view_gallery(request):
         reviews = paginator.page(paginator.num_pages)
 
     return render(request, "gallery.html", {'reviews' : reviews})
-        
+
 
 @login_required
 def add_review(request, order_id):
@@ -38,16 +60,18 @@ def add_review(request, order_id):
     rev = Reviews()
     
     if request.method=="GET":
-        
+        # This sets up the form ready for the user to enter information.
         form = reviewForm()
         return render(request, "add_review.html", {'form' : form, 'order': order})
     
     else:
-        
+        # This is processed when the user submits the form.
         form = reviewForm(request.POST, request.FILES, instance=rev)
         
+        # Confirms the form is valid.
         if form.is_valid():
             
+            # Attempts to save the form into the tables.
             try:
                 rev.order_number = order
                 rev.user_int = userID

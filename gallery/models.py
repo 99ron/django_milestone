@@ -22,6 +22,7 @@ class Reviews(models.Model):
     title = models.CharField(max_length=50, blank=False)
     comment = models.TextField(max_length=500, blank=False)
     review_left = models.BooleanField(default=False)
+    review_submitted = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.order_number.service_id.invoice_no

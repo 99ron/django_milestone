@@ -111,7 +111,6 @@ a:link, a:visited {
 }
 
 
-
 .header-container-text {
     font-weight: bold;
     font-size: 46px;
@@ -333,6 +332,28 @@ a:link, a:visited {
     }
 }
 
+
+.main-container-top {
+    background-color: $white-colour;
+    text-align: left;
+    border: solid 1px;
+    border-radius: 10px;
+    margin: -35px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.main-container-bottom {
+    background-color: $white-colour;
+    text-align: center;
+    border: solid 1px;
+    border-radius: 10px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+    padding-top: 15px;
+    box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
+}
 /* ---------------------------------------------------------- Background Images */
 
 // Login and registration page background image.
@@ -520,7 +541,7 @@ ul {
 .quote-table-image {
     max-width: 30px;
     max-height: 30px;
-    border: 2px solid white;
+    border: 2px solid $white-colour;
     padding: 1px;
     border-radius: 5px;
 }
@@ -542,6 +563,10 @@ ul {
 
 /* ---------------------------------------------------------- Other */
 
+
+
+
+
 .gallery-text {
     height: 100px;
     text-overflow: ellipsis;
@@ -551,6 +576,7 @@ ul {
 
 .review-avatar {
     border-radius: 20px;
+    margin-left: 15px;
     display: block !important;
 }
 
@@ -598,7 +624,7 @@ ul {
 }
 
 .OptionalService, .TypeOfService, .Damage, .Make-Model, .WrapColour, .Price, .order-nothing, .gallery-nothing {
-    background-color: white;
+    background-color: $white-colour;
     border: black solid 2px;
     border-radius: 5px;
     padding: 10px;
@@ -722,8 +748,26 @@ ul {
 
 
 /* ---------------------------------------------------------- Media Queries */
+@media only screen and (max-width: 475px) {
+    
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        height: 200px;
+        width: 100%;
+        object-fit: fill !important;
+    }
 
-@media only screen and (max-width: 768px) {
+    .carousel {
+        position: relative;
+        height: 200px !important;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    
+}
+@media only screen and (max-width: 990px) {
     
     .review-avatar {
         border-radius: 20px;
@@ -738,6 +782,24 @@ ul {
         margin-top: 20px;
     }
     
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        max-height: 280px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .carousel {
+        position: relative;
+        height: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-container-top {
+        text-align: center;
+    }
 }
 
 
@@ -795,19 +857,22 @@ ul {
         margin-left: auto;
         margin-right: auto;
         display: block !important;
-        
+}
+
+// Controls how the carousel renders on the page when at min of 991px width
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    max-height: 580px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .carousel {
     position: relative;
-    width: 80%;
+    height: 580px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.review-carousel-image {
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 //----------------------------------------------------------- Background Images

@@ -14,6 +14,7 @@ My UX process was to analyze the customer’s requirements and try and think of 
     To be able to create, edit, delete and view services on their account
     To be able to leave a review once they've purchased a service.
     To be able to contact the company for any queries via a contact form.
+    To be able to sort through previous reviews to make judgement on work done
 
 ## User stories:
 
@@ -21,6 +22,7 @@ My UX process was to analyze the customer’s requirements and try and think of 
     As a user I want to be able to setup a personal profile.
     As a user I want to be able to create, edit and delete my own services/orders.
     As a user I want to be able to send the company an email with any queries I have.
+    As a user I want to be able to sort through reviews by different criteria's
     As a user I want to view other user’s reviews.
     As a user I want be able to see a users review in detail. 
     As a user I want to be able to log out of my account
@@ -90,6 +92,7 @@ The features of this application are as follows:
     Ability to View other Reviews left by Users
     Ability to Upload images for my Profile and/or Reviews
     Ability to Contact the company for any queries
+    Ability to Sort the Review results to what suits me
 
 
 ## Features Left to Implement
@@ -153,11 +156,11 @@ I've used my PC at home which uses the screen size 2560 x 1080 and at work which
     Edit a Order using the URL and vehicle id for a vehicle that is another user’s upload
     Delete a Order using the URL and vehicle id for a vehicle that has the matching upload_by and current user
     Delete a Order using the URL and vehicle id for a vehicle that is another user’s order
+    Sort the results on the Reviews/Gallery page
     Logout
 
 ## Bugs
 
-Filter-page: When the user wants to search by 'Likes', this brings back the results but not in order, however, if you keep it on 'Likes' and add the Region to be 'JDM' it orders the results correctly even though it's displaying the same vehicles on my testing, likewise with different regions or transmission types. I've had a tutor try and look into this with me but after a week with no results I've added this to the bugs unfixed list.
 
 
 # Deployment

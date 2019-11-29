@@ -310,7 +310,7 @@ a:link, a:visited {
 }
 
 .header-image {
-  background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) center no-repeat;
+  background: url(/img/header-image.jpg) center no-repeat;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
   background-size: cover;
   height: 750px;
@@ -468,6 +468,14 @@ ul {
 }
 
 /* ---------------------------------------------------------- Other */
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
+
 .gallery-text {
   height: 100px;
   text-overflow: ellipsis;
@@ -764,7 +772,7 @@ ul {
   }
 
   .header-image {
-    background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) center no-repeat;
+    background: url(/img/header-image.jpg) center no-repeat;
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5);
     height: 750px;
     background-attachment: fixed;

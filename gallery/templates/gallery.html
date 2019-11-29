@@ -9,7 +9,7 @@
 <div class="background-carbon-fibre">
     
     <!--This div sets the header image and text you see at the top of the page.-->
-    <div class="gallery-header-image">
+    <div class="gallery-header-image animated fadeIn">
         <div class="container">
             <h1 class="gallery-header-container-text"> | GALLERY & REVIEWS | </h1>
         </div>
@@ -22,7 +22,7 @@
 
         {% if reviews %}
         
-        <div class="row order-sort-container">
+        <div class="row order-sort-container animated fadeIn">
             <div class="order-sort-by">
                 <!--This form allows the user to sort/order the results-->
                 <form action="{% url 'gallery' %}" method="get">
@@ -44,12 +44,12 @@
             </div>
         </div>
         
-        <hr >
+        <hr>
         
         <div class="review-container">
 
             {% for review in reviews %}
-            <div class="panel panel-group review-panel-container">
+            <div class="panel panel-group review-panel-container animated fadeInUp">
 
                 <div class="panel panel-primary">
 

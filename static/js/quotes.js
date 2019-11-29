@@ -81,8 +81,9 @@ $('select[name=car_make]').change(function(){
 
                 $('select[name=car_model]').append(
                 $('<option></option>').val(car_model).html(car_model)
-                );
                 
+                );
+                console.log(car_model);
             }
        }
     });

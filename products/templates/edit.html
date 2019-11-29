@@ -7,7 +7,7 @@
 <div class="background-carbon-fibre">
     
     <!--This div sets the header image and text you see at the top of the page.-->
-    <div class="edit-quote-header-image">
+    <div class="edit-quote-header-image animated fadeIn">
         <div class="container">
             <h1 class="header-container-text"> | AMENDING: {{ origOrder }} | </h1>
         </div>
@@ -19,7 +19,7 @@
     <!--This page is used to update an existing quote.-->
     <div class="container">
            
-        <div class="quotes-form">
+        <div class="quotes-form animated fadeInUp">
             
             <!--This action sets the form to fetch the update url with the invoice number when the submit button is pressed-->
             <form method="POST" action="{% url 'update' origOrder.invoice_no %}">

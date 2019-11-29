@@ -5,7 +5,7 @@
 {% load static %}
 
 <!--This is the div for the header image which uses the parrallax effect.-->
-<div class="header-image">
+<div class="header-image animated fadeIn">
     <div class="container"> 
         <h1 class="header-container-text"> | DARE TO BE DIFFERENT? | </h1>
     </div>
@@ -15,7 +15,7 @@
 <div class="header-box-shadow">
     
     <!--Container which has the main content for the page.-->
-    <div class="container main-content">
+    <div class="container main-content animated fadeInUp">
         
         <div class="row">
             
@@ -38,7 +38,7 @@
         </div>
         
         <!--Row for my images which fade in when the page loads.-->
-        <div class="row imagetiles">
+        <div class="row imagetiles animated rubberBand">
             
             <div class="col-sm-12 col-md-3">
                 <img class="img-responsive img-mainpage-size" src="{% static "img/acc.png" %}" alt="Auto Ceramic Coating">
@@ -58,16 +58,18 @@
         </div>
         
         <!--This row is the section of services the company supplies.-->
-        <div class="row">
+        <div class="row animated fadeInUp">
             <h1 class="text-center header-text">OUR SERVICES</h1>
             
             <hr class="hr-under-heading">
             
             <div class="services-subtext">
-                <div class="row">
+                
+                <div class="col-sm-12">
                     <p class="text-center"><small>Our quality standards goes more than to just the work we do. Also applies in terms of service, technical expertise and advice. 
                     Our team are more than happy to assist you with know-how and any questions you may have.</small></p>
                 </div>
+                
                 <div class="row servicetiles">
                     
                     <div class="col-sm-12 col-md-4">

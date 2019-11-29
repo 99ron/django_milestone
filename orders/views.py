@@ -64,7 +64,7 @@ def delete_order(request, order, user_id):
     order = OrderList.objects.filter(pk=order)
     
     # This checks if the logged in user is the owner of the order trying to be deleted
-    # or if the user is an employee who then has the write to remove the order.
+    # or if the user is an employee who then has the right to remove the order.
     
     if user_id == current_user or user.employee == True:
         try:

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from orders.models import OrderList
+from orders.views import view_order
 from payment.forms import orderForm, makePaymentForm
 from profiles.models import UserProfile
 from django.conf import settings
@@ -18,17 +19,24 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def checkout(request, order_id):
     if request.method == "GET":
         
-        # Fetches user profile details by currently logged in user. 
+        # Fetches user profile details by currently logged in user.
+        current_user = request.user.username
         user = UserProfile.objects.get(pk=request.user.id)
         # Collects the correct order from the imported order_id.
         serviceOrder = OrderList.objects.get(pk=order_id)
         
-        # Sets the payment form up as new and the order form with the user's data.
-        payment_form = makePaymentForm()
-        order_form = orderForm(instance=user)
+        if serviceOrder.paid == False and current_user == serviceOrder.username:
         
-        return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder, 'publishable': settings.STRIPE_PUBLIC_KEY })
+            # Sets the payment form up as new and the order form with the user's data.
+            payment_form = makePaymentForm()
+            order_form = orderForm(instance=user)
+            
+            return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'order' : serviceOrder, 'publishable': settings.STRIPE_PUBLIC_KEY })
         
+        else:
+            # If user has already paid then takes them back to the orders page.
+            messages.error(request, "You've already paid or didn't make the order.")
+            return redirect(view_order)
  
 
 @login_required
@@ -71,7 +79,7 @@ def payment(request, order_id):
                 order.paid = True
                 order.save()
                 
-                messages.success(request, "You've paid successfully")
+                messages.success(request, "You've paid Successfully")
                 return redirect(reverse('orders'))
             
             else:

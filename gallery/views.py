@@ -5,6 +5,7 @@ from django.contrib import messages
 from gallery.models import Reviews, Attachment
 from gallery.forms import reviewForm
 from orders.models import OrderList
+from orders.views import view_order
 from profiles.models import UserProfile
 
 
@@ -55,41 +56,55 @@ def view_gallery(request):
 def add_review(request, order_id):
     """ This will either fetch the page for the review or post a review """
     
+    current_user = request.user.username
     order = OrderList.objects.get(pk=order_id)
     userID = UserProfile.objects.get(pk=request.user.id)
     rev = Reviews()
     
     if request.method=="GET":
         # This sets up the form ready for the user to enter information.
-        form = reviewForm()
-        return render(request, "add_review.html", {'form' : form, 'order': order})
+        # Checks that the user leaving the review is the one who created it.
+        if order.username == current_user:
+            form = reviewForm()
+            return render(request, "add_review.html", {'form' : form, 'order': order})
+        else:
+            messages.error(request, "You didn't pay for the order, can't access this.")
+            return redirect(view_order)
+     
     
     else:
-        # This is processed when the user submits the form.
-        form = reviewForm(request.POST, request.FILES, instance=rev)
         
-        # Confirms the form is valid.
-        if form.is_valid():
+        # This checks if the logged in user is the owner of the order trying to be reviewed.
+        if order.username == current_user:
             
-            # Attempts to save the form into the tables.
-            try:
-                rev.order_number = order
-                rev.user_int = userID
-                rev.review_left = True
-                rev.save()
-                form.save()
-
-                return redirect(view_gallery)
+            # This is processed when the user submits the form.
+            form = reviewForm(request.POST, request.FILES, instance=rev)
+            
+            # Confirms the form is valid.
+            if form.is_valid():
                 
-            except Exception as e:
-                messages.error(request, "Error occured: " + str(e))
-                print("Error occured: " + str(e))
+                # Attempts to save the form into the tables.
+                try:
+                    rev.order_number = order
+                    rev.user_int = userID
+                    rev.review_left = True
+                    rev.save()
+                    form.save()
+    
+                    return redirect(view_gallery)
+                    
+                except Exception as e:
+                    messages.error(request, "Error occured: " + str(e))
+                    print("Error occured: " + str(e))
+                    return render(request, "add_review.html", {'form' : form, 'order': order})
+                    
+            else:
+                print(form.errors)
                 return render(request, "add_review.html", {'form' : form, 'order': order})
-                
         else:
-            print(form.errors)
-            return render(request, "add_review.html", {'form' : form, 'order': order})
-            
+            messages.error(request, "Sorry but you're not the owner of that listing.")
+            return reverse(view_order)
+
             
 def review_more(request, review_id):
     """ This view is used for more info on the review """

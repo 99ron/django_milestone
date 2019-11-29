@@ -37,7 +37,7 @@
                     </div> 
                     
                     <div class="col-xs-4">
-                        <input type="submit" class="btn btn-success btn-sort-by" value="Sort">
+                        <input type="submit" class="btn btn-success btn-wait btn-sort-by" value="Sort">
                     </div>
                     
                 </form>
@@ -49,7 +49,7 @@
         <div class="review-container">
 
             {% for review in reviews %}
-            <div class="panel panel-group review-panel-container animated fadeInUp">
+            <div class="panel panel-group review-panel-container animated flipInX">
 
                 <div class="panel panel-primary">
 
@@ -61,7 +61,7 @@
                             <!--This checks for images in the current review and if it has more than 1 picture it then stops the loop function so it only shows one for now.-->
                             {% for image in review.attachment.all %} 
                                 {% if forloop.counter < 2 %} 
-                                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image img-thumbnail" alt="Gallery Image">
+                                    <img src="{{ MEDIA_URL }}{{ image.file }}" class="img-responsive testimonial-image img-thumbnail grow" alt="Gallery Image">
                                 {% endif %} 
                             {% endfor %}
                             
@@ -72,7 +72,7 @@
                             <p> <b>{{ review.user_int }}</b> rated this service a <b>{{ review.rating }} out of 5!</b></p>
                             <hr class="hr-break--full">
                             <p class="gallery-text"> {{ review.comment }}</p>
-                            <a href="{% url 'review_more' review.pk %}" type="submit" class="btn btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
+                            <a href="{% url 'review_more' review.pk %}" type="submit" class="btn btn-wait btn-success pull-right"><i class="fas fa-book" aria-hidden="true"></i> Read More! </a>
                             
                         </div>
 

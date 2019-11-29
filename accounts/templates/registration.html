@@ -17,14 +17,14 @@
                 
                 {% csrf_token %}
                 {{ registration_form | as_bootstrap }}
-                <button type="submit" class="btn btn-success form-button">Register</button>
+                <button type="submit" class="btn btn-wait btn-success form-button">Register</button>
                 
             </form>
         </div>
         
         <div class="row">
             <p>Or if you've got an account already:</p>
-            <a href="{% url 'login' %}" class="col-xs-12"><button class="btn btn-primary ">Sign in</button></a>
+            <a href="{% url 'login' %}" class="col-xs-12"><button class="btn btn-wait btn-primary ">Sign in</button></a>
         </div>
         
     </div>

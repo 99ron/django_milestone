@@ -20,14 +20,14 @@
                 {% csrf_token %} 
                 {{ login_form | as_bootstrap }}
 
-                <button type="submit" class="btn btn-success form-button">Login</button>
+                <button type="submit" class="btn btn-wait btn-success form-button">Login</button>
 
             </form>
         </div>
         
         <div class="row">
-            <a href="{% url 'password_reset' %}" class="col-xs-12 col-sm-6"><button class="btn btn-warning form-button">Reset Password</button></a>
-            <a href="{% url 'register' %}" class="col-xs-12 col-sm-6"><button class="btn btn-primary form-button ">Register</button></a>
+            <a href="{% url 'password_reset' %}" class="col-xs-12 col-sm-6"><button class="btn btn-wait btn-warning form-button">Reset Password</button></a>
+            <a href="{% url 'register' %}" class="col-xs-12 col-sm-6"><button class="btn btn-wait btn-primary form-button ">Register</button></a>
         </div>
         
     </div>

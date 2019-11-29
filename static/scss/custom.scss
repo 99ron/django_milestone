@@ -360,7 +360,7 @@ a:link, a:visited {
 
 // Main page top image used for the parralax effect.
 .header-image { 
-    background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
+    background: url(/img/header-image.jpg) 
     center no-repeat;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
     background-size: cover;
@@ -557,8 +557,9 @@ ul {
 
 /* ---------------------------------------------------------- Other */
 
-
-
+// Used for enlarging images on home page when
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
 
 
 .gallery-text {
@@ -887,7 +888,7 @@ ul {
 }
 
 // Main page top image used for the parralax effect.
-.header-image { background: url(https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) 
+.header-image { background: url(/img/header-image.jpg) 
     center no-repeat;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
     height: 750px;
@@ -897,7 +898,7 @@ ul {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
+    }
 
 }
 

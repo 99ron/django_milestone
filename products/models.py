@@ -7,9 +7,14 @@ MAKE_CHOICES = (
     ('', 'Please choose a Make'),
     ('audi','Audi'),
     ('bmw', 'BMW'),
-    ('toyota','Toyota'),
-    ('nissan','Nissan'),
+    ('bentley','Bentley'),
+    ('citreon', 'Citreon'),
+    ('ford','Ford'),
     ('mini','Mini'),
+    ('nissan','Nissan'),
+    ('toyota','Toyota'),
+    ('volvo','Volvo'),
+    
 )
 
 # Generates a unique quote number when the user loads a quote but only saves when the form is submitted. 

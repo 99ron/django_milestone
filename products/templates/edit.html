@@ -144,8 +144,9 @@
                         {{ form | as_bootstrap }}
                         
                         <label for="car_model"> Car Model</label>
-                    
-                        <select class="form-control car_model" name="car_model" id="car_model" size="3">
+                        
+                        <!--This has size = 5 to limit how much is displayed on the screen at once.-->
+                        <select class="form-control car_model" name="car_model" id="car_model" size="5">
                             <option value="{{ origOrder.car_model }}" disabled selected> {{ origOrder.car_model }} </option>
                         </select>
                             
@@ -196,7 +197,7 @@
                                             <span class="glyphicon glyphicon-ok"></span>
                                             <span> </span>
                                         </label>
-                                        <label for="{{ i.name }}" class="btn btn-default active optional-services-label">
+                                        <label for="{{ i.name }}" class="btn btn-wait btn-default active optional-services-label">
                                             {{ i.name }}
                                         </label>
                                     </div>
@@ -281,7 +282,7 @@
                     
                     <hr class="hr-break">
 
-                    <button class="btn btn-success">Update Order</button>
+                    <button class="btn btn-wait btn-success">Update Order</button>
                 </div>
                 
             </form>

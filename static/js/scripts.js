@@ -58,4 +58,10 @@ function ShowMoreChange(id) {
     }
 }
 
-
+// Brings up the loading message upon button submit. Made it timeout after 2 seconds incase a form was submitted but failed validation.
+$(document).ready(function() { 
+    $('.btn-wait').click(function() { 
+        $.blockUI({ message: '<h2> Please Wait...</h2>' }); 
+        setTimeout($.unblockUI, 2000);
+    }); 
+}); 

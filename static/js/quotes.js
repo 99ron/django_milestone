@@ -30,7 +30,7 @@ $( document ).ready(function() {
     var request_url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/' + car_make + '?format=json';
 
     $.ajax({
-        url: request_url,
+        url: request_url, 
         success: function(data){
       
             for (let i=0, item; item=data.Results[i]; i++) {
@@ -69,21 +69,17 @@ $( document ).ready(function() {
 $('select[name=car_make]').change(function(){
     car_make = $(this).val();
     var request_url = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/' + car_make + '?format=json';
-        
-    $('select[name=car_model]').empty();
     
+    $('select[name=car_model]').empty();
     $.ajax({
         url: request_url,
         success: function(data){
-      
             for (let i=0, item; item=data.Results[i]; i++) {
                 let car_model = item.Model_Name;
 
                 $('select[name=car_model]').append(
                 $('<option></option>').val(car_model).html(car_model)
-                
                 );
-                console.log(car_model);
             }
        }
     });

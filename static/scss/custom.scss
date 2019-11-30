@@ -1,4 +1,6 @@
-/* ---------------------------------------------------------- Variables */
+/* -----------------------------------------------------------------------------------------------------------------------------  
+                                                                                                                    Variables 
+-----------------------------------------------------------------------------------------------------------------------------*/
 
 $primary-text-colour: #000;
 $header-text-overlay: #ffffff;
@@ -14,7 +16,9 @@ $hr-colour: #4bb7ff;
 $font-family: "Montserrat";
 $form-colour: #f4f3e9;
 
-/* ---------------------------------------------------------- Body */
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Body 
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 
 // This makes sure the footer is always at the bottom of the page regardless of how much content is showing.
@@ -82,8 +86,9 @@ a:link, a:visited {
     box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* ---------------------------------------------------------- Headers */
-
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Headers
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 
 .header-container-text, .about-header-container-text {
@@ -117,12 +122,17 @@ a:link, a:visited {
     margin-top: 235px;
 }
 
-/* ---------------------------------------------------------- Main */
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Main
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 .gallery-main-content, .main-content {
     margin-bottom: 40px;
+    
 }
 
+// Used to add a black fade into the header images.
+//(Granted most at the moment have a boxshader applied to them so are difficult to see)
 .header-box-shadow {
     box-shadow: 0px -4px 5px 1px rgba(0, 0, 0, 0.3);
 }
@@ -166,6 +176,7 @@ a:link, a:visited {
     display: block !important;
 }
 
+// Applies to successful email sent on password reset.
 .green-tick-image {
     width: 150px !important;
     margin-left: auto;
@@ -188,6 +199,7 @@ a:link, a:visited {
     display: block !important;
 }
 
+// Payment button centering
 .payment-button {
     text-align: center;
 }
@@ -219,6 +231,7 @@ a:link, a:visited {
     color: $secondary-text-colour;
 }
 
+// Used on home/main page for the 4 static images.
 .imagetiles {
     margin: 0px;
     padding-top: 80px;
@@ -246,6 +259,7 @@ a:link, a:visited {
     padding-bottom: 16px;
 }
 
+// Hr rule for 50% width
 .hr-break {
     width: 50%;
     height: 2px;
@@ -253,6 +267,7 @@ a:link, a:visited {
     background-color: $hr-colour;
 }
 
+// Hr rule for 100%% width
 .hr-break--full {
     width: 100%;
     height: 2px;
@@ -261,6 +276,7 @@ a:link, a:visited {
     
 }
 
+// Hr rule for 35%% width
 .hr-under-heading {
     width: 35px;
     height: 2px;
@@ -314,7 +330,8 @@ a:link, a:visited {
         color: $a-link-text-colour;
     }
 }
-    
+
+// Used as part of the carousel structure.    
 #id_image {
     padding: 0px;
 }
@@ -348,7 +365,10 @@ a:link, a:visited {
     margin-top: 30px;
     box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3); 
 }
-/* ---------------------------------------------------------- Background Images */
+
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                            Background Images
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 // Login and registration page background image.
 .login-bg {
@@ -362,6 +382,7 @@ a:link, a:visited {
 .header-image { 
     background: url(/img/header-image.jpg) 
     center no-repeat;
+    
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.5);
     background-size: cover;
     height: 750px;
@@ -383,6 +404,7 @@ a:link, a:visited {
 
 // None Parralax background images. //
 
+// Edit quote header image.
 .edit-quote-header-image {
     background: url(/img/amend-quote-header-image.jpg) 
     center no-repeat;
@@ -393,7 +415,7 @@ a:link, a:visited {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+// Quotes page header image.
 .quotes-header-image {
     background: url(/img/quotes-header-image.jpg) 
     center no-repeat;
@@ -417,6 +439,7 @@ a:link, a:visited {
     background-size: cover;
 }
 
+// Orders header image.
 .orders-header-images {
     background: url(/img/orders-bg-image.jpg) 
     center no-repeat;
@@ -429,6 +452,7 @@ a:link, a:visited {
     background-size: cover;
 }
 
+// Profile header image.
 .profile-header-image {
     background: url(/img/profile-header-image.jpg) 
     center no-repeat;
@@ -440,6 +464,7 @@ a:link, a:visited {
     background-size: cover;      
 }
 
+// Gallery header image.
 .gallery-header-image {
     background: url(/img/gallery-header-background.jpg) 
     center no-repeat;
@@ -451,6 +476,7 @@ a:link, a:visited {
     background-size: cover;
 }
 
+// Add review header image.
 .add-review-header-image {
     background: url(/img/add-page-header-image.jpg) 
     center no-repeat;
@@ -462,6 +488,7 @@ a:link, a:visited {
     background-size: cover;
 }
 
+// Checkout page header image.
 .checkout-header-image {
     background: url(/img/payment-header-image.jpg) 
     center no-repeat;
@@ -473,6 +500,7 @@ a:link, a:visited {
     background-size: cover;
 }
 
+// Profilepage header image.
 .profile-background-image{
     background: url(/img/profile-background-image.jpg) 
     center no-repeat;
@@ -492,8 +520,9 @@ a:link, a:visited {
     height: 100%;
 }
 
-/* ---------------------------------------------------------- Footer */
-
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Footer
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 footer {
     padding-top: 15px;
@@ -516,8 +545,9 @@ ul {
         padding-top: 15px;
 }
 
-
-/* ---------------------------------------------------------- Tables */
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                        Tables
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 // Order page previous selected wrap table.
 .previous-quote-table-container {
@@ -555,9 +585,11 @@ ul {
     font-weight: bold;
 }
 
-/* ---------------------------------------------------------- Other */
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                            Other -- Assorted 
+-----------------------------------------------------------------------------------------------------------------------------  */
 
-// Used for enlarging images on home page when
+// Used for enlarging items on the website.
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(1.1); }
 
@@ -581,6 +613,7 @@ ul {
     margin-bottom: 0px;
 }
 
+// Messages are center aligned.
 .messages {
     text-align: center;
 }
@@ -634,7 +667,7 @@ ul {
     margin-right: 10px;
 }
 
-// required for the nice looking checkboxes to hide and show the ticks.
+// All below is required for the nice looking checkboxes to hide and show the ticks.
 .form-group input[type="checkbox"] {
     display: none;
 }
@@ -656,6 +689,7 @@ ul {
 .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
     display: none;   
 }
+// End of nice looking checkboxes.
 
 // Hide radio button on quotes page
 .quote-radio [type=radio] { 
@@ -738,11 +772,10 @@ ul {
     
 }
 
-/* ---------------------------------------------------------- SlideShow in Gallery /*
-
-
-
-/* ---------------------------------------------------------- Media Queries */
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                                    Media Queries 
+These are specific to items not fitting or looking correct on smaller screens
+-----------------------------------------------------------------------------------------------------------------------------  */
 @media only screen and (max-width: 475px) {
     
     .carousel-inner > .item > img,
@@ -870,7 +903,9 @@ ul {
     box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
-//----------------------------------------------------------- Background Images
+/* -----------------------------------------------------------------------------------------------------------------------------   
+                                                                                                        BackGround Images -- MQ
+-----------------------------------------------------------------------------------------------------------------------------  */
 
 // About Us page top image used for the parralax effect.
 .about-header-image {

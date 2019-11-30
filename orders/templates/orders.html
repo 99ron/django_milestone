@@ -107,13 +107,13 @@
                                     
                                     <!--This is the delete order button, will cause a prompt if clicked to confirm.-->
                                     <div class="order-delete-container">
-                                        <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-wait btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
+                                        <a href="{% url 'delete' order.pk order.username %}" type="submit" class="btn btn-warning pull-left confirm-delete" ><i class="fas fa-trash-alt" aria-hidden="true"></i> Delete </a>
                                     </div>
                                     
                                     <!--If the user hasn't paid then this displays the option to edit their order. -->
                                     {% if not order.paid %}
                                         <div class="order-edit-container">
-                                            <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-wait btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
+                                            <a href="{% url 'edit' order.pk %}" type="submit" class="btn btn-info pull-left"><i class="fas fa-edit" aria-hidden="true"></i> Edit </a>
                                         </div>
                                     {% endif %}
     

@@ -73,7 +73,11 @@ def get_quote(request):
 
             # This gathers the text inputted for the 'car model'.            
             carmoGet = request.POST.get('car_model')
-
+            
+            # Checks to see if model has been chosen.
+            if carmoGet is None:
+                carmoGet = "Unknown"
+                
             # This gets the text from the 'Damage Details' text box.
             damageDetailsGet = request.POST.get('ddInput')
             
@@ -248,6 +252,10 @@ def update_quote(request, order_id):
             # This gathers the text inputted for the 'car model'.            
             carmoGet = request.POST.get('car_model')
             
+            # Checks to see if model has been chosen.
+            if carmoGet is None:
+                carmoGet = "Unknown"
+                
             # This checks if an input was selected, if not then gets the previous selection from the database.
             if carmoGet == None:
                 carmoGet = cs.car_model

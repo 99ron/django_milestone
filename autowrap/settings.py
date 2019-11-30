@@ -52,12 +52,10 @@ INSTALLED_APPS = [
     'payment',
     'gallery',
     'storages',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,22 +85,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'autowrap.wsgi.application'
-
-
-# CORS Settings for the Ajax Requests.
-CORS_ORIGIN_WHITELIST = [
-    "https://vpic.nhtsa.dot.gov",
-]
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

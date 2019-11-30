@@ -5,7 +5,6 @@ colorama==0.2.5
 docutils==0.14
 dj-database-url==0.5.0
 Django==1.11.26
-django-cors-headers==2.4.0
 django-forms-bootstrap==3.1.0
 django-multiupload==0.5.2
 django-storages==1.7.2

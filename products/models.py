@@ -8,10 +8,10 @@ MAKE_CHOICES = (
     ('audi','Audi'),
     ('bmw', 'BMW'),
     ('bentley','Bentley'),
-    ('citreon', 'Citreon'),
     ('ford','Ford'),
     ('mini','Mini'),
     ('nissan','Nissan'),
+    ('mercedes', 'Mercedes'),
     ('toyota','Toyota'),
     ('volvo','Volvo'),
     

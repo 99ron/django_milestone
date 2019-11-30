@@ -39,7 +39,7 @@ About Page - This page has a little more personal information about the company 
 
 User Profile - This page is where a user who's just created an account is redirected to so they can upload a picture and add some personal information which will then be used in the payments app later on.
 
-Contact Us - This is a page with a simple form used to send the company any query a user may have. It's setup using a gmail account.
+Contact Us - This is a page with a simple form used to send the company any query a user may have. It's setup using a free gmail account == vehicleautowraps@gmail.com.
 
 Quotes Page - This is the page the user heads to get a quote for a service. There's multiple options to choose from and uses jQuery to hide or show certain containers as well as ajax using an api for the car models.
 
@@ -77,7 +77,7 @@ My Database consists of many tables:
 
 The ER Diagram for my database:
 
-.:: Attached as image in repositry ::.
+.:: Attached as a pdf in repositry ::.
 
 # Features
 
@@ -109,7 +109,7 @@ Possibly change the layout for the wrap colour choice as it works well now, but 
 
 # Technologies Used
 
-Python, Django, S3, AJAX, Pillow, Stripe
+Python, Django, S3, AJAX, Pillow, Stripe, BlockUI
 
 Django is the Python Framework I’m using for this application. 
 
@@ -125,6 +125,8 @@ Boto3 / S3 - Used for uploading images to my Bucket hosted on AWS.
 
 Stripe - This was used for making a purchase of a service, controls all the card details and transmits them securly. 
 
+BlockUI - This is used for the message when the user presses a button. It times out after 2 seconds incase they press a submit button and the form doesn't validate.
+
 ## CSS
 
 I'm using SCSS to build my css style sheet which has SASS doing the conversion for me.
@@ -133,13 +135,16 @@ Animated CSS by Daniel Eden. I love this package and use it with all my projects
 
 ## jQuery
 
-I've used jQuery to do a simple 'back to top' function but also for hiding/showing containers for the quotes page. Changing text for the show more buttons in the quotes page as well as the orders page. Confirm prompt box for when the user chooses to delete an order. 
+I've used jQuery to do a simple 'back to top' function but also for hiding/showing containers for the quotes page. Changing text for the show more buttons in the quotes page as well as the orders page. Confirm prompt box for when the user chooses to delete an order. At the last moment I've added the ability 
 
 ## Testing
 
 For testing I have tried the following browsers; Firefox, Chrome, Edge and Internet Explorer.
 
 I've used my PC at home which uses the screen size 2560 x 1080 and at work which is dual screen setup, used the built in "reponsive browser" feature mainly in firefox to test for different resolutions/devices.
+As an addition I've used Django's built in TestCase to check urls, forms and some models, confirmed they pass but will need to be done on a local environment. To check your self type: python3 manage.py test
+
+Check HTML and CSS code using W3C Markup, HTML had complaints regarding missing header tags as it can't read into the {% extend %} as well as any python logic it doesn't like.
 
 ## Testing Scenarios
 
@@ -161,7 +166,11 @@ I've used my PC at home which uses the screen size 2560 x 1080 and at work which
 
 ## Bugs
 
+I've installed django-cors-headers and set it up to whitelist the website needed to get car models, it still sometimes doesn't load the list due to
+an error; "Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at
+https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/?format=json. (Reason: CORS request did not succeed)."
 
+Yet again, it does pull the list through most of the times so I'm not too sure on this, I've set up the package as the manual shows.
 
 # Deployment
 
@@ -225,4 +234,5 @@ https://autowraps-django-milestone.herokuapp.com/
     SQL Schema - dbdiagram.io
     Django - Google/FullStack search results using snippets and amending for my purpose
     Images - Google Images, literally every image is found on here.
-    CI Tutor - Helped with passing my travis with an issue no one could seem to figure until Micheal had a suggestion. Most of the time I ran through my ideas of what I wanted to achieve and found a solution after chatting "out loud" as it were.
+    CI Tutor - Helped with passing my travis with an issue no one could seem to figure until Micheal had a suggestion of rebuiling my table structure removing all the migrations filex except __init__ and then migrating. 
+    Most of the time I ran through my ideas of what I wanted to achieve and found a solution after chatting "out loud" as it were.

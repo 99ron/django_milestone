@@ -95,11 +95,10 @@ def add_review(request, order_id):
                     
                 except Exception as e:
                     messages.error(request, "Error occured: " + str(e))
-                    print("Error occured: " + str(e))
                     return render(request, "add_review.html", {'form' : form, 'order': order})
                     
             else:
-                print(form.errors)
+                messages.error(request, "Form wasn't valid, please check everthing is filled out.")
                 return render(request, "add_review.html", {'form' : form, 'order': order})
         else:
             messages.error(request, "Sorry but you're not the owner of that listing.")

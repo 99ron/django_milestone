@@ -73,8 +73,7 @@ def delete_order(request, order, user_id):
             messages.success(request, "Order has been removed.")
             return redirect(view_order) 
         except Exception as e:
-            print(e)
-            messages.error(request, "Couldn't delete object.")
+            messages.error(request, "Couldn't delete object. Reason: " + str(e))
             return redirect(view_order)
             
     # If they're not the owner then it returns to the orders page with a message redirecting 

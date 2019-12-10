@@ -17,8 +17,7 @@ def user_profile(request):
     try:
         user = UserProfile.objects.get(pk=request.user.id)
     except Exception as e:
-        messages.error(request, "No profile found, please contact the company.")
-        print("Error: " + str(e))
+        messages.error(request, "No profile found, please contact the company: " + str(e))
         return render(request, 'home.html')       
     
     if request.method == 'GET':
@@ -50,7 +49,7 @@ def user_profile(request):
                 if image:
                     up.image = image
                 else:
-                    # If no data was collected it sets the image before form was submitted.
+                    # If no data was collected it sets the image to be what it was before the form was submitted.
                     form.image = user.image
                     
                 up.save()
@@ -59,8 +58,7 @@ def user_profile(request):
                 
             except Exception as e:
                 # If an error occurs it throws up a message and asks to retry.
-                print("Error: " + str(e))
-                messages.error(request, "Failed to update, try again.")
+                messages.error(request, "Failed to update: " + str(e))
                 return render(request, 'profile.html', {'form' : form, 'profile' : user})
                 
     return render(request, 'profile.html', {'form' : form, 'profile' : user})

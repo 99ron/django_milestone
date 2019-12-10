@@ -1,7 +1,7 @@
+import requests
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from datetime import datetime
-import requests, json
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from orders.models import OrderList
@@ -127,18 +127,15 @@ def get_quote(request):
                         ol.save()
     
                     except Exception as e:
-                        print("Error: " + str(e))
-                        messages.error(request, "Couldn't save your order, please try again shortly.")
+                        messages.error(request, "Couldn't save your order: " + str(e))
                         return redirect(get_quote)
                 else:
-                    print("Failed on matching user to invoice.")
                     messages.error(request, "Couldn't match the user to the invoice, please try again.")
                     return redirect(get_quote)
             
             except Exception as e:
                 # If it fails on one of the options above it'll ask the user to try again.
-                print(e)
-                messages.error(request, "Something went wrong: " + e + " , please try again.")
+                messages.error(request, "Something went wrong: " + str(e) + " , please try again.")
                 return redirect(get_quote)
             
             # All being well it ends here!
@@ -146,10 +143,8 @@ def get_quote(request):
             return redirect(view_order)
             
         else: 
-
-            print(form.errors)
             # If form isn't valid!
-            messages.error(request, "Form didn't validate, please try again.")
+            messages.error(request, "Form didn't validate: " + str(form.errors))
             return redirect(get_quote)
 
 
@@ -186,8 +181,7 @@ def edit_quote(request, order_id):
             return render(request, 'edit.html', context)
        
         except Exception as e:
-            print("Error: " + str(e))
-            messages.error(request, "Sorry, something went wrong while trying to get your order.")
+            messages.error(request, "Sorry, something went wrong while trying to get your order. " + str(e))
             
     else:
         messages.error(request, "You are not an employee or the creator for this order.")
@@ -252,10 +246,6 @@ def update_quote(request, order_id):
             # This gathers the text inputted for the 'car model'.            
             carmoGet = request.POST.get('car_model')
             
-            # Checks to see if model has been chosen.
-            if carmoGet is None:
-                carmoGet = "Unknown"
-                
             # This checks if an input was selected, if not then gets the previous selection from the database.
             if carmoGet == None:
                 carmoGet = cs.car_model
@@ -300,8 +290,7 @@ def update_quote(request, order_id):
                 return redirect(view_order)
                 
             except Exception as e:
-                messages.error(request, "Error occured updating this order, please try again.")
-                print("Error : " + str(e))
+                messages.error(request, "Error occured updating this order: " + str(e))
                 return redirect(view_order)
         
         else:

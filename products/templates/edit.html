@@ -22,7 +22,7 @@
         <div class="quotes-form animated fadeInUp">
             
             <!--This action sets the form to fetch the update url with the invoice number when the submit button is pressed-->
-            <form method="POST" action="{% url 'update' origOrder.invoice_no %}">
+            <form method="POST" action="{% url 'edit' origOrder.invoice_no %}">
                 
                 {% csrf_token %}
                 

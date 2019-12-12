@@ -150,152 +150,154 @@ def get_quote(request):
 
 @login_required
 def edit_quote(request, order_id):
-    
+    # Gets the current user and their profile.
     current_user = request.user.username
-    orderList = OrderList.objects.get(pk=order_id)
-    user = UserProfile.objects.get(user=request.user) 
+    user = UserProfile.objects.get(user=request.user)
     
-    # This checks to confirm that the order was created by the user trying to edit it or an employee of the company
-    if current_user == orderList.username or user.employee == True:
+    # If the request is GET it loads the order the user would like to edit.
+    if request.method == 'GET':
         
-        try:
-            # This retrieves the options selected from the original order created.
-            origOrder = orderList.service_id
-            service = Services.objects.get(invoice_no=origOrder)
-            car_info = quotesForm(instance=service)
-            
-            # This retrieves all options from the models, these are dynamic in respect that the employer can add more as they need to.
-            serviceType = TypeOfService.objects.all()
-            optionalService = OptionalService.objects.all()
-            wrapColour = WrapColour.objects.all()
-            damage = Damage.objects.all() 
-            
-            # This sets the multi choice options as a flat list. Reason for this is when the options from that model
-            # are rendered it will compare it to this list and if the option exists it'll add a checked option to it.
-            origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
-            origDamageList = origOrder.damage.all().values_list('name', flat=True)
-        
-            context = { 'form' : car_info, 'serviceType' : serviceType, 'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour,
-                        'origOrder' : origOrder, 'origOSlist' : origOSlist, 'origDamageList' : origDamageList}
-                        
-            return render(request, 'edit.html', context)
-       
-        except Exception as e:
-            messages.error(request, "Sorry, something went wrong while trying to get your order. " + str(e))
-            
-    else:
-        messages.error(request, "You are not an employee or the creator for this order.")
-        return render(request, 'orders.html')
+        # This gets the details from the order via the order id that was passed through.
+        orderList = OrderList.objects.get(pk=order_id)
 
-
-
-
-
-@login_required
-def update_quote(request, order_id):
-    """ This will collect the new (if updated) data from the quotes page """
-
-    current_user = request.user.username
-    user = UserProfile.objects.get(user=request.user) 
-    
-    # Gets the Current Service by matching the invoice numbers.
-    cs = Services.objects.get(invoice_no=order_id)
-    form = quotesForm(request.POST)
-    
-    # This confirms the user trying to update the order is the owner or an employee.
-    if current_user == cs.user or user.employee == True:
-    
-        # Taken from the get_quote function.
-        if form.is_valid():
-            ''' If the form is valid it then collects the information on the form before saving it.'''
+        # This checks to confirm that the order was created by the user trying to edit it or an employee of the company
+        if current_user == orderList.username or user.employee == True:
             
-            # This gets the info from the 'type of service' select menu, converts it to an int 
-            # and then compares it to the option in TypesOfService table.
-            tosGet = request.POST.get('tos-option')
-            ToSToInt = int(tosGet)
-            tosModel = TypeOfService.objects.get(id=ToSToInt)
-            
-
-            # This gets the selected wrap colour which is a radio button, then compares it to 
-            # the table to see what the match is.
-            wcGet = request.POST.get('wc-option')
-
-            
-            # This checks to see if an input has been chosen and if not gets the original colour choice from the database.
-            if wcGet == None:
-                wcRetreive = cs.wrap_colour.id
-                wcModel = WrapColour.objects.get(id=wcRetreive)
-            else:
-                wcModel = WrapColour.objects.get(id=wcGet)
-
-           
-            # This gets the option from the Optional Services list, compares the int to the 
-            # OptionalServices table and then appends it to a list.
-            osGet = request.POST.getlist('OS')
-            
-            osList = []
-            
-            for i in osGet:
-                osModel = OptionalService.objects.get(id=i)
-                osList.append(osModel)
-
-               
-            # This gathers the text inputted for the 'car make'.
-            carmaGet = form.cleaned_data['car_make']
-
-            # This gathers the text inputted for the 'car model'.            
-            carmoGet = request.POST.get('car_model')
-            
-            # This checks if an input was selected, if not then gets the previous selection from the database.
-            if carmoGet == None:
-                carmoGet = cs.car_model
-            
-            # This gets the text from the 'Damage Details' text box.
-            damageDetailsGet = request.POST.get('ddInput')
-
-            
-            # This gets the selected (if any) options to then compare to the Damage table
-            # and then adds it to list.
-            vdGet = request.POST.getlist('TD')
-            
-            vdList = []
-            
-            for i in vdGet:
-                vdModel = Damage.objects.get(id=i)
-                vdList.append(vdModel)
-
-            
-            # This gets the total price from the read-only text box which is updated by JS depending
-            # on what options are selected by the user.
-            tpGet = request.POST.get('tp-name')
-
-        
-            # Once the data has been collected above, it then attempts to add it to the neccessary fields in the 
-            # matched Services table.
             try:
-
-                cs.save()
-                cs.type_of_service = tosModel
-                cs.optional_service.set(osList)
-                cs.wrap_colour = wcModel
-                cs.car_make = carmaGet
-                cs.car_model = carmoGet
-                cs.damage.set(vdList)
-                cs.damage_details = damageDetailsGet
-                cs.total_price = tpGet
-                cs.user = str(user)
-                cs.save()
+                # This retrieves the options selected from the original order created.
+                origOrder = orderList.service_id
+                service = Services.objects.get(invoice_no=origOrder)
+                car_info = quotesForm(instance=service)
                 
-                messages.success(request, "This order was updated successfully!")
-                return redirect(view_order)
+                # This retrieves all options from the models, these are dynamic in respect that the employer can add more as they need to.
+                serviceType = TypeOfService.objects.all()
+                optionalService = OptionalService.objects.all()
+                wrapColour = WrapColour.objects.all()
+                damage = Damage.objects.all() 
                 
+                # This sets the multi choice options as a flat list. Reason for this is when the options from that model
+                # are rendered it will compare it to this list and if the option exists it'll add a checked option to it.
+                origOSlist = origOrder.optional_service.all().values_list('id', flat=True)
+                origDamageList = origOrder.damage.all().values_list('name', flat=True)
+            
+                context = { 'form' : car_info, 'serviceType' : serviceType, 'optionalService' : optionalService, 'damage' : damage, 'wrapColour' : wrapColour,
+                            'origOrder' : origOrder, 'origOSlist' : origOSlist, 'origDamageList' : origDamageList}
+                            
+                return render(request, 'edit.html', context)
+           
             except Exception as e:
-                messages.error(request, "Error occured updating this order: " + str(e))
-                return redirect(view_order)
-        
+                print("Error: " + str(e))
+                messages.error(request, "Sorry, something went wrong while trying to get your order.")
+                
         else:
-            messages.error(request, "Sorry, there was an error with the form, please try again.")
-            return redirect(view_order)
+            messages.error(request, "You are not an employee or the creator for this order.")
+            return render(request, 'orders.html')
+        
     else:
-        messages.error(request, "You don't have permission to update this quote!")
-        return redirect(view_order)
+        
+        """ This will collect the new (if updated) data from the quotes page """
+        
+        # Gets the Current Service by matching the invoice numbers.
+        cs = Services.objects.get(invoice_no=order_id)
+        form = quotesForm(request.POST)
+        
+        # This confirms the user trying to update the order is the owner or an employee.
+        if current_user == cs.user or user.employee == True:
+        
+            # Taken from the get_quote function.
+            if form.is_valid():
+                ''' If the form is valid it then collects the information on the form before saving it.'''
+                
+                
+                # This gets the info from the 'type of service' select menu, converts it to an int 
+                # and then compares it to the option in TypesOfService table.
+                tosGet = request.POST.get('tos-option')
+                ToSToInt = int(tosGet)
+                tosModel = TypeOfService.objects.get(id=ToSToInt)
+                
+            
+                        
+                # This gets the option from the Optional Services list, compares the int to the 
+                # OptionalServices table and then appends it to a list.
+                osGet = request.POST.getlist('OS')
+                
+                osList = []
+                
+                for i in osGet:
+                    osModel = OptionalService.objects.get(id=i)
+                    osList.append(osModel)
+            
+                   
+                # This gathers the text inputted for the 'car make'.
+                carmaGet = form.cleaned_data['car_make']
+            
+                
+                # This gets the text from the 'Damage Details' text box.
+                damageDetailsGet = request.POST.get('ddInput')
+            
+                
+                # This gets the selected (if any) options to then compare to the Damage table
+                # and then adds it to list.
+                vdGet = request.POST.getlist('TD')
+                
+                vdList = []
+                
+                for i in vdGet:
+                    vdModel = Damage.objects.get(id=i)
+                    vdList.append(vdModel)
+            
+                
+                # This gets the total price from the read-only text box which is updated by JS depending
+                # on what options are selected by the user.
+                tpGet = request.POST.get('tp-name')
+                
+                # This gets the selected wrap colour which is a radio button, then compares it to 
+                # the table to see what the match is.
+                wcGet = request.POST.get('wc-option')
+                
+                
+                # This checks to see if an input has been chosen and if not gets the original colour choice from the database.
+                if wcGet == None:
+                    wcRetreive = cs.wrap_colour.id
+                    wcModel = WrapColour.objects.get(id=wcRetreive)
+                else:
+                    wcModel = WrapColour.objects.get(id=wcGet)
+                
+                # This gathers the text inputted for the 'car model'.            
+                carmoGet = request.POST.get('car_model')
+                
+                # This checks if an input was selected, if not then gets the previous selection from the database.
+                if carmoGet == None:
+                    carmoGet = cs.car_model
+                
+                
+                    
+                # Once the data has been collected above, it then attempts to add it to the neccessary fields in the 
+                # matched Services table.
+                try:
+        
+                    cs.save()
+                    cs.type_of_service = tosModel
+                    cs.optional_service.set(osList)
+                    cs.wrap_colour = wcModel
+                    cs.car_make = carmaGet
+                    cs.car_model = carmoGet
+                    cs.damage.set(vdList)
+                    cs.damage_details = damageDetailsGet
+                    cs.total_price = tpGet
+                    cs.user = str(user)
+                    cs.save()
+                    
+                    messages.success(request, "This order was updated successfully!")
+                    return redirect(view_order)
+                    
+                except Exception as e:
+                    messages.error(request, "Error occured updating this order: " + str(e))
+                    return redirect(view_order)
+            
+            else:
+                messages.error(request, "Sorry, there was an error with the form, please try again.")
+                return redirect(view_order)
+        else:
+            messages.error(request, "You don't have permission to update this quote!")
+            return redirect(view_order)

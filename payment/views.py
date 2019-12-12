@@ -68,22 +68,25 @@ def payment(request, order_id):
                     description = request.user.email,
                     card = payment_form.cleaned_data['stripe_id'],
                 )
+                
+                if customer.paid:
+                # This sets the paid checkbox to true.
+                    order.paid = True
+                    order.save()
+                    
+                    messages.success(request, "You've paid Successfully")
+                    return redirect(reverse('orders'))
+            
+                else:
+                    messages.error(request, "Unable to take payment")
+                
             # Any issues it prompts a message and a chance for the user to try again.
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
             
             # Confirms once user has paid it will set a checkbox to true so it changes to 'leave review'
             # instead of 'pay' as it did previously on the orders page. 
-            if customer.paid:
-                # This sets the paid checkbox to true.
-                order.paid = True
-                order.save()
-                
-                messages.success(request, "You've paid Successfully")
-                return redirect(reverse('orders'))
             
-            else:
-                messages.error(request, "Unable to take payment")
        
         else:
             print(payment_form.errors)

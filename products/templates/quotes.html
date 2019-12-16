@@ -5,6 +5,8 @@
 {% block content %}
 {% load static %}
 
+
+
 <!--This is used to make a background pattern.-->
 <div class="background-carbon-fibre">
     
@@ -26,6 +28,8 @@
             <form method="POST">
                 
                 {% csrf_token %}
+                
+                {{ form.non_field_errors }}
                 
                 <!--
                 This container is for the type of service chosen, it iterates through and then adds the type of service options into a list.
@@ -98,14 +102,14 @@
                     
                     <div class="form-group Make-Model">
 
-                            {{ form | as_bootstrap }}
-                            
-                            <label for="car_model"> Car Model</label>
-                            
-                            <!--This has size = 5 to limit how much is displayed on the screen at once.-->
-                            <select class="form-control car_model" name="car_model" id="car_model" size="5">
-                                <option value="none" disabled selected> Choose an option! </option>
-                            </select>
+                        {{ form | as_bootstrap }}
+                        
+                        <label for="car_model"> Car Model</label>
+                        
+                        <!--This has size = 5 to limit how much is displayed on the screen at once.-->
+                        <select class="form-control car_model" name="car_model" id="car_model" size="5">
+                            <option value="none" disabled selected> Choose an option! </option>
+                        </select>
 
                     </div>
                 </div>

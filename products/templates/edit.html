@@ -115,7 +115,7 @@
                                 <tr>
                                     <td>
                                         <div class="quote-radio">
-                                            <label><input type="radio" id='{{ i.id }}' name="wc-option" value="{{ i.id }}"> {{ i.name }} </label>
+                                            <label><input type="radio" id='{{ i.id }}' name="wc-option" value="{{ i.id }}">{{ i.name }} <label>
                                         </div>
                                     </td>
                                     <td>
@@ -147,7 +147,7 @@
                         
                         <!--This has size = 5 to limit how much is displayed on the screen at once.-->
                         <select class="form-control car_model" name="car_model" id="car_model" size="5">
-                            <option value="{{ origOrder.car_model }}" disabled selected> {{ origOrder.car_model }} </option>
+                            <option value="{{ origOrder.car_model }}" selected> {{ origOrder.car_model }} </option>
                         </select>
                             
                     </div>
@@ -197,7 +197,7 @@
                                             <span class="glyphicon glyphicon-ok"></span>
                                             <span> </span>
                                         </label>
-                                        <label for="{{ i.name }}" class="btn btn-wait btn-default active optional-services-label">
+                                        <label for="{{ i.name }}" class="btn btn-default active optional-services-label">
                                             {{ i.name }}
                                         </label>
                                     </div>

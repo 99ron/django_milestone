@@ -82,12 +82,11 @@ def payment(request, order_id):
                 
             # Any issues it prompts a message and a chance for the user to try again.
             except stripe.error.CardError:
-                messages.error(request, "Your card was declined!")
+                messages.error(request, "Your card was declined, please check your details below.")
             
             # Confirms once user has paid it will set a checkbox to true so it changes to 'leave review'
             # instead of 'pay' as it did previously on the orders page. 
             
-       
         else:
             print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")

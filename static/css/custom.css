@@ -4,9 +4,14 @@
 /* -----------------------------------------------------------------------------------------------------------------------------   
                                                                                                                         Body 
 -----------------------------------------------------------------------------------------------------------------------------  */
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
 body {
   font-family: "Montserrat";
-  font-size: 13pt;
+  font-size: 1.1rem;
   padding-top: 50px;
   display: flex;
   min-height: 100vh;
@@ -15,10 +20,6 @@ body {
 
 main {
   flex: 1 0 auto;
-}
-
-html {
-  height: 100%;
 }
 
 a:link, a:visited {
@@ -72,14 +73,14 @@ a:link, a:visited {
   color: #ffffff;
   margin-top: 150px;
   font-weight: bold;
-  font-size: 55px;
+  font-size: 3.23rem;
 }
 
 .header-text {
   color: #000;
   padding-top: 30px;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 3rem;
 }
 
 .header-text-alternative {
@@ -88,7 +89,7 @@ a:link, a:visited {
 
 .about-header-container-text {
   font-weight: bold;
-  font-size: 55px;
+  font-size: 3.23rem;
   margin-top: 235px;
 }
 
@@ -96,7 +97,7 @@ a:link, a:visited {
                                                                                                                         Main
 -----------------------------------------------------------------------------------------------------------------------------  */
 .gallery-main-content, .main-content {
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .header-box-shadow {
@@ -429,7 +430,7 @@ a:link, a:visited {
 footer {
   padding-top: 15px;
   padding-bottom: 15px;
-  font-size: 12pt;
+  font-size: 1.1rem;
   color: #ffffff;
   background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.3);
@@ -517,7 +518,11 @@ ul {
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
-  color: red;
+  color: #fff;
+  background-color: #f00;
+  font-size: 1.5em;
+  padding: 10px;
+  box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .font-bold {
@@ -612,7 +617,7 @@ ul {
   border-radius: 10px;
 }
 .order-container .order-nothing, .order-container .gallery-container, .gallery-container .order-nothing, .gallery-container .gallery-container {
-  font-size: 30px;
+  font-size: 2.5rem;
 }
 .order-container a, .gallery-container a {
   color: #000;
@@ -697,7 +702,7 @@ These are specific to items not fitting or looking correct on smaller screens
 
   .carousel {
     position: relative;
-    height: 280px;
+    max-height: 280px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
@@ -770,7 +775,7 @@ These are specific to items not fitting or looking correct on smaller screens
 
   .carousel {
     position: relative;
-    height: 580px;
+    max-height: 580px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);

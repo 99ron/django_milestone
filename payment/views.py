@@ -88,7 +88,6 @@ def payment(request, order_id):
             # instead of 'pay' as it did previously on the orders page. 
             
         else:
-            print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
 
     return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLIC_KEY, 'order' : order})

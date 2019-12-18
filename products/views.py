@@ -166,7 +166,7 @@ def get_quote(request):
 
 
 
-
+# This function is used for the user to update/edit their quote.
 @login_required
 def edit_quote(request, order_id):
     # Gets the current user and their profile.
@@ -205,7 +205,6 @@ def edit_quote(request, order_id):
                 return render(request, 'edit.html', context)
            
             except Exception as e:
-                print("Error: " + str(e))
                 messages.error(request, "Sorry, something went wrong while trying to get your order.")
                 
         else:

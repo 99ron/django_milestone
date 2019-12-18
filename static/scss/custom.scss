@@ -20,11 +20,16 @@ $form-colour: #f4f3e9;
                                                                                                                         Body 
 -----------------------------------------------------------------------------------------------------------------------------  */
 
+// Forces content to always be 100% height, also sets default text size.
+html {
+    font-size: 16px;
+    height: 100%;
+}
 
 // This makes sure the footer is always at the bottom of the page regardless of how much content is showing.
 body {
     font-family: $font-family;
-    font-size: 13pt;
+    font-size: 1.1rem;
     padding-top: 50px;
     display: flex;
     min-height: 100vh;
@@ -34,11 +39,6 @@ body {
 // same as above.
 main {
     flex: 1 0 auto;
-}
-
-// Forces content to always be 100% height.
-html {
-    height: 100%;
 }
 
 // Colour for visited links.
@@ -101,14 +101,14 @@ a:link, a:visited {
     color: $header-text-overlay;
     margin-top: 150px;
     font-weight: bold;
-    font-size: 55px;
+    font-size: 3.23rem;
 }
 
 .header-text {
     color: $primary-text-colour;
     padding-top: 30px;
     font-weight: bold;
-    font-size: 45px;
+    font-size: 3rem;
 }
 
 .header-text-alternative {
@@ -118,7 +118,7 @@ a:link, a:visited {
 
 .about-header-container-text {
     font-weight: bold;
-    font-size: 55px;
+    font-size: 3.23rem;
     margin-top: 235px;
 }
 
@@ -127,8 +127,7 @@ a:link, a:visited {
 -----------------------------------------------------------------------------------------------------------------------------  */
 
 .gallery-main-content, .main-content {
-    margin-bottom: 40px;
-    
+    padding-bottom: 40px;
 }
 
 // Used to add a black fade into the header images.
@@ -515,7 +514,7 @@ a:link, a:visited {
     radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
     radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
     background-color:#282828;
-    background-size:16px 16px;
+    background-size: 16px 16px;
     
     height: 100%;
 }
@@ -527,7 +526,7 @@ a:link, a:visited {
 footer {
     padding-top: 15px;
     padding-bottom: 15px;
-    font-size: 12pt;
+    font-size: 1.1rem;
     color: $footer-text-colour;
     background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
     box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.3);
@@ -622,7 +621,11 @@ ul {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
-    color: red;
+    color: #fff;
+    background-color: #f00;
+    font-size: 1.5em;
+    padding: 10px;
+    box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .font-bold {
@@ -725,7 +728,7 @@ ul {
     border-radius: 10px;
     
     .order-nothing, .gallery-container {
-        font-size: 30px;
+        font-size: 2.5rem;
     }
     
     a {
@@ -793,7 +796,6 @@ These are specific to items not fitting or looking correct on smaller screens
         box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
     }
 
-    
 }
 @media only screen and (max-width: 990px) {
     
@@ -819,7 +821,7 @@ These are specific to items not fitting or looking correct on smaller screens
 
     .carousel {
         position: relative;
-        height: 280px;
+        max-height: 280px;
         margin-left: auto;
         margin-right: auto;
         box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
@@ -897,7 +899,7 @@ These are specific to items not fitting or looking correct on smaller screens
 
 .carousel {
     position: relative;
-    height: 580px;
+    max-height: 580px;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 2px 1px 5px 2px rgba(0, 0, 0, 0.3);
@@ -934,6 +936,5 @@ These are specific to items not fitting or looking correct on smaller screens
     background-repeat: no-repeat;
     background-size: cover;
     }
-
 }
 

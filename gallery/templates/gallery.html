@@ -24,16 +24,15 @@
         
         <div class="row order-sort-container animated fadeIn">
             <div class="order-sort-by">
+                
                 <!--This form allows the user to sort/order the results-->
-                <form action="{% url 'gallery' %}" method="get">
-                    
+                <form action="{% url 'gallery' %}" method="post">
+
                     <div class="form-group col-xs-8">
-                        <select name="orderSortBy" class="form-control">
-                            <option value="Newest">Sort by: Newest</option>
-                            <option value="Oldest">Sort by: Oldest</option>
-                            <option value="HighRated">Sort by: Highest Rated</option>
-                            <option value="LowRated">Sort by: Lowest Rated</option>
-                        </select>
+                        {% csrf_token %}
+                        
+                        {{ sortForm.order }}
+
                     </div> 
                     
                     <div class="col-xs-4">

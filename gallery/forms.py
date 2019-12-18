@@ -2,6 +2,14 @@ from django import forms
 from gallery.models import Reviews, Attachment
 from multiupload.fields import MultiMediaField
 
+
+SORT_BY = (
+    ('Newest', 'Newest'),
+    ('Oldest', 'Oldest'),
+    ('HighRated', 'Highest Rated'),
+    ('LowRated', 'Lowest Rated'),
+    )
+
 # This form uses the django-multiupload app.
 class reviewForm(forms.ModelForm):
     
@@ -20,4 +28,7 @@ class reviewForm(forms.ModelForm):
             Attachment.objects.create(file=each, review_table=instance)
         return instance
 
-        
+# Used to order the reviews.
+class sortOrder(forms.Form):
+    order = forms.ChoiceField(choices=SORT_BY,
+    widget=forms.Select(attrs={'class': 'form-control'}))

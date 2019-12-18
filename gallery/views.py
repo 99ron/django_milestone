@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from gallery.models import Reviews, Attachment
-from gallery.forms import reviewForm
+from gallery.forms import reviewForm, sortOrder
 from orders.models import OrderList
 from orders.views import view_order
 from profiles.models import UserProfile
@@ -15,28 +15,34 @@ from profiles.models import UserProfile
 def view_gallery(request):
     
     # This checks if any filters have been applied
-    if request.GET.get('orderSortBy'):
-        sort_by = request.GET.get('orderSortBy')
+    if request.method=="POST":
+        sortForm = sortOrder(request.POST)
         
-        if sort_by == "HighRated":
-            # If sort_by contains HighRated it'll display the results highest ratings first.
-            reviews_list = Reviews.objects.all().order_by('-rating')
-        
-        elif sort_by == "Newest":
-            # If sort_by contains Newest it'll display the results Newest first.
-            reviews_list = Reviews.objects.all().order_by('-review_submitted')
-        
-        elif sort_by == "LowRated":
-            # If sort_by contains LowRated it'll display the results lowest ratings first.
-            reviews_list = Reviews.objects.all().order_by('rating')
-            
-        elif sort_by == "Oldest":
-            # If sort_by contains Oldest it'll display the results oldest posts first.
-            reviews_list = Reviews.objects.all().order_by('review_submitted')
+        if sortForm.is_valid():
+            sort_by = sortForm.cleaned_data['order']
 
+            if sort_by == "HighRated":
+                # If sort_by contains HighRated it'll display the results highest ratings first.
+                reviews_list = Reviews.objects.all().order_by('-rating')
+            
+            elif sort_by == "Newest":
+                # If sort_by contains Newest it'll display the results Newest first.
+                reviews_list = Reviews.objects.all().order_by('-review_submitted')
+            
+            elif sort_by == "LowRated":
+                # If sort_by contains LowRated it'll display the results lowest ratings first.
+                reviews_list = Reviews.objects.all().order_by('rating')
+                
+            elif sort_by == "Oldest":
+                # If sort_by contains Oldest it'll display the results oldest posts first.
+                reviews_list = Reviews.objects.all().order_by('review_submitted')
+        else:
+            messages.error(request, "Something went wrong, please try again.")
+            return redirect(view_gallery)
     else:
         # This is the default when the page is loaded.
         reviews_list = Reviews.objects.all()
+        sortForm = sortOrder(request.GET)
     
     """ This sets the pagination up for the reviews list with a maximum of 3 shown per page."""
     page = request.GET.get('page', 1)
@@ -49,7 +55,7 @@ def view_gallery(request):
     except EmptyPage:
         reviews = paginator.page(paginator.num_pages)
 
-    return render(request, "gallery.html", {'reviews' : reviews})
+    return render(request, "gallery.html", {'reviews' : reviews, 'sortForm' : sortForm})
 
 
 @login_required

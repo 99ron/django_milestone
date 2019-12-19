@@ -11,13 +11,10 @@ class Products_App_Tests(TestCase):
     def test_gallery_URLs_if_user_is_annon(self):
         quotes = self.client.get(reverse('quotes'), follow=True)
         quotes2 = self.client.get(reverse('edit', args=[1]), follow=True)
-        quotes3 = self.client.get(reverse('update', args=[1]), follow=True)
         self.assertEquals(quotes.status_code, 200)
         self.assertEquals(quotes2.status_code, 200)
-        self.assertEquals(quotes3.status_code, 200)
         self.assertTemplateUsed(quotes, 'login.html')
         self.assertTemplateUsed(quotes2, 'login.html')
-        self.assertTemplateUsed(quotes3, 'login.html')
       
     
 class Products_Models_Tests(TestCase):

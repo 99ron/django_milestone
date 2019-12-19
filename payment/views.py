@@ -78,7 +78,7 @@ def payment(request, order_id):
                     return redirect(reverse('orders'))
             
                 else:
-                    messages.error(request, "Unable to take payment")
+                    messages.error(request, "Unable to take payment, please try again")
                 
             # Any issues it prompts a message and a chance for the user to try again.
             except stripe.error.CardError:

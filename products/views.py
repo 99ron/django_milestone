@@ -211,6 +211,7 @@ def edit_quote(request, order_id):
             messages.error(request, "You are not an employee or the creator for this order.")
             return render(request, 'orders.html')
     
+    
     # If request.method == 'POST' then do the following below.   
     else:
         

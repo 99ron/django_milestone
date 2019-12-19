@@ -11,6 +11,29 @@ from profiles.models import UserProfile
 
 # Views for the Gallery app.
 
+""" Simple function to order the review results """
+def review_sort_by(sort_by):
+    
+    if sort_by == "HighRated":
+        # If sort_by contains HighRated it'll display the results highest ratings first.
+        reviews_list = Reviews.objects.all().order_by('-rating')
+    
+    elif sort_by == "Newest":
+        # If sort_by contains Newest it'll display the results Newest first.
+        reviews_list = Reviews.objects.all().order_by('-review_submitted')
+    
+    elif sort_by == "LowRated":
+        # If sort_by contains LowRated it'll display the results lowest ratings first.
+        reviews_list = Reviews.objects.all().order_by('rating')
+        
+    elif sort_by == "Oldest":
+        # If sort_by contains Oldest it'll display the results oldest posts first.
+        reviews_list = Reviews.objects.all().order_by('review_submitted')
+    
+    return reviews_list
+
+
+
 """ This gets the gallery page to display """
 def view_gallery(request):
     
@@ -20,22 +43,10 @@ def view_gallery(request):
         
         if sortForm.is_valid():
             sort_by = sortForm.cleaned_data['order']
-
-            if sort_by == "HighRated":
-                # If sort_by contains HighRated it'll display the results highest ratings first.
-                reviews_list = Reviews.objects.all().order_by('-rating')
             
-            elif sort_by == "Newest":
-                # If sort_by contains Newest it'll display the results Newest first.
-                reviews_list = Reviews.objects.all().order_by('-review_submitted')
+            # Function that sets the order of the results.
+            reviews_list = review_sort_by(sort_by)
             
-            elif sort_by == "LowRated":
-                # If sort_by contains LowRated it'll display the results lowest ratings first.
-                reviews_list = Reviews.objects.all().order_by('rating')
-                
-            elif sort_by == "Oldest":
-                # If sort_by contains Oldest it'll display the results oldest posts first.
-                reviews_list = Reviews.objects.all().order_by('review_submitted')
         else:
             messages.error(request, "Something went wrong, please try again.")
             return redirect(view_gallery)

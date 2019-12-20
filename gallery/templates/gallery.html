@@ -26,13 +26,16 @@
             <div class="order-sort-by">
                 
                 <!--This form allows the user to sort/order the results-->
-                <form action="{% url 'gallery' %}" method="post">
-
+                <form action="{% url 'gallery' %}" method="GET">
+                    <!--{% csrf_token %}-->
                     <div class="form-group col-xs-8">
-                        {% csrf_token %}
-                        
-                        {{ sortForm.order }}
-
+                        <select name="orderSortBy" class="form-control">
+                            
+                            <option value="Newest" {% if sort_by == "Newest" %} selected="selected"{% endif %}>Sort by: Newest</option>
+                            <option value="Oldest" {% if sort_by == "Oldest" %} selected="selected"{% endif %}>Sort by: Oldest</option>
+                            <option value="HighRated" {% if sort_by == "HighRated" %} selected="selected"{% endif %}>Sort by: Highest Rated</option>
+                            <option value="LowRated" {% if sort_by == "LowRated" %} selected="selected"{% endif %}>Sort by: Lowest Rated</option>
+                        </select>
                     </div> 
                     
                     <div class="col-xs-4">
@@ -106,7 +109,7 @@
 
         <ul class="pagination">
             {% if reviews.has_previous %}
-                <li><a href="?page={{ reviews.previous_page_number }}">&laquo;</a></li>
+                <li><a href="?page={{ reviews.previous_page_number }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">&laquo;</a></li>
             {% else %}
                 <li class="disabled"><span>&laquo;</span></li>
             {% endif %} 
@@ -116,12 +119,12 @@
                     <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span>
                     </li>
                 {% else %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    <li><a href="?page={{ i }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">{{ i }}</a></li>
                 {% endif %}
             {% endfor %}
             
             {% if reviews.has_next %}
-                <li><a href="?page={{ reviews.next_page_number }}">&raquo;</a></li>
+                <li><a href="?page={{ reviews.next_page_number }}{% if sort_by %}&orderSortBy={{ sort_by }}{% endif %}">&raquo;</a></li>
             {% else %}
                 <li class="disabled"><span>&raquo;</span></li>
             {% endif %}
@@ -129,6 +132,7 @@
 
         {% endif %}
     </div>
+</div>
 </div>
 
 {% endblock %}

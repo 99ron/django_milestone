@@ -37,23 +37,14 @@ def review_sort_by(sort_by):
 """ This gets the gallery page to display """
 def view_gallery(request):
     
-    # This checks if any filters have been applied
-    if request.method=="POST":
-        sortForm = sortOrder(request.POST)
-        
-        if sortForm.is_valid():
-            sort_by = sortForm.cleaned_data['order']
-            
-            # Function that sets the order of the results.
-            reviews_list = review_sort_by(sort_by)
-            
-        else:
-            messages.error(request, "Something went wrong, please try again.")
-            return redirect(view_gallery)
-    else:
-        # This is the default when the page is loaded.
+    sort_by = request.GET.get('orderSortBy')
+    
+    if sort_by == None:
         reviews_list = Reviews.objects.all()
-        sortForm = sortOrder(request.GET)
+    else:
+        # Passes the variable to the function so it can be filtered above. 
+        reviews_list = review_sort_by(sort_by)
+    
     
     """ This sets the pagination up for the reviews list with a maximum of 3 shown per page."""
     page = request.GET.get('page', 1)
@@ -66,7 +57,7 @@ def view_gallery(request):
     except EmptyPage:
         reviews = paginator.page(paginator.num_pages)
 
-    return render(request, "gallery.html", {'reviews' : reviews, 'sortForm' : sortForm})
+    return render(request, "gallery.html", {'reviews' : reviews, 'sort_by' : sort_by})
 
 
 @login_required
@@ -122,6 +113,7 @@ def add_review(request, order_id):
             return reverse(view_order)
 
             
+
 def review_more(request, review_id):
     """ This view is used for more info on the review """
     
